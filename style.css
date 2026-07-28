@@ -1,0 +1,646 @@
+/* ============================================================
+   Viaggio in Cina — Trip Planner
+   Layout responsive: mappa a sinistra, sidebar a destra.
+   Su mobile la sidebar scivola sotto la mappa.
+   ============================================================ */
+
+/* ---------- 1. Design tokens (CSS custom properties) --------- */
+:root {
+    /* Palette: rosso cinabro (accento cinese) + neutri caldi */
+    --color-bg:            #f6f5f2;
+    --color-surface:       #ffffff;
+    --color-surface-alt:   #fafaf7;
+    --color-border:        #e6e4dd;
+    --color-text:          #1c1b18;
+    --color-text-muted:    #6b6a63;
+    --color-accent:        #c8332a;   /* rosso cinabro */
+    --color-accent-soft:   #f6dad7;
+    --color-accent-hover:  #a82820;
+
+    /* Ombre e raggi */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,.12);
+
+    /* Sidebar */
+    --sidebar-width: 380px;
+
+    /* Timing per le transizioni */
+    --ease-out: cubic-bezier(.2,.7,.2,1);
+}
+
+/* ---------- 2. Reset e base ---------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
+
+/* Ripristina il comportamento dell'attributo HTML `hidden`.
+   Necessario perché regole d'autore tipo `.detail-empty { display: flex }`
+   vincono su `[hidden] { display: none }` dello stylesheet del browser. */
+[hidden] { display: none !important; }
+
+/* ---------- 3. Layout: mappa full-viewport + overlay ---------- */
+/* La sidebar è un pannello flottante posizionato in absolute
+   sopra la mappa. La mappa occupa tutto lo schermo. */
+.app-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* ---------- 4. Mappa a schermo intero ------------------------ */
+.map-wrapper {
+    position: absolute;
+    inset: 0;
+    background: #dde3e6; /* fallback mentre le tile caricano */
+}
+
+#map {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+/* Barra filtri flottante, angolo in alto a sinistra */
+.filter-bar {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 500;                 /* sopra le tile Leaflet */
+    display: flex;
+    gap: 6px;
+    padding: 6px;
+    /* Liquid glass coerente con la sidebar */
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+    max-width: calc(100% - 32px);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .2s var(--ease-out), color .2s var(--ease-out);
+    white-space: nowrap;
+}
+.filter-btn:hover { background: var(--color-surface-alt); color: var(--color-text); }
+
+.filter-btn.is-active {
+    background: var(--color-accent);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(200,51,42,.35);
+}
+
+/* ---------- 5. Sidebar flottante (liquid glass) -------------- */
+.sidebar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    width: var(--sidebar-width);
+    z-index: 600;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    /* Liquid glass: sfondo semi-trasparente + sfocatura di ciò che sta dietro */
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+
+    /* Bordo bianco tenue che simula il highlight del vetro */
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 20px;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.16),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+
+    /* Transizione di apertura/chiusura */
+    transition:
+        transform .32s var(--ease-out),
+        opacity   .32s var(--ease-out);
+}
+
+/* Stato "chiuso": traslata fuori a destra + trasparente + non cliccabile */
+.sidebar.is-closed {
+    transform: translateX(calc(100% + 40px));
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Bottone di chiusura (X) — cerchietto in alto a destra */
+.sidebar-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition:
+        background .15s var(--ease-out),
+        color      .15s var(--ease-out),
+        transform  .15s var(--ease-out);
+    z-index: 10;
+}
+.sidebar-close:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--color-text);
+    transform: rotate(90deg);
+}
+
+.sidebar-header {
+    /* Padding destro maggiore per non finire sotto alla X */
+    padding: 22px 60px 16px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    flex: 0 0 auto;
+    background: transparent;
+}
+.sidebar-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.sidebar-subtitle {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+/* ---------- 5.1 Pannello dettaglio --------------------------- */
+.detail-panel {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 20px 24px;
+}
+
+/* Stato vuoto */
+.detail-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: 40px 12px;
+    gap: 12px;
+}
+.detail-empty-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    display: grid; place-items: center;
+}
+.detail-empty p { margin: 0; font-size: 14px; max-width: 260px; }
+
+/* Contenuto reale */
+.detail-content {
+    animation: fadeInUp .35s var(--ease-out);
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Galleria immagini ------------------------------- */
+/* Scorrimento orizzontale nativo con scroll-snap.
+   Nessuna libreria: swipe/drag gestiti dal browser. */
+.detail-gallery {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-surface-alt);
+    margin-bottom: 16px;
+}
+
+.gallery-track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+.gallery-track::-webkit-scrollbar { display: none; }
+
+.gallery-item {
+    flex: 0 0 100%;
+    height: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    position: relative;
+}
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder se un'immagine non carica (onerror in JS aggiunge la classe) */
+.gallery-item img.is-broken {
+    opacity: 0;                     /* nascondi la crocetta rotta del browser */
+}
+.gallery-item.is-broken::after {
+    content: 'Immagine non disponibile';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    background: var(--color-surface-alt);
+}
+
+/* Frecce di navigazione (visibili solo in hover, desktop) */
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--color-text);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    transition: opacity .2s var(--ease-out), background .15s var(--ease-out);
+}
+.gallery-arrow--prev { left: 8px; }
+.gallery-arrow--next { right: 8px; }
+.detail-gallery:hover .gallery-arrow { opacity: 1; }
+.gallery-arrow:hover { background: #fff; }
+
+/* Su dispositivi touch le frecce non servono (si swipa direttamente) */
+@media (hover: none) {
+    .gallery-arrow { display: none !important; }
+}
+/* Galleria con una sola immagine: nasconde frecce e pallini */
+.detail-gallery.is-single .gallery-arrow,
+.detail-gallery.is-single .gallery-dots {
+    display: none !important;
+}
+
+/* Pallini indicatori — pillola scura semi-trasparente in basso */
+.gallery-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    padding: 5px 9px;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 999px;
+    z-index: 4;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+.gallery-dot {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    transition:
+        background .2s var(--ease-out),
+        width      .2s var(--ease-out);
+}
+.gallery-dot.is-active {
+    background: #ffffff;
+    width: 16px;                    /* si "allunga" per indicare la posizione */
+    border-radius: 999px;
+}
+
+.detail-body { display: flex; flex-direction: column; gap: 10px; }
+
+.detail-city {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.detail-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.detail-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    font-size: 12px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.detail-description {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.detail-meta {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ---------- 5.2 Lista POI ------------------------------------ */
+.poi-list-wrapper {
+    flex: 0 0 auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    /* Fondo appena più opaco per staccare dalla scheda dettaglio,
+       ma senza rompere l'effetto glass */
+    background: rgba(255, 255, 255, 0.25);
+    max-height: 40vh;
+    overflow-y: auto;
+    padding: 12px 12px 16px;
+}
+.poi-list-title {
+    margin: 4px 12px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+}
+.poi-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.poi-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background .15s var(--ease-out);
+    border: 1px solid transparent;
+}
+.poi-item:hover { background: rgba(255, 255, 255, 0.7); }
+.poi-item.is-active {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: var(--color-accent-soft);
+}
+
+.poi-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex: 0 0 auto;
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+.poi-item-body { display: flex; flex-direction: column; min-width: 0; }
+.poi-item-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.poi-item-city {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+/* ---------- 6. Marker personalizzato Leaflet ----------------- */
+.custom-marker {
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 4px 12px rgba(200,51,42,.4);
+    border: 2px solid #fff;
+    transition: transform .25s var(--ease-out);
+}
+.custom-marker span {
+    transform: rotate(45deg);
+    font-size: 14px;
+    font-weight: 700;
+}
+.leaflet-marker-icon:hover .custom-marker,
+.custom-marker.is-active {
+    transform: rotate(-45deg) scale(1.15);
+}
+
+/* ---------- 6.1 Tasto "Torna al POI genitore" ---------------- */
+.detail-back-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 0;
+    margin-bottom: 12px;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    align-self: flex-start;
+    transition: color .15s var(--ease-out);
+}
+.detail-back-btn:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+}
+
+/* ---------- 6.2 Menu sezioni (sub-POI) ----------------------- */
+.detail-sections {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--color-border);
+}
+
+.sections-title {
+    margin: 0 0 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+}
+
+.section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.section-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    text-align: left;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    cursor: pointer;
+    transition:
+        border-color .15s var(--ease-out),
+        background   .15s var(--ease-out),
+        transform    .15s var(--ease-out);
+}
+.section-btn:hover {
+    border-color: var(--color-accent-soft);
+    background: var(--color-surface-alt);
+}
+.section-btn.is-active {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+    transform: translateX(2px);
+}
+
+.section-btn-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+.section-btn-hint {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+/* Tooltip Leaflet delle sezioni sulla mappa */
+.section-tooltip {
+    background: rgba(255,255,255,.95);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 4px 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text);
+    box-shadow: var(--shadow-sm);
+}
+.section-tooltip::before { display: none; }  /* nasconde la freccia */
+
+/* Popup Leaflet: aspetto più moderno */
+.leaflet-popup-content-wrapper {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 4px 8px;
+}
+.leaflet-popup-content {
+    margin: 10px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+}
+.leaflet-popup-content strong {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--color-text);
+}
+
+/* ---------- 7. Responsive: bottom sheet su mobile ------------ */
+@media (max-width: 900px) {
+    /* La sidebar diventa un pannello che scivola dal basso.
+       Occupa tutta la larghezza (con piccoli margini laterali) e
+       fino al 70% dell'altezza. */
+    .sidebar {
+        top: auto;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        width: auto;
+        max-height: 70vh;
+    }
+    .sidebar.is-closed {
+        /* Scivola verso il basso invece che a destra */
+        transform: translateY(calc(100% + 24px));
+    }
+
+    .filter-bar {
+        top: 12px;
+        left: 12px;
+        max-width: calc(100% - 24px);
+    }
+
+    .poi-list-wrapper {
+        max-height: 30vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-header { padding: 18px 56px 12px 18px; }
+    .detail-panel   { padding: 16px 18px; }
+    .detail-image   { height: 140px; }
+    .sidebar-title  { font-size: 18px; }
+    .detail-title   { font-size: 19px; }
+}
