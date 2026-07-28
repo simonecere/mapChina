@@ -149,6 +149,26 @@
                         <p class="detail-description" id="detail-description"></p>
                         <div class="detail-meta" id="detail-meta"></div>
 
+                        <!-- Pulsante Google Maps: visibile solo per i POI
+                             che hanno il campo `mapsUrl`. Apre in nuova tab. -->
+                        <a
+                            class="maps-btn"
+                            id="maps-btn"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            hidden
+                        >
+                            <svg viewBox="0 0 24 24" width="14" height="14"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <span>Apri in Google Maps</span>
+                        </a>
+
                         <!-- Menu delle sezioni: mostrato solo per POI che
                              hanno un overlay con sub-elementi (es. Muraglia). -->
                         <div class="detail-sections" id="detail-sections" hidden>

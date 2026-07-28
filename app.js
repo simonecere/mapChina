@@ -334,11 +334,26 @@ const POI_DATA = [
         tags: ['Fauna', 'Conservazione'],
         image: 'https://loremflickr.com/800/500/panda,chengdu?lock=1',
         bestTime: 'Mar-Giu (cuccioli)'
-    }
+    },
 
-    /* ===================== CIBO =====================
-       (categoria attiva ma ancora senza POI — verranno aggiunti)
-    ---------------------------------------------------- */
+    /* ===================== CIBO ===================== */
+    {
+        id: 'peking-duck-example',
+        name: "Anatra alla Pechinese (esempio)",
+        city: 'Pechino',
+        category: 'food',
+        coords: [39.91834631837488, 116.40887272446551],
+        zoom: 16,
+        description:
+            "Ristorante specializzato in anatra laccata alla pechinese. " +
+            "Il piatto tipico è servito con crêpes sottili, cipollotto, " +
+            "cetriolo e salsa hoisin. Il link Google Maps qui sotto porta " +
+            "alla scheda del locale con orari, foto e recensioni aggiornate.",
+        tags: ['Anatra Laccata', 'Cucina Pechinese'],
+        image: 'https://loremflickr.com/800/500/peking-duck,beijing?lock=1',
+        mapsUrl: 'https://maps.app.goo.gl/DX4NHXTZTTDbyu7C8',
+        bestTime: 'Prenotazione consigliata'
+    }
 ];
 
 /* ------------------------------------------------------------------
@@ -435,6 +450,7 @@ const dom = {
     detailTags:        document.getElementById('detail-tags'),
     detailDescription: document.getElementById('detail-description'),
     detailMeta:        document.getElementById('detail-meta'),
+    mapsButton:        document.getElementById('maps-btn'),
     detailSections:    document.getElementById('detail-sections'),
     sectionList:       document.getElementById('section-list')
 };
@@ -621,6 +637,9 @@ function renderDetail(poi) {
         `<span>Categoria: ${escapeHtml(catLabel)}</span>` +
         `<span>Periodo consigliato: ${escapeHtml(poi.bestTime || '—')}</span>`;
 
+    // Link Google Maps (opzionale)
+    updateMapsButton(poi.mapsUrl);
+
     // Se il POI ha sezioni, popola l'elenco e mostralo
     if (poi.overlay && poi.overlay.sections) {
         renderSectionButtons(poi.overlay.sections, null);
@@ -663,9 +682,23 @@ function renderSectionDetail(parent, section) {
     dom.detailMeta.innerHTML =
         `<span>Sezione di: ${escapeHtml(parent.name)}</span>`;
 
+    // Link Google Maps (opzionale, anche a livello di sezione)
+    updateMapsButton(section.mapsUrl);
+
     // Lista sezioni resta visibile, con la sezione attiva evidenziata
     renderSectionButtons(parent.overlay.sections, section.id);
     dom.detailSections.hidden = false;
+}
+
+/** Mostra o nasconde il pulsante "Apri in Google Maps" in base al link. */
+function updateMapsButton(url) {
+    if (url) {
+        dom.mapsButton.href = url;
+        dom.mapsButton.hidden = false;
+    } else {
+        dom.mapsButton.hidden = true;
+        dom.mapsButton.removeAttribute('href');
+    }
 }
 
 /* Popola i bottoni delle sezioni; opzionalmente evidenzia quello attivo */
