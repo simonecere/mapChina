@@ -82,11 +82,12 @@ button { font-family: inherit; }
     z-index: 1;
 }
 
-/* Barra filtri flottante, angolo in alto a sinistra */
+/* Barra filtri flottante, centrata in alto */
 .filter-bar {
     position: absolute;
     top: 16px;
-    left: 16px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 500;                 /* sopra le tile Leaflet */
     display: flex;
     gap: 6px;
@@ -628,7 +629,8 @@ button { font-family: inherit; }
 
     .filter-bar {
         top: 12px;
-        left: 12px;
+        left: 50%;
+        transform: translateX(-50%);
         max-width: calc(100% - 24px);
     }
 

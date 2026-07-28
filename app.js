@@ -58,7 +58,7 @@ const POI_DATA = [
             "di abitanti. Base logica per i monumenti imperiali (Città " +
             "Proibita, Tempio del Cielo) e per la Grande Muraglia.",
         tags: ['Capitale', 'Imperiale', 'Hub'],
-        image: 'https://picsum.photos/seed/beijing/600/360',
+        image: 'https://loremflickr.com/800/500/beijing,china?lock=1',
         bestTime: 'Apr-Mag / Set-Ott'
     },
     {
@@ -73,7 +73,7 @@ const POI_DATA = [
             "Contrasto tra il lungofiume storico (The Bund) e lo skyline " +
             "futurista di Pudong. Ottima cucina cantonese/shanghaiese.",
         tags: ['Skyline', 'Finanza', 'Cucina'],
-        image: 'https://picsum.photos/seed/shanghai/600/360',
+        image: 'https://loremflickr.com/800/500/shanghai,skyline,pudong?lock=1',
         bestTime: 'Mar-Mag / Ott-Nov'
     },
     {
@@ -88,7 +88,7 @@ const POI_DATA = [
             "palazzi Joseon (Gyeongbokgung), quartieri commerciali " +
             "(Myeongdong, Gangnam) e cultura pop coreana.",
         tags: ['Corea', 'K-Pop', 'Cucina'],
-        image: 'https://picsum.photos/seed/seoul/600/360',
+        image: 'https://loremflickr.com/800/500/seoul,korea,skyline?lock=1',
         bestTime: 'Apr (fioritura) / Set-Ott'
     },
     {
@@ -103,7 +103,7 @@ const POI_DATA = [
             "della Via della Seta. Mura Ming ancora intatte e quartiere " +
             "musulmano storico. Vicino all'Esercito di Terracotta.",
         tags: ['Via della Seta', 'Storia', 'Cucina Hui'],
-        image: 'https://picsum.photos/seed/xian/600/360',
+        image: 'https://loremflickr.com/800/500/xian,china,bell-tower?lock=1',
         bestTime: 'Mar-Mag / Set-Nov'
     },
     {
@@ -118,7 +118,7 @@ const POI_DATA = [
             "giganti. Ritmo più rilassato rispetto alle megalopoli " +
             "costiere. Case da tè, vicoli e mercati.",
         tags: ['Cucina Sichuan', 'Panda', 'Slow'],
-        image: 'https://picsum.photos/seed/chengdu/600/360',
+        image: 'https://loremflickr.com/800/500/chengdu,sichuan?lock=1',
         bestTime: 'Mar-Giu / Set-Nov'
     },
     {
@@ -133,7 +133,7 @@ const POI_DATA = [
             "Grattacieli, scale infinite, monorotaia che attraversa " +
             "edifici. Patria dell'hotpot piccante.",
         tags: ['Megalopoli', 'Hotpot', 'Yangtze'],
-        image: 'https://picsum.photos/seed/chongqing/600/360',
+        image: 'https://loremflickr.com/800/500/chongqing,skyline,china?lock=1',
         bestTime: 'Set-Nov (estati torride)'
     },
 
@@ -150,7 +150,7 @@ const POI_DATA = [
             "politico della Cina per quasi cinque secoli. Ospita il " +
             "Museo del Palazzo con oltre un milione di reperti.",
         tags: ['UNESCO', 'Storia', 'Architettura'],
-        image: 'https://picsum.photos/seed/forbiddencity/600/360',
+        image: 'https://loremflickr.com/800/500/forbidden-city,beijing?lock=1',
         bestTime: 'Apr-Mag / Set-Ott'
     },
     {
@@ -171,7 +171,7 @@ const POI_DATA = [
             "paralleli, torri, forti e passi. Le sezioni sotto sono " +
             "le più significative da visitare.",
         tags: ['UNESCO', 'Ming', 'Difesa'],
-        image: 'https://picsum.photos/seed/greatwall/600/360',
+        image: 'https://loremflickr.com/800/500/great-wall-of-china?lock=1',
         bestTime: 'Mag-Giu / Set-Ott',
         overlay: {
             // Tracciato schematico est → ovest della Muraglia Ming.
@@ -206,7 +206,7 @@ const POI_DATA = [
                         "nel mare — unico tratto della Muraglia che tocca " +
                         "l'acqua.",
                     tags: ['Estremità Est', 'Costa', 'Ming'],
-                    image: 'https://picsum.photos/seed/shanhaiguan/600/360',
+                    image: 'https://loremflickr.com/800/500/shanhaiguan,great-wall?lock=1',
                     hint: "L'estremo est, sul mare"
                 },
                 {
@@ -221,7 +221,7 @@ const POI_DATA = [
                         "l'aspetto originale. Trekking classico di 10 km " +
                         "fino a Simatai.",
                     tags: ['Trekking', 'Poco affollato', 'Ming'],
-                    image: 'https://picsum.photos/seed/jinshanling/600/360',
+                    image: 'https://loremflickr.com/800/500/jinshanling,great-wall?lock=1',
                     hint: 'Il tratto più fotografato'
                 },
                 {
@@ -236,7 +236,7 @@ const POI_DATA = [
                         "notte. Adiacente al borgo turistico ricostruito " +
                         "di Gubei Water Town.",
                     tags: ['Selvaggio', 'Aperto di notte'],
-                    image: 'https://picsum.photos/seed/simatai/600/360',
+                    image: 'https://loremflickr.com/800/500/simatai,great-wall?lock=1',
                     hint: 'Visitabile anche di notte'
                 },
                 {
@@ -251,7 +251,7 @@ const POI_DATA = [
                         "per la discesa. Ottimo compromesso tra accessibilità " +
                         "e atmosfera.",
                     tags: ['Restaurato', 'Facile accesso'],
-                    image: 'https://picsum.photos/seed/mutianyu/600/360',
+                    image: 'https://loremflickr.com/800/500/mutianyu,great-wall?lock=1',
                     hint: 'La scelta più bilanciata'
                 },
                 {
@@ -266,7 +266,7 @@ const POI_DATA = [
                         "completo negli anni '50. Utile se hai poco tempo, " +
                         "ma aspettati folle.",
                     tags: ['Treno diretto', 'Affollato'],
-                    image: 'https://picsum.photos/seed/badaling/600/360',
+                    image: 'https://loremflickr.com/800/500/badaling,great-wall?lock=1',
                     hint: 'Il più accessibile da Pechino'
                 },
                 {
@@ -281,7 +281,7 @@ const POI_DATA = [
                         "Gobi. Storicamente ultimo posto di frontiera " +
                         "dell'impero verso la Via della Seta.",
                     tags: ['Estremità Ovest', 'Via della Seta', 'Deserto'],
-                    image: 'https://picsum.photos/seed/jiayuguan/600/360',
+                    image: 'https://loremflickr.com/800/500/jiayuguan,fortress?lock=1',
                     hint: "L'estremo ovest, nel deserto"
                 }
             ]
@@ -300,7 +300,7 @@ const POI_DATA = [
             "ciascuna con tratti distinti. Scoperto nel 1974 da " +
             "contadini che scavavano un pozzo.",
         tags: ['UNESCO', 'Archeologia', 'Storia'],
-        image: 'https://picsum.photos/seed/terracotta/600/360',
+        image: 'https://loremflickr.com/800/500/terracotta-army,xian?lock=1',
         bestTime: 'Mar-Mag / Set-Nov'
     },
 
@@ -317,7 +317,7 @@ const POI_DATA = [
             "per i pinnacoli carsici e i villaggi di pescatori. Il " +
             "paesaggio compare sul retro della banconota da 20 yuan.",
         tags: ['Natura', 'Crociera', 'Paesaggio'],
-        image: 'https://picsum.photos/seed/liriver/600/360',
+        image: 'https://loremflickr.com/800/500/li-river,guilin,karst?lock=1',
         bestTime: 'Apr-Ott'
     },
     {
@@ -332,7 +332,7 @@ const POI_DATA = [
             "rosso, fondato nel 1987. Su una collina boscosa a nord " +
             "di Chengdu, con recinti che riproducono l'habitat naturale.",
         tags: ['Fauna', 'Conservazione'],
-        image: 'https://picsum.photos/seed/panda/600/360',
+        image: 'https://loremflickr.com/800/500/panda,chengdu?lock=1',
         bestTime: 'Mar-Giu (cuccioli)'
     }
 
@@ -436,8 +436,7 @@ const dom = {
     detailDescription: document.getElementById('detail-description'),
     detailMeta:        document.getElementById('detail-meta'),
     detailSections:    document.getElementById('detail-sections'),
-    sectionList:       document.getElementById('section-list'),
-    poiList:           document.getElementById('poi-list')
+    sectionList:       document.getElementById('section-list')
 };
 
 /* ------------------------------------------------------------------
@@ -583,10 +582,6 @@ function closeSidebar() {
     state.activePoiId     = null;
     state.activeSectionId = null;
     clearOverlay();
-
-    // Deseleziona la voce evidenziata nella lista
-    dom.poiList.querySelectorAll('.poi-item.is-active')
-        .forEach(el => el.classList.remove('is-active'));
 }
 
 /* ------------------------------------------------------------------
@@ -719,7 +714,6 @@ function onFilterClick(evt) {
     // Cambiare filtro rimuove qualunque overlay attivo
     clearOverlay();
     applyCategoryFilter();
-    renderPoiList();
 }
 
 function applyCategoryFilter() {
@@ -752,34 +746,6 @@ function applyCategoryFilter() {
 function getVisiblePois() {
     if (state.activeCategory === 'all') return POI_DATA;
     return POI_DATA.filter(p => p.category === state.activeCategory);
-}
-
-/* ------------------------------------------------------------------
-   6.4) Lista POI (sidebar)
------------------------------------------------------------------- */
-function renderPoiList() {
-    const items = getVisiblePois();
-
-    if (items.length === 0) {
-        dom.poiList.innerHTML =
-            '<li style="padding:12px;color:var(--color-text-muted);' +
-            'font-size:13px;">Nessuna tappa in questa categoria.</li>';
-        return;
-    }
-
-    dom.poiList.innerHTML = items.map(poi => {
-        const isActive = poi.id === state.activePoiId;
-        return (
-            `<li class="poi-item ${isActive ? 'is-active' : ''}"` +
-            ` data-id="${poi.id}" role="button" tabindex="0">` +
-                `<span class="poi-dot" aria-hidden="true"></span>` +
-                `<span class="poi-item-body">` +
-                    `<span class="poi-item-name">${escapeHtml(poi.name)}</span>` +
-                    `<span class="poi-item-city">${escapeHtml(poi.city)}</span>` +
-                `</span>` +
-            `</li>`
-        );
-    }).join('');
 }
 
 /* ------------------------------------------------------------------
@@ -848,11 +814,6 @@ function selectPoi(poiId, opts = {}) {
     renderDetail(poi);
     openSidebar();
 
-    // Aggiorna evidenziazione nella lista
-    dom.poiList.querySelectorAll('.poi-item').forEach(el => {
-        el.classList.toggle('is-active', el.dataset.id === poi.id);
-    });
-
     if (opts.openPopup !== false) {
         const marker = state.markersById.get(poi.id);
         if (marker && map.hasLayer(marker)) marker.openPopup();
@@ -893,22 +854,6 @@ function onBackClick() {
    9) EVENT BINDING GLOBALE
 ------------------------------------------------------------------ */
 function bindEvents() {
-    // Click sulla lista POI
-    dom.poiList.addEventListener('click', evt => {
-        const li = evt.target.closest('.poi-item');
-        if (!li) return;
-        selectPoi(li.dataset.id);
-    });
-
-    // Attivazione da tastiera
-    dom.poiList.addEventListener('keydown', evt => {
-        if (evt.key !== 'Enter' && evt.key !== ' ') return;
-        const li = evt.target.closest('.poi-item');
-        if (!li) return;
-        evt.preventDefault();
-        selectPoi(li.dataset.id);
-    });
-
     // Click sui bottoni delle sezioni
     dom.sectionList.addEventListener('click', evt => {
         const btn = evt.target.closest('.section-btn');
@@ -961,7 +906,6 @@ function escapeHtml(str) {
 function init() {
     createMarkers();
     renderFilterBar();
-    renderPoiList();
     bindEvents();
     renderDetail(null);
 
