@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Viaggio in Cina — Trip Planner</title>
 
-    <!-- Leaflet CSS (CDN ufficiale) -->
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -13,7 +12,6 @@
         crossorigin=""
     />
 
-    <!-- Google Fonts: Inter per un look moderno e pulito -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,36 +19,24 @@
         rel="stylesheet"
     />
 
-    <!-- Foglio di stile applicativo -->
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Contenitore principale a due colonne (mappa + sidebar) -->
+
     <div class="app-container">
 
-        <!-- ============================================================= -->
-        <!-- COLONNA SINISTRA: mappa interattiva                             -->
-        <!-- ============================================================= -->
         <main class="map-wrapper">
-            <!-- Barra dei filtri sovrapposta alla mappa (top) -->
+
             <div class="filter-bar" id="filter-bar" role="toolbar" aria-label="Filtri categorie">
-                <!-- I bottoni vengono generati dinamicamente da app.js
-                     a partire dalle categorie presenti nei dati. -->
+
             </div>
 
-            <!-- Il div su cui Leaflet monta la mappa -->
             <div id="map" aria-label="Mappa della Cina"></div>
         </main>
 
-        <!-- ============================================================= -->
-        <!-- SIDEBAR FLOTTANTE (glass panel)                                 -->
-        <!-- Nasce chiusa (classe .is-closed): compare quando si seleziona   -->
-        <!-- un POI e si chiude con la X in alto a destra.                   -->
-        <!-- ============================================================= -->
         <aside class="sidebar is-closed" id="sidebar"
                aria-label="Dettagli punto di interesse">
 
-            <!-- Bottone X: chiude il pannello -->
             <button
                 type="button"
                 class="sidebar-close"
@@ -67,7 +53,6 @@
                 </svg>
             </button>
 
-            <!-- Intestazione della sidebar -->
             <header class="sidebar-header">
                 <h1 class="sidebar-title">Viaggio in Cina</h1>
                 <p class="sidebar-subtitle">
@@ -75,12 +60,11 @@
                 </p>
             </header>
 
-            <!-- Pannello dettaglio: viene popolato dinamicamente da app.js -->
             <section class="detail-panel" id="detail-panel">
-                <!-- Stato iniziale (nessun POI selezionato) -->
+
                 <div class="detail-empty" id="detail-empty">
                     <div class="detail-empty-icon" aria-hidden="true">
-                        <!-- Icona SVG inline: bussola stilizzata -->
+
                         <svg viewBox="0 0 24 24" width="48" height="48"
                              fill="none" stroke="currentColor"
                              stroke-width="1.5" stroke-linecap="round"
@@ -92,10 +76,8 @@
                     <p>Seleziona un punto sulla mappa per iniziare a esplorare.</p>
                 </div>
 
-                <!-- Contenuto reale (nascosto finché non c'è una selezione) -->
                 <article class="detail-content" id="detail-content" hidden>
-                    <!-- Pulsante "Torna al POI genitore": visibile solo
-                         quando si sta guardando una sezione (sotto-POI). -->
+
                     <button
                         type="button"
                         class="detail-back-btn"
@@ -103,16 +85,12 @@
                         hidden
                     >&#8592; Torna</button>
 
-                    <!-- Galleria immagini: contenitore orizzontale con
-                         scroll-snap. Le foto vengono generate da JS a
-                         partire dal campo `images` (o `image`) del POI. -->
                     <div class="detail-gallery" id="detail-gallery">
                         <div class="gallery-track" id="gallery-track"
                              role="region" aria-label="Galleria immagini">
-                            <!-- popolata da app.js -->
+
                         </div>
 
-                        <!-- Frecce di navigazione (compaiono in hover desktop) -->
                         <button type="button"
                                 class="gallery-arrow gallery-arrow--prev"
                                 id="gallery-prev"
@@ -136,10 +114,9 @@
                             </svg>
                         </button>
 
-                        <!-- Indicatori a pallino (uno per immagine) -->
                         <div class="gallery-dots" id="gallery-dots"
                              role="tablist" aria-label="Naviga tra le immagini">
-                            <!-- popolata da app.js -->
+
                         </div>
                     </div>
                     <div class="detail-body">
@@ -149,8 +126,6 @@
                         <p class="detail-description" id="detail-description"></p>
                         <div class="detail-meta" id="detail-meta"></div>
 
-                        <!-- Pulsante Google Maps: visibile solo per i POI
-                             che hanno il campo `mapsUrl`. Apre in nuova tab. -->
                         <a
                             class="maps-btn"
                             id="maps-btn"
@@ -169,8 +144,6 @@
                             <span>Apri in Google Maps</span>
                         </a>
 
-                        <!-- Menu delle sezioni: mostrato solo per POI che
-                             hanno un overlay con sub-elementi (es. Muraglia). -->
                         <div class="detail-sections" id="detail-sections" hidden>
                             <h4 class="sections-title">Sezioni visitabili</h4>
                             <div class="section-list" id="section-list"></div>
@@ -182,14 +155,12 @@
         </aside>
     </div>
 
-    <!-- Leaflet JS (CDN ufficiale) -->
     <script
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""
     ></script>
 
-    <!-- Logica applicativa -->
     <script src="app.js"></script>
 </body>
 </html>

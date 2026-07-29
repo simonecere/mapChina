@@ -19,3 +19,4 @@ inventario-immagini.txt
 *.bak
 *.tmp
 *~
+.backup/

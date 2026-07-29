@@ -1,51 +1,7 @@
-/* ================================================================
-   app.js — Viaggio in Cina (Trip Planner)
-   ----------------------------------------------------------------
-   Struttura del file:
-     1) Dataset dei POI (con eventuale overlay: linea + sezioni)
-     2) Categorie dei filtri
-     3) Inizializzazione mappa Leaflet
-     4) Stato applicativo
-     5) Marker principali
-     6) Sidebar: dettaglio + lista + filtri
-     7) Overlay (linea Muraglia + marker sezioni)
-     8) Selezione POI / Selezione Sezione (con tasto Torna)
-     9) Utility e bootstrap
-   ================================================================ */
-
 'use strict';
 
-/* ------------------------------------------------------------------
-   1) DATASET DEI POI
-   ------------------------------------------------------------------
-   Coordinate in [lat, lng] (formato Leaflet, NON GeoJSON puro).
-
-   Campi:
-     - id           slug univoco (minuscole, trattini)
-     - name         nome visibile
-     - city         città / regione / nazione
-     - category     deve esistere in CATEGORIES ('city','monument',
-                    'nature','food')
-     - coords       [lat, lng]
-     - zoom         zoom target al flyTo
-                       ~11 = città intera
-                       ~13 = quartiere / area estesa
-                       ~15 = singolo monumento
-     - description  testo breve (2-4 righe)
-     - tags         etichette libere (mostrate come chip)
-     - image        URL immagine (placeholder o reale)
-     - bestTime     periodo consigliato
-
-   Opzionale — un POI può avere un OVERLAY:
-     overlay: {
-        polyline: [[lat,lng], ...]     // linea disegnata sulla mappa
-        sections: [ { ...sotto-POI } ] // punti selezionabili annidati
-     }
-   Le sezioni compaiono solo quando il POI genitore è selezionato.
------------------------------------------------------------------- */
 const POI_DATA = [
 
-    /* ===================== CITTÀ ===================== */
     {
         id: 'beijing',
         name: 'Pechino',
@@ -137,7 +93,6 @@ const POI_DATA = [
         bestTime: 'Set-Nov (estati torride)'
     },
 
-    /* =================== MONUMENTI =================== */
     {
         id: 'forbidden-city',
         name: 'Città Proibita',
@@ -158,9 +113,7 @@ const POI_DATA = [
         name: 'Grande Muraglia',
         city: 'Cina settentrionale',
         category: 'monument',
-        // La linea è lunga migliaia di km — il "coords" del POI è il
-        // punto su cui centrare la vista d'insieme (nord della Cina),
-        // e lo zoom è basso per mostrare tutta la traccia.
+
         coords: [39.5, 111.0],
         zoom: 5,
         description:
@@ -174,24 +127,22 @@ const POI_DATA = [
         image: 'https://loremflickr.com/800/500/great-wall-of-china?lock=1',
         bestTime: 'Mag-Giu / Set-Ott',
         overlay: {
-            // Tracciato schematico est → ovest della Muraglia Ming.
-            // NOTA: rappresentazione semplificata; nella realtà il muro
-            // si biforca in più tratti (muro interno / esterno).
+
             polyline: [
-                [39.9628, 119.7972], // Shanhaiguan (Testa del Drago)
-                [40.4297, 118.4820], // Chengde area
-                [40.6795, 117.2439], // Jinshanling
-                [40.6845, 117.1660], // Gubeikou
-                [40.4319, 116.5704], // Mutianyu
-                [40.3564, 116.0166], // Badaling
-                [40.0918, 113.2947], // Datong
-                [38.9998, 111.7028], // Pianguan area
-                [38.2854, 109.7341], // Yulin
-                [38.4872, 106.2309], // Yinchuan (Muro Helan)
-                [37.5171, 105.1898], // Zhongwei
-                [37.9299, 102.6407], // Wuwei
-                [38.9333, 100.4517], // Zhangye
-                [39.8018, 98.2896]   // Jiayuguan (estremità ovest)
+                [39.9628, 119.7972], 
+                [40.4297, 118.4820], 
+                [40.6795, 117.2439], 
+                [40.6845, 117.1660], 
+                [40.4319, 116.5704], 
+                [40.3564, 116.0166], 
+                [40.0918, 113.2947], 
+                [38.9998, 111.7028], 
+                [38.2854, 109.7341], 
+                [38.4872, 106.2309], 
+                [37.5171, 105.1898], 
+                [37.9299, 102.6407], 
+                [38.9333, 100.4517], 
+                [39.8018, 98.2896]   
             ],
             sections: [
                 {
@@ -304,7 +255,6 @@ const POI_DATA = [
         bestTime: 'Mar-Mag / Set-Nov'
     },
 
-    /* ==================== NATURA ==================== */
     {
         id: 'li-river',
         name: 'Fiume Li',
@@ -336,7 +286,6 @@ const POI_DATA = [
         bestTime: 'Mar-Giu (cuccioli)'
     },
 
-    /* ===================== CIBO ===================== */
     {
         id: 'peking-duck-example',
         name: "Anatra alla Pechinese (esempio)",
@@ -356,9 +305,6 @@ const POI_DATA = [
     }
 ];
 
-/* ------------------------------------------------------------------
-   2) CATEGORIE — chiave interna -> etichetta visibile
------------------------------------------------------------------- */
 const CATEGORIES = [
     { key: 'all',      label: 'Tutti' },
     { key: 'city',     label: 'Città' },
@@ -367,9 +313,6 @@ const CATEGORIES = [
     { key: 'food',     label: 'Cibo' }
 ];
 
-/* ------------------------------------------------------------------
-   3) INIZIALIZZAZIONE MAPPA
------------------------------------------------------------------- */
 const map = L.map('map', {
     center: [34.5, 112.5],
     zoom: 4,
@@ -391,20 +334,14 @@ L.tileLayer(
     }
 ).addTo(map);
 
-/* ------------------------------------------------------------------
-   4) STATO APPLICATIVO
------------------------------------------------------------------- */
 const state = {
     activeCategory:  'all',
     activePoiId:     null,
-    activeSectionId: null,          // sezione (sotto-POI) attualmente aperta
-    markersById:     new Map(),     // id-POI -> L.Marker
-    overlayLayers:   []             // layer temporanei (polyline + section markers)
+    activeSectionId: null,          
+    markersById:     new Map(),     
+    overlayLayers:   []             
 };
 
-/* ------------------------------------------------------------------
-   5) MARKER PRINCIPALI
------------------------------------------------------------------- */
 function buildIcon(poi) {
     const letter = poi.category.charAt(0).toUpperCase();
     return L.divIcon({
@@ -430,9 +367,6 @@ function createMarkers() {
     });
 }
 
-/* ------------------------------------------------------------------
-   6) SIDEBAR: cache DOM
------------------------------------------------------------------- */
 const dom = {
     sidebar:           document.getElementById('sidebar'),
     sidebarClose:      document.getElementById('sidebar-close'),
@@ -455,15 +389,6 @@ const dom = {
     sectionList:       document.getElementById('section-list')
 };
 
-/* ------------------------------------------------------------------
-   GALLERIA IMMAGINI
-   ------------------------------------------------------------------
-   Accetta sia il vecchio schema (image: 'url') sia il nuovo
-   (images: [...]). Nessuna migrazione forzata: puoi convertirli
-   uno alla volta.
------------------------------------------------------------------- */
-
-/** Restituisce sempre un array di URL, anche se il POI ha un singolo `image`. */
 function getImagesForItem(item) {
     if (item && Array.isArray(item.images) && item.images.length > 0) {
         return item.images;
@@ -472,7 +397,6 @@ function getImagesForItem(item) {
     return [];
 }
 
-/** Osservatore attivo per la galleria corrente (uno solo alla volta). */
 let galleryObserver = null;
 
 function renderGallery(item, altName) {
@@ -480,13 +404,11 @@ function renderGallery(item, altName) {
     const track  = dom.galleryTrack;
     const dots   = dom.galleryDots;
 
-    // Ripulisce l'observer precedente per evitare memory leak
     if (galleryObserver) {
         galleryObserver.disconnect();
         galleryObserver = null;
     }
 
-    // Nessuna immagine: mostra un placeholder muto
     if (images.length === 0) {
         track.innerHTML =
             '<div class="gallery-item is-broken">' +
@@ -497,9 +419,6 @@ function renderGallery(item, altName) {
         return;
     }
 
-    // Costruisce le card immagine.
-    // `loading="lazy"` = il browser scarica ciascuna foto solo quando
-    // entra in viewport durante lo scroll orizzontale.
     track.innerHTML = images.map((url, i) => (
         `<div class="gallery-item">` +
             `<img src="${escapeHtml(url)}"` +
@@ -511,7 +430,6 @@ function renderGallery(item, altName) {
         `</div>`
     )).join('');
 
-    // Pallini indicatori (solo con più di un'immagine)
     if (images.length > 1) {
         dots.innerHTML = images.map((_, i) => (
             `<button class="gallery-dot ${i === 0 ? 'is-active' : ''}"` +
@@ -524,11 +442,8 @@ function renderGallery(item, altName) {
 
     dom.detailGallery.classList.toggle('is-single', images.length === 1);
 
-    // Riporta lo scroll all'inizio (utile quando si cambia POI)
     track.scrollLeft = 0;
 
-    // Attiva l'IntersectionObserver che aggiorna i pallini
-    // durante lo swipe/scroll orizzontale
     if (images.length > 1) setupGalleryObserver(track, dots);
 }
 
@@ -545,27 +460,23 @@ function setupGalleryObserver(track, dots) {
         });
     }, {
         root: track,
-        threshold: 0.6           // considera "attiva" l'immagine visibile >=60%
+        threshold: 0.6           
     });
 
     Array.from(track.children).forEach(item => galleryObserver.observe(item));
 }
 
-/** Scorre a una immagine specifica (chiamata dai pallini) */
 function scrollGalleryToIndex(index) {
     const item = dom.galleryTrack.children[index];
     if (!item) return;
     item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 }
 
-/** Scorre di ±1 rispetto all'immagine attualmente centrata */
 function scrollGalleryBy(delta) {
     const track = dom.galleryTrack;
     const items = Array.from(track.children);
     if (items.length === 0) return;
 
-    // L'immagine "attiva" è quella la cui posizione X è più vicina a 0
-    // rispetto al bordo sinistro del track
     const trackLeft = track.scrollLeft;
     let currentIndex = 0;
     let minDistance = Infinity;
@@ -581,14 +492,6 @@ function scrollGalleryBy(delta) {
     scrollGalleryToIndex(target);
 }
 
-/* ------------------------------------------------------------------
-   Apertura / chiusura della sidebar flottante
-   ------------------------------------------------------------------
-   L'apertura è idempotente: chiamarla su una sidebar già aperta
-   non fa nulla di visibile. La chiusura invece pulisce anche lo
-   stato di selezione e l'overlay Muraglia, così la mappa torna a
-   una vista "pulita".
------------------------------------------------------------------- */
 function openSidebar() {
     dom.sidebar.classList.remove('is-closed');
 }
@@ -600,9 +503,6 @@ function closeSidebar() {
     clearOverlay();
 }
 
-/* ------------------------------------------------------------------
-   6.1) Rendering dettaglio POI
------------------------------------------------------------------- */
 function renderDetail(poi) {
     if (!poi) {
         dom.detailEmpty.hidden   = false;
@@ -613,13 +513,11 @@ function renderDetail(poi) {
     dom.detailEmpty.hidden   = true;
     dom.detailContent.hidden = false;
 
-    // Nessun back button per un POI di primo livello
     dom.detailBackBtn.hidden = true;
 
-    // Piccolo trick per far ri-partire l'animazione fadeInUp
     dom.detailContent.style.animation = 'none';
-    // eslint-disable-next-line no-unused-expressions
-    dom.detailContent.offsetHeight; // reflow
+
+    dom.detailContent.offsetHeight; 
     dom.detailContent.style.animation = '';
 
     renderGallery(poi, poi.name);
@@ -637,10 +535,8 @@ function renderDetail(poi) {
         `<span>Categoria: ${escapeHtml(catLabel)}</span>` +
         `<span>Periodo consigliato: ${escapeHtml(poi.bestTime || '—')}</span>`;
 
-    // Link Google Maps (opzionale)
     updateMapsButton(poi.mapsUrl);
 
-    // Se il POI ha sezioni, popola l'elenco e mostralo
     if (poi.overlay && poi.overlay.sections) {
         renderSectionButtons(poi.overlay.sections, null);
         dom.detailSections.hidden = false;
@@ -650,14 +546,6 @@ function renderDetail(poi) {
     }
 }
 
-/* ------------------------------------------------------------------
-   6.2) Rendering dettaglio SEZIONE
-   ------------------------------------------------------------------
-   Mostra i dati della sezione ma:
-     - conserva il pulsante "Torna a <POI genitore>"
-     - lascia visibile la lista sezioni per passare rapidamente
-       da una sezione all'altra
------------------------------------------------------------------- */
 function renderSectionDetail(parent, section) {
     dom.detailEmpty.hidden   = true;
     dom.detailContent.hidden = false;
@@ -666,7 +554,7 @@ function renderSectionDetail(parent, section) {
     dom.detailBackBtn.textContent = `← Torna a ${parent.name}`;
 
     dom.detailContent.style.animation = 'none';
-    // eslint-disable-next-line no-unused-expressions
+
     dom.detailContent.offsetHeight;
     dom.detailContent.style.animation = '';
 
@@ -682,15 +570,12 @@ function renderSectionDetail(parent, section) {
     dom.detailMeta.innerHTML =
         `<span>Sezione di: ${escapeHtml(parent.name)}</span>`;
 
-    // Link Google Maps (opzionale, anche a livello di sezione)
     updateMapsButton(section.mapsUrl);
 
-    // Lista sezioni resta visibile, con la sezione attiva evidenziata
     renderSectionButtons(parent.overlay.sections, section.id);
     dom.detailSections.hidden = false;
 }
 
-/** Mostra o nasconde il pulsante "Apri in Google Maps" in base al link. */
 function updateMapsButton(url) {
     if (url) {
         dom.mapsButton.href = url;
@@ -701,7 +586,6 @@ function updateMapsButton(url) {
     }
 }
 
-/* Popola i bottoni delle sezioni; opzionalmente evidenzia quello attivo */
 function renderSectionButtons(sections, activeId) {
     dom.sectionList.innerHTML = sections.map(s => {
         const isActive = s.id === activeId;
@@ -717,9 +601,6 @@ function renderSectionButtons(sections, activeId) {
     }).join('');
 }
 
-/* ------------------------------------------------------------------
-   6.3) Filtri categoria
------------------------------------------------------------------- */
 function renderFilterBar() {
     dom.filterBar.innerHTML = CATEGORIES.map(cat => {
         const isActive = cat.key === state.activeCategory;
@@ -744,7 +625,6 @@ function onFilterClick(evt) {
         b.classList.toggle('is-active', b.dataset.category === category);
     });
 
-    // Cambiare filtro rimuove qualunque overlay attivo
     clearOverlay();
     applyCategoryFilter();
 }
@@ -762,12 +642,10 @@ function applyCategoryFilter() {
         else if (!visibleIds.has(poi.id) && isOnMap)   map.removeLayer(marker);
     });
 
-    // Se il POI attivo sparisce dal filtro, chiudi la sidebar
     if (state.activePoiId && !visibleIds.has(state.activePoiId)) {
         closeSidebar();
     }
 
-    // Auto-fit sui POI visibili (contesto visivo)
     if (visible.length >= 2) {
         const bounds = L.latLngBounds(visible.map(p => p.coords));
         map.flyToBounds(bounds, { padding: [60, 60], duration: 0.9 });
@@ -781,14 +659,10 @@ function getVisiblePois() {
     return POI_DATA.filter(p => p.category === state.activeCategory);
 }
 
-/* ------------------------------------------------------------------
-   7) OVERLAY: polilinea + marker delle sezioni
------------------------------------------------------------------- */
 function showOverlay(poi) {
     clearOverlay();
     if (!poi.overlay) return;
 
-    // Polilinea principale (es. traccia della Muraglia)
     if (poi.overlay.polyline && poi.overlay.polyline.length > 1) {
         const line = L.polyline(poi.overlay.polyline, {
             color:     '#c8332a',
@@ -800,7 +674,6 @@ function showOverlay(poi) {
         state.overlayLayers.push(line);
     }
 
-    // Marker delle sezioni (piccoli cerchi bianchi bordati)
     if (poi.overlay.sections) {
         poi.overlay.sections.forEach(sec => {
             const marker = L.circleMarker(sec.coords, {
@@ -830,9 +703,6 @@ function clearOverlay() {
     state.activeSectionId = null;
 }
 
-/* ------------------------------------------------------------------
-   8) SELEZIONE POI / SEZIONE
------------------------------------------------------------------- */
 function selectPoi(poiId, opts = {}) {
     const poi = POI_DATA.find(p => p.id === poiId);
     if (!poi) return;
@@ -841,7 +711,6 @@ function selectPoi(poiId, opts = {}) {
 
     map.flyTo(poi.coords, poi.zoom, { duration: 1.2, easeLinearity: 0.25 });
 
-    // Overlay: sostituisce quello del POI precedente
     showOverlay(poi);
 
     renderDetail(poi);
@@ -872,7 +741,6 @@ function selectSection(parentId, sectionId) {
     openSidebar();
 }
 
-/* Handler del pulsante "← Torna a ..." */
 function onBackClick() {
     if (!state.activePoiId) return;
     const parent = POI_DATA.find(p => p.id === state.activePoiId);
@@ -883,11 +751,8 @@ function onBackClick() {
     renderDetail(parent);
 }
 
-/* ------------------------------------------------------------------
-   9) EVENT BINDING GLOBALE
------------------------------------------------------------------- */
 function bindEvents() {
-    // Click sui bottoni delle sezioni
+
     dom.sectionList.addEventListener('click', evt => {
         const btn = evt.target.closest('.section-btn');
         if (!btn) return;
@@ -895,17 +760,13 @@ function bindEvents() {
         selectSection(state.activePoiId, btn.dataset.sectionId);
     });
 
-    // Pulsante "Torna al POI genitore"
     dom.detailBackBtn.addEventListener('click', onBackClick);
 
-    // Pulsante X: chiude la sidebar flottante
     dom.sidebarClose.addEventListener('click', closeSidebar);
 
-    // Frecce galleria
     dom.galleryPrev.addEventListener('click', () => scrollGalleryBy(-1));
     dom.galleryNext.addEventListener('click', () => scrollGalleryBy(+1));
 
-    // Pallini galleria (click su un dot = vai a quell'immagine)
     dom.galleryDots.addEventListener('click', evt => {
         const dot = evt.target.closest('.gallery-dot');
         if (!dot) return;
@@ -913,7 +774,6 @@ function bindEvents() {
         if (!Number.isNaN(idx)) scrollGalleryToIndex(idx);
     });
 
-    // Tasto Esc: shortcut da tastiera per chiudere
     document.addEventListener('keydown', evt => {
         if (evt.key === 'Escape' && !dom.sidebar.classList.contains('is-closed')) {
             closeSidebar();
@@ -921,9 +781,6 @@ function bindEvents() {
     });
 }
 
-/* ------------------------------------------------------------------
-   Utility: escaping HTML nei template letterali
------------------------------------------------------------------- */
 function escapeHtml(str) {
     return String(str)
         .replace(/&/g, '&amp;')
@@ -933,16 +790,12 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
-/* ------------------------------------------------------------------
-   BOOTSTRAP
------------------------------------------------------------------- */
 function init() {
     createMarkers();
     renderFilterBar();
     bindEvents();
     renderDetail(null);
 
-    // Fit iniziale su tutti i POI
     const bounds = L.latLngBounds(POI_DATA.map(p => p.coords));
     map.fitBounds(bounds, { padding: [60, 60] });
 }
