@@ -1,166 +1,82 @@
 <!DOCTYPE html>
-<html lang = "it">
-<head> 
+<html lang="it">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Viaggio in Cina — Trip Planner</title>
+    <title>Viaggio in Cina — Home</title>
 
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin=""
-    />
-
+    <!-- Font Inter da Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     />
 
+    <!-- Foglio di stile condiviso -->
     <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="page-home">
 
-    <div class="app-container">
+    <!-- =========================================================
+         Home: landing page. Non c'è il menu drawer perché
+         le due card sotto già portano alle uniche altre pagine.
+    ========================================================== -->
+    <main class="home">
 
-        <main class="map-wrapper">
+        <header class="home-header">
+            <h1 class="home-title">Viaggio in Cina</h1>
+            <p class="home-subtitle">
+                Il tuo trip planner. Scegli dove vuoi andare.
+            </p>
+        </header>
 
-            <div class="filter-bar" id="filter-bar" role="toolbar" aria-label="Filtri categorie">
+        <nav class="home-cards" aria-label="Sezioni del trip planner">
 
-            </div>
-
-            <div id="map" aria-label="Mappa della Cina"></div>
-        </main>
-
-        <aside class="sidebar is-closed" id="sidebar"
-               aria-label="Dettagli punto di interesse">
-
-            <button
-                type="button"
-                class="sidebar-close"
-                id="sidebar-close"
-                aria-label="Chiudi pannello"
-                title="Chiudi"
-            >
-                <svg viewBox="0 0 24 24" width="16" height="16"
-                     fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round"
-                     stroke-linejoin="round" aria-hidden="true">
-                    <line x1="5" y1="5" x2="19" y2="19" />
-                    <line x1="19" y1="5" x2="5" y2="19" />
-                </svg>
-            </button>
-
-            <header class="sidebar-header">
-                <h1 class="sidebar-title">Viaggio in Cina</h1>
-                <p class="sidebar-subtitle">
-                    Itinerario interattivo — clicca un marker sulla mappa
+            <!-- Card 1: mappa interattiva -->
+            <a class="home-card" href="mappa.html">
+                <span class="home-card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="32" height="32"
+                         fill="none" stroke="currentColor"
+                         stroke-width="1.6" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M9 3l6 3 6-2v14l-6 2-6-3-6 2V5l6-2z"/>
+                        <path d="M9 3v14M15 6v14"/>
+                    </svg>
+                </span>
+                <h2 class="home-card-title">Mappa</h2>
+                <p class="home-card-desc">
+                    Esplora città, monumenti, ristoranti e servizi
+                    sulla mappa interattiva. Filtra per categoria,
+                    apri i POI, salta direttamente su Google Maps.
                 </p>
-            </header>
+                <span class="home-card-cta">Apri la mappa &rarr;</span>
+            </a>
 
-            <section class="detail-panel" id="detail-panel">
+            <!-- Card 2: Il File -->
+            <a class="home-card" href="il-file.html">
+                <span class="home-card-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="32" height="32"
+                         fill="none" stroke="currentColor"
+                         stroke-width="1.6" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="8" y1="13" x2="16" y2="13"/>
+                        <line x1="8" y1="17" x2="16" y2="17"/>
+                    </svg>
+                </span>
+                <h2 class="home-card-title">Il File</h2>
+                <p class="home-card-desc">
+                    Info pratiche del viaggio: itinerario, voli e
+                    bagagli, spostamenti interni, app utili, regole
+                    generali.
+                </p>
+                <span class="home-card-cta">Apri Il File &rarr;</span>
+            </a>
 
-                <div class="detail-empty" id="detail-empty">
-                    <div class="detail-empty-icon" aria-hidden="true">
+        </nav>
 
-                        <svg viewBox="0 0 24 24" width="48" height="48"
-                             fill="none" stroke="currentColor"
-                             stroke-width="1.5" stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" />
-                        </svg>
-                    </div>
-                    <p>Seleziona un punto sulla mappa per iniziare a esplorare.</p>
-                </div>
-
-                <article class="detail-content" id="detail-content" hidden>
-
-                    <button
-                        type="button"
-                        class="detail-back-btn"
-                        id="detail-back-btn"
-                        hidden
-                    >&#8592; Torna</button>
-
-                    <div class="detail-gallery" id="detail-gallery">
-                        <div class="gallery-track" id="gallery-track"
-                             role="region" aria-label="Galleria immagini">
-
-                        </div>
-
-                        <button type="button"
-                                class="gallery-arrow gallery-arrow--prev"
-                                id="gallery-prev"
-                                aria-label="Immagine precedente">
-                            <svg viewBox="0 0 24 24" width="16" height="16"
-                                 fill="none" stroke="currentColor"
-                                 stroke-width="2.5" stroke-linecap="round"
-                                 stroke-linejoin="round" aria-hidden="true">
-                                <polyline points="15 18 9 12 15 6" />
-                            </svg>
-                        </button>
-                        <button type="button"
-                                class="gallery-arrow gallery-arrow--next"
-                                id="gallery-next"
-                                aria-label="Immagine successiva">
-                            <svg viewBox="0 0 24 24" width="16" height="16"
-                                 fill="none" stroke="currentColor"
-                                 stroke-width="2.5" stroke-linecap="round"
-                                 stroke-linejoin="round" aria-hidden="true">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                        </button>
-
-                        <div class="gallery-dots" id="gallery-dots"
-                             role="tablist" aria-label="Naviga tra le immagini">
-
-                        </div>
-                    </div>
-                    <div class="detail-body">
-                        <span class="detail-city" id="detail-city"></span>
-                        <h2 class="detail-title" id="detail-title"></h2>
-                        <div class="detail-tags" id="detail-tags"></div>
-                        <p class="detail-description" id="detail-description"></p>
-                        <div class="detail-meta" id="detail-meta"></div>
-
-                        <a
-                            class="maps-btn"
-                            id="maps-btn"
-                            href="#"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            hidden
-                        >
-                            <svg viewBox="0 0 24 24" width="14" height="14"
-                                 fill="none" stroke="currentColor"
-                                 stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" aria-hidden="true">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            <span>Apri in Google Maps</span>
-                        </a>
-
-                        <div class="detail-sections" id="detail-sections" hidden>
-                            <h4 class="sections-title">Sezioni visitabili</h4>
-                            <div class="section-list" id="section-list"></div>
-                        </div>
-                    </div>
-                </article>
-            </section>
-
-        </aside>
-    </div>
-
-    <script
-        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""
-    ></script>
-
-    <script src="app.js"></script>
+    </main>
 </body>
 </html>

@@ -1,5 +1,38 @@
+/* ================================================================
+   app.js — Viaggio in Cina (Trip Planner)
+   ----------------------------------------------------------------
+   Struttura del file:
+     1) POI_DATA               array dei luoghi (con overlay/sezioni)
+     2) CATEGORIES             tassonomia gerarchica dei filtri
+     3) Utilities               findCategoryByKey, getCategoryLabel
+     4) Inizializzazione mappa  Leaflet + tile CartoDB
+     5) Stato applicativo       state
+     6) Marker principali       buildIcon, createMarkers
+     7) DOM cache               riferimenti agli elementi statici
+     8) Galleria immagini       carousel scroll-snap, IntersectionObserver
+     9) Sidebar open/close      + calcolo --sidebar-reserved
+    10) Rendering dettaglio     renderDetail / renderSectionDetail
+    11) Filtri (primary + sub)  openSubBar, closeSubBar, updateFilterBarActive
+    12) Overlay Grande Muraglia polyline + marker sezioni
+    13) Selezione POI/sezione   selectPoi, selectSection, onBackClick
+    14) Bottom sheet mobile     initSheetDrag
+    15) Event binding & bootstrap
+   ================================================================ */
+
 'use strict';
 
+/* ------------------------------------------------------------------
+   1) DATASET DEI POI
+   ------------------------------------------------------------------
+   Coordinate in [lat, lng] (formato Leaflet, NON GeoJSON puro).
+   Campi obbligatori: id, name, city, category, coords, zoom,
+   description, tags, image.
+   Campi opzionali (mostrati in sidebar solo se presenti):
+     bestTime, mapsUrl, checkIn/checkOut (hotel),
+     iata (aeroporti), lines (stazioni), rating.
+   Un POI può avere `overlay` con `polyline` e/o `sections`
+   (usato dalla Grande Muraglia).
+------------------------------------------------------------------ */
 const POI_DATA = [
 
     {
@@ -302,23 +335,139 @@ const POI_DATA = [
         image: 'https://loremflickr.com/800/500/peking-duck,beijing?lock=1',
         mapsUrl: 'https://maps.app.goo.gl/DX4NHXTZTTDbyu7C8',
         bestTime: 'Prenotazione consigliata'
+    },
+
+    {
+        id: 'wangfujing-example',
+        name: 'Wangfujing Street',
+        city: 'Pechino — Dongcheng',
+        category: 'shopping',
+        coords: [39.9127, 116.4103],
+        zoom: 16,
+        description:
+            "Principale via commerciale pedonale di Pechino. Grandi " +
+            "magazzini (APM, Dongan Plaza), Snack Street con street food, " +
+            "librerie internazionali. Ottima per una serata a piedi.",
+        tags: ['Pedonale', 'Snack Street', 'Turistico'],
+        image: 'https://loremflickr.com/800/500/wangfujing,beijing,street?lock=1'
+    },
+
+    {
+        id: 'hotel-example',
+        name: 'Rosewood Beijing (esempio)',
+        city: 'Pechino — CBD',
+        category: 'hotel',
+        coords: [39.9264, 116.4534],
+        zoom: 16,
+        description:
+            "Hotel 5 stelle nel quartiere finanziario di Pechino. " +
+            "283 camere, spa, ristorante fine dining. Base comoda per " +
+            "muoversi verso i monumenti imperiali con la metro.",
+        tags: ['5 stelle', 'CBD', 'Lusso'],
+        image: 'https://loremflickr.com/800/500/hotel,luxury,beijing?lock=1',
+        checkIn: 'Dal 15:00',
+        checkOut: 'Fino a 12:00'
+    },
+
+    {
+        id: 'beijing-south-station',
+        name: 'Stazione di Pechino Sud',
+        city: 'Beijingnan Zhan',
+        category: 'station',
+        coords: [39.8654, 116.3785],
+        zoom: 15,
+        description:
+            "Terminal high-speed a sud di Pechino. Treni CRH per " +
+            "Shanghai (~4h30), Tianjin (~30 min), Nanjing (~3h30). " +
+            "Servita dalle linee metro 4, 14 e 16.",
+        tags: ['CRH', 'High-Speed'],
+        image: 'https://loremflickr.com/800/500/train-station,beijing?lock=1',
+        lines: 'CRH · Beijing-Shanghai HSR'
+    },
+
+    {
+        id: 'pek-airport',
+        name: 'Aeroporto Internazionale Capital',
+        city: 'Pechino — PEK',
+        category: 'airport',
+        coords: [40.0801, 116.5846],
+        zoom: 12,
+        description:
+            "Principale aeroporto di Pechino, hub di Air China. " +
+            "Tre terminal (T1/T2/T3). Airport Express in metro fino al " +
+            "centro in ~25 min, taxi ~45 min.",
+        tags: ['Hub', 'Air China'],
+        image: 'https://loremflickr.com/800/500/airport,beijing,pek?lock=1',
+        iata: 'PEK'
     }
 ];
 
+/* ------------------------------------------------------------------
+   2) TASSONOMIA CATEGORIE
+   ------------------------------------------------------------------
+   Struttura gerarchica: elementi top-level appaiono nella primary
+   bar. Quelli con `sub` sono espandibili (aprono la sub-bar).
+   'esperienze' e 'services' NON sono categorie di POI (nessun POI
+   ha `category: 'esperienze'`), sono contenitori visivi. Le key
+   foglia ('food', 'hotel', ecc.) sono quelle usate nei POI.
+------------------------------------------------------------------ */
 const CATEGORIES = [
     { key: 'all',      label: 'Tutti' },
     { key: 'city',     label: 'Città' },
     { key: 'monument', label: 'Monumenti' },
     { key: 'nature',   label: 'Natura' },
-    { key: 'food',     label: 'Cibo' }
+    { key: 'esperienze', label: 'Esperienze', sub: [
+        { key: 'food',     label: 'Cibo' },
+        { key: 'shopping', label: 'Shopping' },
+        { key: 'activity', label: 'Attività' }
+    ]},
+    { key: 'services', label: 'Servizi', sub: [
+        { key: 'hotel',   label: 'Hotel' },
+        { key: 'station', label: 'Stazioni' },
+        { key: 'airport', label: 'Aeroporti' }
+    ]}
 ];
 
+/* Testo del marker sulla mappa per ogni categoria.
+   Uso codici a 1-2 lettere per evitare conflitti (es. shopping/station
+   entrambi 'S'). Il font marker è calibrato in CSS per accomodare 2 char. */
+const CATEGORY_MARKER_TEXT = {
+    city: 'C', monument: 'M', nature: 'N',
+    food: 'F', shopping: 'Sh', activity: 'At',
+    hotel: 'H', station: 'St', airport: 'Ae'
+};
+
+/* ------------------------------------------------------------------
+   3) UTILITY per la tassonomia
+------------------------------------------------------------------ */
+
+/** Ricerca ricorsiva della categoria (top-level o sub) per la sua key. */
+function findCategoryByKey(key) {
+    for (const c of CATEGORIES) {
+        if (c.key === key) return c;
+        if (c.sub) for (const s of c.sub) if (s.key === key) return s;
+    }
+    return null;
+}
+
+function getCategoryLabel(key) {
+    const c = findCategoryByKey(key);
+    return c ? c.label : key;
+}
+
+/* ------------------------------------------------------------------
+   4) INIZIALIZZAZIONE MAPPA LEAFLET
+   ------------------------------------------------------------------
+   Tile server: CartoDB Voyager (stile pulito, gratis).
+   zoomControl: false = nasconde i bottoni +/- (zoom via rotella/pinch).
+   worldCopyJump: true = pan continuo attraverso il meridiano 180°.
+------------------------------------------------------------------ */
 const map = L.map('map', {
     center: [34.5, 112.5],
     zoom: 4,
     minZoom: 3,
     maxZoom: 18,
-    zoomControl: true,
+    zoomControl: false,
     scrollWheelZoom: true,
     worldCopyJump: true
 });
@@ -334,19 +483,28 @@ L.tileLayer(
     }
 ).addTo(map);
 
+/* ------------------------------------------------------------------
+   5) STATO APPLICATIVO
+------------------------------------------------------------------ */
 const state = {
-    activeCategory:  'all',
-    activePoiId:     null,
-    activeSectionId: null,          
-    markersById:     new Map(),     
-    overlayLayers:   []             
+    activeCategory:  'all',      // 'all' | primary key | parent key | sub key
+    activePoiId:     null,       // id del POI attualmente aperto
+    activeSectionId: null,       // id sezione Muraglia (se in modalità sezione)
+    markersById:     new Map(),  // id-POI -> istanza L.Marker
+    overlayLayers:   []          // polilinea + marker sezioni della Muraglia
 };
 
+/* ------------------------------------------------------------------
+   6) MARKER PRINCIPALI
+   ------------------------------------------------------------------
+   Uso L.divIcon (marker HTML/CSS custom) invece delle icone raster
+   di default: permette styling via CSS e transizioni.
+------------------------------------------------------------------ */
 function buildIcon(poi) {
-    const letter = poi.category.charAt(0).toUpperCase();
+    const text = CATEGORY_MARKER_TEXT[poi.category] || poi.category.charAt(0).toUpperCase();
     return L.divIcon({
         className: 'custom-marker-wrapper',
-        html: `<div class="custom-marker" data-id="${poi.id}"><span>${letter}</span></div>`,
+        html: `<div class="custom-marker" data-id="${poi.id}"><span>${text}</span></div>`,
         iconSize:   [32, 32],
         iconAnchor: [16, 32],
         popupAnchor:[0, -30]
@@ -367,10 +525,18 @@ function createMarkers() {
     });
 }
 
+/* ------------------------------------------------------------------
+   7) DOM CACHE
+   ------------------------------------------------------------------
+   Riferimenti risolti una volta sola all'init, evitano querySelector
+   ripetuti nel codice caldo (rendering della sidebar a ogni click).
+------------------------------------------------------------------ */
 const dom = {
     sidebar:           document.getElementById('sidebar'),
     sidebarClose:      document.getElementById('sidebar-close'),
+    sidebarHandle:     document.getElementById('sidebar-handle'),
     filterBar:         document.getElementById('filter-bar'),
+    subBar:            document.getElementById('sub-bar'),
     detailEmpty:       document.getElementById('detail-empty'),
     detailContent:     document.getElementById('detail-content'),
     detailBackBtn:     document.getElementById('detail-back-btn'),
@@ -389,6 +555,17 @@ const dom = {
     sectionList:       document.getElementById('section-list')
 };
 
+/* ------------------------------------------------------------------
+   8) GALLERIA IMMAGINI
+   ------------------------------------------------------------------
+   Carousel orizzontale con scroll-snap nativo del browser. Nessuna
+   libreria esterna. Il tracking dell'immagine attiva è fatto via
+   IntersectionObserver: quando >=60% di un'immagine è visibile,
+   il pallino corrispondente si evidenzia.
+   Accetta sia schema legacy (image: 'url') sia nuovo (images: [...]).
+------------------------------------------------------------------ */
+
+/** Restituisce sempre un array di URL, anche se il POI ha un singolo `image`. */
 function getImagesForItem(item) {
     if (item && Array.isArray(item.images) && item.images.length > 0) {
         return item.images;
@@ -492,17 +669,148 @@ function scrollGalleryBy(delta) {
     scrollGalleryToIndex(target);
 }
 
+/* ------------------------------------------------------------------
+   9) LAYOUT DINAMICO E ANIMAZIONI DELLA MAPPA
+   ------------------------------------------------------------------
+   Sotto i 900px la sidebar diventa un bottom sheet: cambia sia il
+   layout della sidebar sia il modo in cui la mappa "vola" verso
+   un POI (offset verticale per non nascondere il marker).
+------------------------------------------------------------------ */
+
+function isMobileViewport() {
+    return window.matchMedia('(max-width: 900px)').matches;
+}
+
+/**
+ * Sostituisce map.flyTo. Su mobile, il centro della mappa viene
+ * spostato in basso di ~metà dell'altezza della sidebar, così il
+ * marker rimane visibile sopra il bottom sheet aperto.
+ */
+function flyToPoi(coords, zoom, opts = {}) {
+    if (!isMobileViewport()) {
+        map.flyTo(coords, zoom, opts);
+        return;
+    }
+    const sidebarClosed = dom.sidebar.classList.contains('is-closed');
+    const sidebarHeight = sidebarClosed
+        ? window.innerHeight * 0.40
+        : dom.sidebar.getBoundingClientRect().height;
+    const offsetPx = sidebarHeight / 2;
+    const point = map.project(coords, zoom);
+    const shifted = L.point(point.x, point.y + offsetPx);
+    const target = map.unproject(shifted, zoom);
+    map.flyTo(target, zoom, opts);
+}
+
+/**
+ * Configura il drag della sidebar mobile (bottom sheet).
+ * Tre stati snap: collapsed (40vh), mid (65vh), expanded (92vh).
+ * Solo attivo sotto i 900px di viewport.
+ */
+function initSheetDrag() {
+    const handle = dom.sidebarHandle;
+    const sidebar = dom.sidebar;
+    if (!handle || !sidebar) return;
+
+    let startY = 0;
+    let startHeight = 0;
+    let dragging = false;
+
+    function onStart(clientY) {
+        if (!isMobileViewport()) return;
+        if (sidebar.classList.contains('is-closed')) return;
+        dragging = true;
+        startY = clientY;
+        startHeight = sidebar.getBoundingClientRect().height;
+        sidebar.classList.add('is-dragging');
+    }
+
+    function onMove(clientY) {
+        if (!dragging) return;
+        const deltaY = startY - clientY;
+        const newHeight = startHeight + deltaY;
+        const vh = window.innerHeight;
+        const clamped = Math.max(vh * 0.20, Math.min(vh * 0.92, newHeight));
+        sidebar.style.height = clamped + 'px';
+    }
+
+    function onEnd() {
+        if (!dragging) return;
+        dragging = false;
+        sidebar.classList.remove('is-dragging');
+
+        const currentHeight = sidebar.getBoundingClientRect().height;
+        const vh = window.innerHeight;
+        sidebar.style.height = '';
+        sidebar.classList.remove('sheet-mid', 'sheet-expanded');
+
+        const dCollapsed = Math.abs(currentHeight - vh * 0.40);
+        const dMid       = Math.abs(currentHeight - vh * 0.65);
+        const dExpanded  = Math.abs(currentHeight - vh * 0.92);
+
+        if (dMid <= dCollapsed && dMid <= dExpanded) {
+            sidebar.classList.add('sheet-mid');
+        } else if (dExpanded < dCollapsed) {
+            sidebar.classList.add('sheet-expanded');
+        }
+    }
+
+    handle.addEventListener('touchstart', e => {
+        onStart(e.touches[0].clientY);
+    }, { passive: true });
+    handle.addEventListener('touchmove', e => {
+        onMove(e.touches[0].clientY);
+        e.preventDefault();
+    }, { passive: false });
+    handle.addEventListener('touchend', onEnd);
+    handle.addEventListener('touchcancel', onEnd);
+
+    handle.addEventListener('mousedown', e => {
+        onStart(e.clientY);
+        function mm(ev) { onMove(ev.clientY); }
+        function mu() {
+            onEnd();
+            document.removeEventListener('mousemove', mm);
+            document.removeEventListener('mouseup', mu);
+        }
+        document.addEventListener('mousemove', mm);
+        document.addEventListener('mouseup', mu);
+    });
+}
+
+/**
+ * Aggiorna la CSS variable --sidebar-reserved usata dalla filter bar
+ * e dalla sub-bar per non finire sotto alla sidebar aperta.
+ * 0px quando sidebar chiusa o su mobile, 420px altrimenti.
+ */
+function updateSidebarReservedSpace() {
+    const open = !dom.sidebar.classList.contains('is-closed');
+    const reserved = (open && !isMobileViewport()) ? '420px' : '0px';
+    document.documentElement.style.setProperty('--sidebar-reserved', reserved);
+}
+
 function openSidebar() {
     dom.sidebar.classList.remove('is-closed');
+    updateSidebarReservedSpace();
 }
 
 function closeSidebar() {
     dom.sidebar.classList.add('is-closed');
+    dom.sidebar.classList.remove('sheet-mid', 'sheet-expanded');
+    dom.sidebar.style.height = '';
     state.activePoiId     = null;
     state.activeSectionId = null;
     clearOverlay();
+    updateSidebarReservedSpace();
 }
 
+/* ------------------------------------------------------------------
+   10) RENDERING DEL DETTAGLIO NELLA SIDEBAR
+   ------------------------------------------------------------------
+   renderDetail(poi) per POI top-level.
+   renderSectionDetail(parent, section) per sezioni Muraglia
+   (mostra il tasto "Torna a X" e mantiene visibile la lista sezioni).
+------------------------------------------------------------------ */
 function renderDetail(poi) {
     if (!poi) {
         dom.detailEmpty.hidden   = false;
@@ -529,11 +837,7 @@ function renderDetail(poi) {
         .map(t => `<span class="tag">${escapeHtml(t)}</span>`)
         .join('');
 
-    const catLabel = (CATEGORIES.find(c => c.key === poi.category) || {}).label
-        || poi.category;
-    dom.detailMeta.innerHTML =
-        `<span>Categoria: ${escapeHtml(catLabel)}</span>` +
-        `<span>Periodo consigliato: ${escapeHtml(poi.bestTime || '—')}</span>`;
+    dom.detailMeta.innerHTML = buildMetaHtml(poi);
 
     updateMapsButton(poi.mapsUrl);
 
@@ -576,6 +880,23 @@ function renderSectionDetail(parent, section) {
     dom.detailSections.hidden = false;
 }
 
+/**
+ * Costruisce l'HTML del blocco "meta" (categoria + campi opzionali).
+ * Ogni riga viene aggiunta solo se il POI ha effettivamente il campo,
+ * così POI di categorie diverse mostrano info diverse (hotel: check-in,
+ * aeroporto: IATA, stazione: linee, ecc.) senza logica per categoria.
+ */
+function buildMetaHtml(poi) {
+    const parts = [`<span>Categoria: ${escapeHtml(getCategoryLabel(poi.category))}</span>`];
+    if (poi.bestTime) parts.push(`<span>Periodo consigliato: ${escapeHtml(poi.bestTime)}</span>`);
+    if (poi.checkIn)  parts.push(`<span>Check-in: ${escapeHtml(poi.checkIn)}</span>`);
+    if (poi.checkOut) parts.push(`<span>Check-out: ${escapeHtml(poi.checkOut)}</span>`);
+    if (poi.iata)     parts.push(`<span>Codice IATA: ${escapeHtml(poi.iata)}</span>`);
+    if (poi.lines)    parts.push(`<span>Linee: ${escapeHtml(poi.lines)}</span>`);
+    if (poi.rating)   parts.push(`<span>Voto: ${escapeHtml(poi.rating)}</span>`);
+    return parts.join('');
+}
+
 function updateMapsButton(url) {
     if (url) {
         dom.mapsButton.href = url;
@@ -601,34 +922,137 @@ function renderSectionButtons(sections, activeId) {
     }).join('');
 }
 
+/* ------------------------------------------------------------------
+   11) BARRA FILTRI (primary + sub-bar espandibile)
+   ------------------------------------------------------------------
+   La primary bar mostra i top-level di CATEGORIES; i pulsanti che
+   hanno `sub` ricevono la classe .has-sub (aggiunge ▾).
+   Il click su un parent apre la sub-bar sotto con un'animazione
+   clip-path: circle() che parte dal centro del pulsante cliccato
+   (origine impostata dinamicamente in openSubBar via CSS variable).
+------------------------------------------------------------------ */
 function renderFilterBar() {
     dom.filterBar.innerHTML = CATEGORIES.map(cat => {
-        const isActive = cat.key === state.activeCategory;
+        const hasSub = !!cat.sub;
+        const cls = 'filter-btn' + (hasSub ? ' has-sub' : '');
         return (
-            `<button class="filter-btn ${isActive ? 'is-active' : ''}"` +
+            `<button class="${cls}"` +
             ` data-category="${cat.key}" type="button">${escapeHtml(cat.label)}</button>`
         );
     }).join('');
 
     dom.filterBar.addEventListener('click', onFilterClick);
+    dom.subBar.addEventListener('click', onFilterClick);
+    updateFilterBarActive();
 }
 
+/**
+ * Popola e apre la sub-bar per un parent.
+ * Calcola il raggio del clip-path circle in modo che copra sempre
+ * l'intera sub-bar, indipendentemente da dove sta l'origine del click
+ * (necessario perché su viewport wide l'origine può cadere fuori box).
+ */
+function openSubBar(triggerBtn, parentKey) {
+    const parent = findCategoryByKey(parentKey);
+    if (!parent || !parent.sub) return;
+
+    dom.subBar.innerHTML = parent.sub.map(s =>
+        `<button class="filter-btn filter-sub-btn"` +
+        ` data-category="${s.key}" type="button">${escapeHtml(s.label)}</button>`
+    ).join('');
+    dom.subBar.dataset.parent = parentKey;
+
+    dom.subBar.offsetHeight; // reflow so getBoundingClientRect è aggiornato
+
+    const btnRect = triggerBtn.getBoundingClientRect();
+    const subRect = dom.subBar.getBoundingClientRect();
+    const relX = (btnRect.left + btnRect.width / 2) - subRect.left;
+    const w = subRect.width;
+    const h = subRect.height;
+    const maxDist = Math.max(
+        Math.hypot(relX, 0),
+        Math.hypot(w - relX, 0),
+        Math.hypot(relX, h),
+        Math.hypot(w - relX, h)
+    );
+    dom.subBar.style.setProperty('--origin-x', relX + 'px');
+    dom.subBar.style.setProperty('--reveal-radius', Math.ceil(maxDist + 20) + 'px');
+
+    dom.subBar.classList.add('is-open');
+    updateFilterBarActive();
+}
+
+function closeSubBar() {
+    dom.subBar.classList.remove('is-open');
+    dom.subBar.dataset.parent = '';
+}
+
+/**
+ * Sincronizza le classi is-active / is-parent-active sui pulsanti
+ * dopo un cambio di stato. Il `!!` in fondo garantisce un booleano
+ * vero per classList.toggle (altrimenti undefined da && short-circuit
+ * farebbe un toggle non voluto).
+ */
+function updateFilterBarActive() {
+    const active = state.activeCategory;
+    dom.filterBar.querySelectorAll('.filter-btn').forEach(btn => {
+        const key = btn.dataset.category;
+        const cat = findCategoryByKey(key);
+        const isActive = key === active;
+        const hasActiveSub = !!(cat && cat.sub && cat.sub.some(s => s.key === active));
+        btn.classList.toggle('is-active', isActive);
+        btn.classList.toggle('is-parent-active', hasActiveSub && !isActive);
+    });
+    dom.subBar.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('is-active', btn.dataset.category === active);
+    });
+}
+
+/**
+ * Handler unico per click sia sulla primary bar sia sulla sub-bar
+ * (registrato su entrambi gli elementi in renderFilterBar).
+ * Logica:
+ *   - Click su parent (has sub): toggle della sub-bar.
+ *   - Click sullo stesso parent già aperto: chiudi e torna a 'all'.
+ *   - Click su primary leaf: chiudi sub-bar, filtra a quella key.
+ *   - Click su sub item: filtra al sub, sub-bar resta aperta.
+ */
 function onFilterClick(evt) {
     const btn = evt.target.closest('.filter-btn');
     if (!btn) return;
-    const category = btn.dataset.category;
-    if (category === state.activeCategory) return;
 
-    state.activeCategory = category;
+    const key = btn.dataset.category;
+    const cat = findCategoryByKey(key);
+    if (!cat) return;
 
-    dom.filterBar.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.toggle('is-active', b.dataset.category === category);
-    });
+    const hasSub    = !!cat.sub;
+    const isSubItem = btn.classList.contains('filter-sub-btn');
 
+    if (hasSub) {
+        const isOpen = dom.subBar.classList.contains('is-open');
+        const sameParent = dom.subBar.dataset.parent === key;
+        if (isOpen && sameParent) {
+            closeSubBar();
+            state.activeCategory = 'all';
+        } else {
+            openSubBar(btn, key);
+            state.activeCategory = key;
+        }
+    } else {
+        if (!isSubItem) closeSubBar();
+        state.activeCategory = key;
+    }
+
+    updateFilterBarActive();
     clearOverlay();
     applyCategoryFilter();
 }
 
+/**
+ * Mostra/nasconde i marker della mappa in base alla categoria attiva,
+ * e chiude la sidebar se il POI attivo viene filtrato via.
+ * Applica anche un fit-bounds automatico sui POI rimasti visibili.
+ */
 function applyCategoryFilter() {
     const visible    = getVisiblePois();
     const visibleIds = new Set(visible.map(p => p.id));
@@ -654,11 +1078,30 @@ function applyCategoryFilter() {
     }
 }
 
+/**
+ * Restituisce i POI da mostrare secondo activeCategory.
+ * Se la key è di un parent (es. 'esperienze'), restituisce l'unione
+ * dei POI di tutti i suoi sub. Altrimenti filtra sulla singola key.
+ */
 function getVisiblePois() {
-    if (state.activeCategory === 'all') return POI_DATA;
-    return POI_DATA.filter(p => p.category === state.activeCategory);
+    const key = state.activeCategory;
+    if (key === 'all') return POI_DATA;
+    const cat = findCategoryByKey(key);
+    if (cat && cat.sub) {
+        const subKeys = cat.sub.map(s => s.key);
+        return POI_DATA.filter(p => subKeys.includes(p.category));
+    }
+    return POI_DATA.filter(p => p.category === key);
 }
 
+/* ------------------------------------------------------------------
+   12) OVERLAY GRANDE MURAGLIA
+   ------------------------------------------------------------------
+   Un POI con `overlay: { polyline, sections }` mostra sulla mappa
+   una polilinea (traccia della Muraglia) e piccoli cerchi bianchi
+   nei punti visitabili. Cliccando un cerchio si apre la sezione
+   corrispondente come sotto-POI.
+------------------------------------------------------------------ */
 function showOverlay(poi) {
     clearOverlay();
     if (!poi.overlay) return;
@@ -703,13 +1146,20 @@ function clearOverlay() {
     state.activeSectionId = null;
 }
 
+/* ------------------------------------------------------------------
+   13) SELEZIONE POI E SEZIONE
+   ------------------------------------------------------------------
+   Punto di sincronizzazione tra mappa e sidebar: aggiornano lo
+   state, animano la mappa, popolano la sidebar, aprono l'overlay
+   Muraglia se il POI ha `overlay`.
+------------------------------------------------------------------ */
 function selectPoi(poiId, opts = {}) {
     const poi = POI_DATA.find(p => p.id === poiId);
     if (!poi) return;
 
     state.activePoiId = poi.id;
 
-    map.flyTo(poi.coords, poi.zoom, { duration: 1.2, easeLinearity: 0.25 });
+    flyToPoi(poi.coords, poi.zoom, { duration: 1.2, easeLinearity: 0.25 });
 
     showOverlay(poi);
 
@@ -732,7 +1182,7 @@ function selectSection(parentId, sectionId) {
     state.activePoiId     = parent.id;
     state.activeSectionId = section.id;
 
-    map.flyTo(section.coords, section.zoom, {
+    flyToPoi(section.coords, section.zoom, {
         duration: 1.2,
         easeLinearity: 0.25
     });
@@ -747,10 +1197,16 @@ function onBackClick() {
     if (!parent) return;
 
     state.activeSectionId = null;
-    map.flyTo(parent.coords, parent.zoom, { duration: 1.0 });
+    flyToPoi(parent.coords, parent.zoom, { duration: 1.0 });
     renderDetail(parent);
 }
 
+/* ------------------------------------------------------------------
+   14) EVENT BINDING GLOBALE
+   ------------------------------------------------------------------
+   Registrazione degli event listener sui pulsanti statici.
+   I filtri usano event delegation dentro renderFilterBar.
+------------------------------------------------------------------ */
 function bindEvents() {
 
     dom.sectionList.addEventListener('click', evt => {
@@ -781,6 +1237,11 @@ function bindEvents() {
     });
 }
 
+/* ------------------------------------------------------------------
+   Utility: escaping HTML per template letterali che ricevono
+   stringhe da dati (nomi POI, tag, ecc.). Difesa base contro
+   caratteri speciali che potrebbero rompere il markup.
+------------------------------------------------------------------ */
 function escapeHtml(str) {
     return String(str)
         .replace(/&/g, '&amp;')
@@ -790,10 +1251,16 @@ function escapeHtml(str) {
         .replace(/'/g, '&#39;');
 }
 
+/* ------------------------------------------------------------------
+   15) BOOTSTRAP
+------------------------------------------------------------------ */
 function init() {
     createMarkers();
     renderFilterBar();
     bindEvents();
+    initSheetDrag();
+    updateSidebarReservedSpace();
+    window.addEventListener('resize', updateSidebarReservedSpace);
     renderDetail(null);
 
     const bounds = L.latLngBounds(POI_DATA.map(p => p.coords));

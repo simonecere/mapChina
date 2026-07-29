@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viaggio in Cina — Trip Planner</title>
+
+    <!-- Leaflet CSS (CDN ufficiale) -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    />
+
+    <!-- Font Inter da Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- Foglio di stile applicativo -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- Mount point del menu di navigazione condiviso.
+         menu.js inietta qui il pulsante burger + il drawer. -->
+    <div id="menu-mount"></div>
+
+    <!-- =========================================================
+         Contenitore radice: mappa a schermo intero + sidebar
+         flottante sopra come overlay (position absolute).
+    ========================================================== -->
+    <div class="app-container">
+
+        <!-- =========================================================
+             Colonna mappa: contiene la barra filtri, la sub-bar
+             espandibile e il div su cui Leaflet monta le tile.
+        ========================================================== -->
+        <main class="map-wrapper">
+
+            <!-- Barra filtri principale (top-level categories) -->
+            <div class="filter-bar" id="filter-bar" role="toolbar" aria-label="Filtri categorie">
+                <!-- popolata dinamicamente da renderFilterBar() -->
+            </div>
+
+            <!-- Sub-bar: seconda barra che appare sotto la primary
+                 con animazione clip-path quando clicchi Esperienze o Servizi. -->
+            <div class="sub-bar" id="sub-bar" role="toolbar" aria-label="Sotto-categorie">
+                <!-- popolata dinamicamente da openSubBar() -->
+            </div>
+
+            <!-- Div su cui Leaflet renderizza le tile della mappa -->
+            <div id="map" aria-label="Mappa della Cina"></div>
+        </main>
+
+        <!-- =========================================================
+             Sidebar flottante (glass panel).
+             Parte con classe .is-closed (traslata fuori a destra).
+             openSidebar/closeSidebar aggiungono/rimuovono la classe.
+             Su mobile diventa un bottom sheet trascinabile.
+        ========================================================== -->
+        <aside class="sidebar is-closed" id="sidebar"
+               aria-label="Dettagli punto di interesse">
+
+            <!-- Handle bar per trascinare la sidebar su mobile.
+                 Visibile solo sotto i 900px di viewport (via CSS). -->
+            <div class="sidebar-handle" id="sidebar-handle"
+                 role="separator" aria-label="Trascina per ridimensionare">
+                <div class="sidebar-handle-bar"></div>
+            </div>
+
+            <!-- Bottone X di chiusura, sovrapposto in alto a destra -->
+            <button
+                type="button"
+                class="sidebar-close"
+                id="sidebar-close"
+                aria-label="Chiudi pannello"
+                title="Chiudi"
+            >
+                <svg viewBox="0 0 24 24" width="16" height="16"
+                     fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="5" x2="19" y2="19" />
+                    <line x1="19" y1="5" x2="5" y2="19" />
+                </svg>
+            </button>
+
+            <!-- Pannello dettagli: contiene stato vuoto + contenuto reale.
+                 Solo uno dei due è visibile alla volta, gestito via `hidden`. -->
+            <section class="detail-panel" id="detail-panel">
+
+                <!-- Stato vuoto: mostrato quando nessun POI è selezionato.
+                     In pratica non appare mai perché la sidebar è chiusa
+                     di default; resta come fallback difensivo. -->
+                <div class="detail-empty" id="detail-empty">
+                    <div class="detail-empty-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" width="48" height="48"
+                             fill="none" stroke="currentColor"
+                             stroke-width="1.5" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" />
+                        </svg>
+                    </div>
+                    <p>Seleziona un punto sulla mappa per iniziare a esplorare.</p>
+                </div>
+
+                <!-- Contenuto reale: gallery + testi + link Maps + eventuali sezioni.
+                     Popolato da renderDetail() / renderSectionDetail(). -->
+                <article class="detail-content" id="detail-content" hidden>
+
+                    <button
+                        type="button"
+                        class="detail-back-btn"
+                        id="detail-back-btn"
+                        hidden
+                    >&#8592; Torna</button>
+
+                    <!-- Galleria immagini: scroll orizzontale con snap.
+                         Contenuto popolato da renderGallery(). -->
+                    <div class="detail-gallery" id="detail-gallery">
+                        <div class="gallery-track" id="gallery-track"
+                             role="region" aria-label="Galleria immagini">
+
+                        </div>
+
+                        <button type="button"
+                                class="gallery-arrow gallery-arrow--prev"
+                                id="gallery-prev"
+                                aria-label="Immagine precedente">
+                            <svg viewBox="0 0 24 24" width="16" height="16"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2.5" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="15 18 9 12 15 6" />
+                            </svg>
+                        </button>
+                        <button type="button"
+                                class="gallery-arrow gallery-arrow--next"
+                                id="gallery-next"
+                                aria-label="Immagine successiva">
+                            <svg viewBox="0 0 24 24" width="16" height="16"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2.5" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                        </button>
+
+                        <div class="gallery-dots" id="gallery-dots"
+                             role="tablist" aria-label="Naviga tra le immagini">
+
+                        </div>
+                    </div>
+                    <div class="detail-body">
+                        <span class="detail-city" id="detail-city"></span>
+                        <h2 class="detail-title" id="detail-title"></h2>
+                        <div class="detail-tags" id="detail-tags"></div>
+                        <p class="detail-description" id="detail-description"></p>
+                        <div class="detail-meta" id="detail-meta"></div>
+
+                        <!-- Pulsante "Apri in Google Maps": visibile solo se
+                             il POI ha il campo mapsUrl. Aggiornato in JS. -->
+                        <a
+                            class="maps-btn"
+                            id="maps-btn"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            hidden
+                        >
+                            <svg viewBox="0 0 24 24" width="14" height="14"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <span>Apri in Google Maps</span>
+                        </a>
+
+                        <!-- Elenco sezioni (usato solo per la Muraglia).
+                             Popolato in renderSectionButtons(). -->
+                        <div class="detail-sections" id="detail-sections" hidden>
+                            <h4 class="sections-title">Sezioni visitabili</h4>
+                            <div class="section-list" id="section-list"></div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+        </aside>
+    </div>
+
+    <!-- Leaflet JS (CDN ufficiale) -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+
+    <!-- Menu di navigazione condiviso (caricato prima di app.js
+         così è disponibile subito su tutte le pagine) -->
+    <script src="menu.js"></script>
+
+    <!-- Logica applicativa (deve venire DOPO leaflet.js) -->
+    <script src="app.js"></script>
+</body>
+</html>

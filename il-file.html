@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viaggio in Cina — Il File</title>
+
+    <!-- Font Inter da Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- Foglio di stile condiviso -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-doc">
+
+    <!-- Mount point del menu di navigazione condiviso -->
+    <div id="menu-mount"></div>
+
+    <!-- =========================================================
+         Il File: informazioni pratiche del viaggio.
+         Ogni sezione è un blocco autonomo con titolo + contenuto.
+         I placeholder sono da sostituire con dati reali quando
+         disponibili.
+    ========================================================== -->
+    <main class="doc">
+        <header class="doc-header">
+            <h1 class="doc-title">Il File</h1>
+            <p class="doc-subtitle">
+                Info pratiche del viaggio in Cina
+            </p>
+        </header>
+
+        <!-- 1. Itinerario ufficiale -->
+        <section class="doc-section" id="sez-itinerario">
+            <h2 class="doc-section-title">Itinerario ufficiale</h2>
+            <p class="doc-placeholder">
+                Qui va il giorno-per-giorno del viaggio: data di arrivo,
+                spostamenti fra le città, giornate di visita, data di
+                ritorno. Da compilare quando le date sono confermate.
+            </p>
+            <!-- Esempio di lista giornaliera. Sostituisci quando pronto. -->
+            <ol class="doc-timeline">
+                <li>
+                    <strong>Giorno 1</strong> — Arrivo a Pechino.
+                </li>
+                <li>
+                    <strong>Giorno 2</strong> — Città Proibita, Piazza Tienanmen.
+                </li>
+                <li>
+                    <strong>Giorno 3</strong> — Grande Muraglia (Mutianyu).
+                </li>
+                <li>
+                    <em>(continua a compilare tu)</em>
+                </li>
+            </ol>
+        </section>
+
+        <!-- 2. Voli e bagagli -->
+        <section class="doc-section" id="sez-voli">
+            <h2 class="doc-section-title">Voli</h2>
+            <p class="doc-placeholder">
+                Compagnia, numero volo, orari e aeroporti. Un blocco
+                per andata e uno per ritorno.
+            </p>
+
+            <div class="doc-subgrid">
+                <div class="doc-card">
+                    <h3 class="doc-card-title">Andata</h3>
+                    <ul class="doc-kv">
+                        <li><span>Compagnia</span><em>-</em></li>
+                        <li><span>Volo</span><em>-</em></li>
+                        <li><span>Partenza</span><em>-</em></li>
+                        <li><span>Arrivo</span><em>-</em></li>
+                        <li><span>Data</span><em>-</em></li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3 class="doc-card-title">Ritorno</h3>
+                    <ul class="doc-kv">
+                        <li><span>Compagnia</span><em>-</em></li>
+                        <li><span>Volo</span><em>-</em></li>
+                        <li><span>Partenza</span><em>-</em></li>
+                        <li><span>Arrivo</span><em>-</em></li>
+                        <li><span>Data</span><em>-</em></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="doc-subtitle">Bagagli</h3>
+            <p class="doc-placeholder">
+                Regole della compagnia: dimensioni e peso del bagaglio
+                a mano e in stiva. Compila secondo il vettore effettivo.
+            </p>
+            <div class="doc-subgrid">
+                <div class="doc-card">
+                    <h3 class="doc-card-title">Bagaglio a mano</h3>
+                    <ul class="doc-kv">
+                        <li><span>Dimensioni max</span><em>- x - x - cm</em></li>
+                        <li><span>Peso max</span><em>- kg</em></li>
+                        <li><span>N. pezzi</span><em>-</em></li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3 class="doc-card-title">Bagaglio in stiva</h3>
+                    <ul class="doc-kv">
+                        <li><span>Dimensioni max</span><em>- x - x - cm</em></li>
+                        <li><span>Peso max</span><em>- kg</em></li>
+                        <li><span>N. pezzi</span><em>-</em></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Spostamenti interni -->
+        <section class="doc-section" id="sez-spostamenti">
+            <h2 class="doc-section-title">Spostamenti interni</h2>
+            <p class="doc-placeholder">
+                Come muoversi fra una città e l'altra durante il viaggio:
+                treni ad alta velocità, voli domestici, bus notturni.
+                Prenotazioni fatte, orari, biglietti.
+            </p>
+            <ul class="doc-list">
+                <li>
+                    <strong>Pechino &rarr; Xi'an</strong> — treno CRH, ~5h30.
+                    Prenotazione tramite Trip.com / 12306.
+                </li>
+                <li>
+                    <strong>Xi'an &rarr; Chengdu</strong> — treno o volo interno.
+                </li>
+                <li>
+                    <strong>Chengdu &rarr; Chongqing</strong> — treno rapido ~1h30.
+                </li>
+                <li>
+                    <em>(aggiungi altre tratte)</em>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 4. App e pagamenti -->
+        <section class="doc-section" id="sez-app">
+            <h2 class="doc-section-title">App &amp; pagamenti</h2>
+            <p class="doc-placeholder">
+                App fondamentali da installare prima della partenza e
+                metodi di pagamento accettati in Cina. La Cina è
+                cashless quasi totalmente: senza WeChat Pay o Alipay
+                può essere difficile.
+            </p>
+
+            <h3 class="doc-subtitle">App essenziali</h3>
+            <ul class="doc-list">
+                <li>
+                    <strong>WeChat</strong> — messaggistica + pagamenti
+                    (WeChat Pay). Configura carta prima di partire.
+                </li>
+                <li>
+                    <strong>Alipay</strong> — alternativa a WeChat Pay,
+                    accetta carte straniere via "Tour Card".
+                </li>
+                <li>
+                    <strong>Amap / Baidu Maps</strong> — le mappe di
+                    Google non funzionano bene in Cina.
+                </li>
+                <li>
+                    <strong>DiDi</strong> — ride-hailing (equivalente Uber).
+                </li>
+                <li>
+                    <strong>Google Translate</strong> — scarica il pacchetto
+                    offline cinese prima di partire.
+                </li>
+                <li>
+                    <strong>Trip.com / 12306</strong> — treni e hotel.
+                </li>
+                <li>
+                    <strong>VPN affidabile</strong> — se vuoi accedere a
+                    Google/WhatsApp/Instagram da dentro la Cina.
+                </li>
+            </ul>
+
+            <h3 class="doc-subtitle">Pagamenti</h3>
+            <ul class="doc-list">
+                <li>Contanti: portane un po' per emergenze e piccoli mercati.</li>
+                <li>Carte Visa/Mastercard: accettate in hotel e catene, ma
+                    non ovunque. Consigliata carta senza commissioni sui
+                    prelievi esteri.</li>
+                <li>WeChat Pay / Alipay: standard di fatto, quasi ovunque.</li>
+            </ul>
+        </section>
+
+        <!-- 5. Regole generali -->
+        <section class="doc-section" id="sez-regole">
+            <h2 class="doc-section-title">Regole generali</h2>
+            <p class="doc-placeholder">
+                Punti fissi del viaggio da tenere presenti: cose da fare,
+                cose da non fare, note pratiche condivise dal gruppo.
+            </p>
+            <ul class="doc-list">
+                <li>Visto turistico L: verifica scadenza e giorni consentiti.</li>
+                <li>Passaporto: minimo 6 mesi di validità residua dalla
+                    data di rientro.</li>
+                <li>Assicurazione sanitaria: consigliata, valida in Cina.</li>
+                <li>Fuso orario: +6 ore rispetto all'Italia (in ora legale).</li>
+                <li>Lingua: fuori dalle grandi città l'inglese è raro.
+                    Usa Google Translate + WeChat "scan" per menu e cartelli.</li>
+                <li>Elettricità: prese di tipo A/C/I, 220V. Adattatore utile.</li>
+                <li>Acqua: bere solo in bottiglia, evitare acqua del rubinetto.</li>
+                <li><em>(aggiungi le regole specifiche del gruppo)</em></li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Menu di navigazione condiviso -->
+    <script src="menu.js"></script>
+</body>
+</html>
