@@ -45,7 +45,7 @@ const POI_DATA = [
             "(Myeongdong, Gangnam) e cultura pop coreana.",
         tags: ['Corea', 'K-Pop', 'Cucina'],
         image: 'https://loremflickr.com/800/500/seoul,korea,skyline?lock=1',
-        bestTime: 'Apr (fioritura) / Set-Ott'
+        bestTime : 'Apr (fioritura) / Set-Ott'
     },
     {
         id: 'xian',
