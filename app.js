@@ -148,7 +148,7 @@ const POI_DATA = [
         category: 'monument',
 
         coords: [39.5, 111.0],
-        zoom: 5,
+        zoom: 5.8,
         description:
             "Complesso di fortificazioni lungo circa 21.000 km " +
             "(considerando tutti i tratti storici), costruito e " +
@@ -428,13 +428,69 @@ const CATEGORIES = [
     ]}
 ];
 
-/* Testo del marker sulla mappa per ogni categoria.
-   Uso codici a 1-2 lettere per evitare conflitti (es. shopping/station
-   entrambi 'S'). Il font marker è calibrato in CSS per accomodare 2 char. */
-const CATEGORY_MARKER_TEXT = {
-    city: 'C', monument: 'M', nature: 'N',
-    food: 'F', shopping: 'Sh', activity: 'At',
-    hotel: 'H', station: 'St', airport: 'Ae'
+/* Colore di sfondo del marker per ogni categoria.
+   Cambia qui il valore hex per rifare il colore di una categoria. */
+const CATEGORY_MARKER_COLOR = {
+    city:     '#4a5aa8',   /* indaco urbano  */
+    monument: '#c8332a',   /* rosso cinabro  */
+    nature:   '#3d8f4d',   /* verde bosco    */
+    food:     '#d68a2e',   /* arancione caldo*/
+    shopping: '#b846a0',   /* magenta        */
+    activity: '#d4a635',   /* giallo oro     */
+    hotel:    '#2f9990',   /* teal           */
+    station:  '#6b6a63',   /* grigio scuro   */
+    airport:  '#3a8fc9'    /* celeste cielo  */
+};
+
+/* Icone SVG del marker (viewBox 24x24, Lucide-style).
+   Ogni valore è la sequenza di elementi figli dentro il tag <svg>.
+   Sostituisci la stringa per cambiare l'icona di una categoria: copia
+   il markup interno dell'icona che vuoi da lucide.dev o da qualunque
+   set SVG con viewBox 24x24 e stroke-based. */
+const CATEGORY_MARKER_ICON = {
+    city:
+        '<rect width="16" height="20" x="4" y="2" rx="2"/>' +
+        '<path d="M9 22v-4h6v4"/>' +
+        '<path d="M8 6h.01"/><path d="M12 6h.01"/><path d="M16 6h.01"/>' +
+        '<path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/>' +
+        '<path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/>',
+    monument:
+        '<line x1="3" y1="22" x2="21" y2="22"/>' +
+        '<line x1="6" y1="18" x2="6" y2="11"/>' +
+        '<line x1="10" y1="18" x2="10" y2="11"/>' +
+        '<line x1="14" y1="18" x2="14" y2="11"/>' +
+        '<line x1="18" y1="18" x2="18" y2="11"/>' +
+        '<polygon points="12 2 20 7 4 7"/>',
+    nature:
+        '<path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14' +
+        'h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7' +
+        'H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>' +
+        '<path d="M12 22v-3"/>',
+    food:
+        '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>' +
+        '<path d="M7 2v20"/>' +
+        '<path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>',
+    shopping:
+        '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>' +
+        '<path d="M3 6h18"/>' +
+        '<path d="M16 10a4 4 0 0 1-8 0"/>',
+    activity:
+        '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02' +
+        ' 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/>',
+    hotel:
+        '<path d="M2 4v16"/>' +
+        '<path d="M2 8h18a2 2 0 0 1 2 2v10"/>' +
+        '<path d="M2 17h20"/>' +
+        '<path d="M6 8v9"/>',
+    station:
+        '<path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/>' +
+        '<path d="M9 15L8 14"/><path d="M15 15l1-1"/>' +
+        '<path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z"/>' +
+        '<path d="m8 19-2 3"/><path d="m16 19 2 3"/>',
+    airport:
+        '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5' +
+        'L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3' +
+        'H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>'
 };
 
 /* ------------------------------------------------------------------
@@ -501,10 +557,16 @@ const state = {
    di default: permette styling via CSS e transizioni.
 ------------------------------------------------------------------ */
 function buildIcon(poi) {
-    const text = CATEGORY_MARKER_TEXT[poi.category] || poi.category.charAt(0).toUpperCase();
+    const iconPath = CATEGORY_MARKER_ICON[poi.category] || '';
+    const bgColor  = CATEGORY_MARKER_COLOR[poi.category] || '#c8332a';
+    const svg =
+        `<svg class="marker-icon" viewBox="0 0 24 24" fill="none"` +
+        ` stroke="currentColor" stroke-width="2.4"` +
+        ` stroke-linecap="round" stroke-linejoin="round">${iconPath}</svg>`;
     return L.divIcon({
         className: 'custom-marker-wrapper',
-        html: `<div class="custom-marker" data-id="${poi.id}"><span>${text}</span></div>`,
+        html: `<div class="custom-marker" data-id="${poi.id}"` +
+              ` style="--marker-bg:${bgColor}">${svg}</div>`,
         iconSize:   [32, 32],
         iconAnchor: [16, 32],
         popupAnchor:[0, -30]
@@ -932,7 +994,22 @@ function renderSectionButtons(sections, activeId) {
    (origine impostata dinamicamente in openSubBar via CSS variable).
 ------------------------------------------------------------------ */
 function renderFilterBar() {
-    dom.filterBar.innerHTML = CATEGORIES.map(cat => {
+    /* Burger sticky "docked" a sinistra della filter bar (solo mobile).
+       Anche se scorri la barra orizzontalmente per raggiungere le
+       categorie di destra, il burger resta ancorato via CSS
+       position: sticky. Al click delega al burger fixed di menu.js. */
+    const burgerHtml =
+        `<button class="filter-burger" type="button" aria-label="Apri menu">` +
+            `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" ` +
+                 `stroke="currentColor" stroke-width="2.2" stroke-linecap="round" ` +
+                 `aria-hidden="true">` +
+                `<line x1="4" y1="7"  x2="20" y2="7"/>` +
+                `<line x1="4" y1="12" x2="20" y2="12"/>` +
+                `<line x1="4" y1="17" x2="20" y2="17"/>` +
+            `</svg>` +
+        `</button>`;
+
+    const btnsHtml = CATEGORIES.map(cat => {
         const hasSub = !!cat.sub;
         const cls = 'filter-btn' + (hasSub ? ' has-sub' : '');
         return (
@@ -940,6 +1017,8 @@ function renderFilterBar() {
             ` data-category="${cat.key}" type="button">${escapeHtml(cat.label)}</button>`
         );
     }).join('');
+
+    dom.filterBar.innerHTML = burgerHtml + btnsHtml;
 
     dom.filterBar.addEventListener('click', onFilterClick);
     dom.subBar.addEventListener('click', onFilterClick);
@@ -1018,6 +1097,14 @@ function updateFilterBarActive() {
  *   - Click su sub item: filtra al sub, sub-bar resta aperta.
  */
 function onFilterClick(evt) {
+    /* Burger integrato: delega al burger fisso di menu.js
+       che gestisce l'apertura del drawer. */
+    if (evt.target.closest('.filter-burger')) {
+        const menuBtn = document.getElementById('menu-btn');
+        if (menuBtn) menuBtn.click();
+        return;
+    }
+
     const btn = evt.target.closest('.filter-btn');
     if (!btn) return;
 

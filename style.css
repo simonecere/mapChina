@@ -257,7 +257,7 @@ button { font-family: inherit; }
 .home-title {
     margin: 0;
     font-size: clamp(32px, 5vw, 52px);
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.02em;
     color: var(--color-text);
 }
@@ -532,6 +532,45 @@ button { font-family: inherit; }
         max-width .32s var(--ease-out);
 }
 .filter-bar::-webkit-scrollbar { display: none; }
+
+/* Burger integrato nella filter bar. Nasconde di default;
+   compare solo sotto i 900px come first-child sticky della barra.
+   Anche scorrendo la barra orizzontalmente resta ancorato a sinistra
+   mentre le categorie gli scivolano sotto. */
+.filter-burger {
+    display: none;
+}
+@media (max-width: 900px) {
+    .filter-burger {
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border: none;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.96);
+        color: var(--color-text);
+        cursor: pointer;
+        /* Il core del trucco: sticky ancorato al bordo sinistro
+           dello scroll container (.filter-bar). */
+        position: sticky;
+        left: 0;
+        z-index: 2;
+        /* Piccola ombra sul lato destro: comunica che c'è contenuto
+           dietro (le categorie che scivolano). */
+        box-shadow: 6px 0 8px -6px rgba(0, 0, 0, 0.18);
+        margin-right: 2px;
+        transition: transform .12s var(--ease-out);
+    }
+    .filter-burger:active {
+        transform: scale(0.94);
+    }
+    /* Su mobile e sulla pagina mappa, nasconde il burger fisso
+       in top-left (quello del menu.js): non serve, è duplicato. */
+    .page-map .menu-btn { display: none; }
+}
 
 /* Sub-bar: seconda barra sotto la primary, rivelata via clip-path
    circle animato. --origin-x è impostato dal JS al centro del bottone
@@ -984,23 +1023,30 @@ button { font-family: inherit; }
 /* ---------- 7. Marker Leaflet e popup ---------------------- */
 /* Marker "goccia" ruotato di -45°, testo interno ruotato di 45°
    così torna dritto. Ombra rossastra e transizione hover. */
+/* Marker "goccia" con colore dinamico per categoria.
+   --marker-bg è impostato inline da buildIcon() in app.js.
+   Il box-shadow deriva dal colore del marker via color-mix, così
+   ogni categoria ha un alone coerente col proprio background. */
 .custom-marker {
     width: 32px; height: 32px;
     display: grid; place-items: center;
-    background: var(--color-accent);
-    color: #fff;
+    background: var(--marker-bg, var(--color-accent));
+    color: #ffffff;
     border-radius: 50% 50% 50% 0;
     transform: rotate(-45deg);
-    box-shadow: 0 4px 12px rgba(200,51,42,.4);
+    box-shadow: 0 4px 12px color-mix(in srgb,
+        var(--marker-bg, var(--color-accent)) 45%, transparent);
     border: 2px solid #fff;
     transition: transform .25s var(--ease-out);
 }
-.custom-marker span {
+
+/* SVG dell'icona dentro il marker. Contro-rotato di 45° per
+   compensare la rotazione del pin e apparire dritto. */
+.marker-icon {
+    width: 15px;
+    height: 15px;
+    display: block;
     transform: rotate(45deg);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1;
 }
 .leaflet-marker-icon:hover .custom-marker,
 .custom-marker.is-active {
