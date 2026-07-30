@@ -12,10 +12,6 @@ desktop.ini
 node_modules/
 package-lock.json
 
-# === Appunti personali (togli la riga se vuoi pubblicarli su GitHub) ===
-inventario-immagini.txt
-template-nuovi-poi.txt
-
 # === Backup e temporanei ===
 *.bak
 *.tmp

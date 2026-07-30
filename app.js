@@ -46,9 +46,9 @@ const POI_DATA = [
             "Capitale della Repubblica Popolare Cinese, oltre 21 milioni " +
             "di abitanti. Base logica per i monumenti imperiali (Città " +
             "Proibita, Tempio del Cielo) e per la Grande Muraglia.",
-        tags: ['Capitale', 'Imperiale', 'Hub'],
+        tags: ['Città', 'Capitale', 'Imperiale', 'Hub'],
         image: 'https://loremflickr.com/800/500/beijing,china?lock=1',
-        bestTime: 'Apr-Mag / Set-Ott'
+        bestTime: 'Apr-Mag / Set-Ott',
     },
     {
         id: 'shanghai',
@@ -61,9 +61,9 @@ const POI_DATA = [
             "Città più popolosa della Cina, cuore finanziario del Paese. " +
             "Contrasto tra il lungofiume storico (The Bund) e lo skyline " +
             "futurista di Pudong. Ottima cucina cantonese/shanghaiese.",
-        tags: ['Skyline', 'Finanza', 'Cucina'],
+        tags: ['Città', 'Skyline', 'Finanza', 'Cucina'],
         image: 'https://loremflickr.com/800/500/shanghai,skyline,pudong?lock=1',
-        bestTime: 'Mar-Mag / Ott-Nov'
+        bestTime: 'Mar-Mag / Ott-Nov',
     },
     {
         id: 'seoul',
@@ -76,9 +76,9 @@ const POI_DATA = [
             "Capitale sudcoreana, ~9,7 milioni di abitanti. Mix di " +
             "palazzi Joseon (Gyeongbokgung), quartieri commerciali " +
             "(Myeongdong, Gangnam) e cultura pop coreana.",
-        tags: ['Corea', 'K-Pop', 'Cucina'],
+        tags: ['Città', 'Corea', 'K-Pop', 'Cucina'],
         image: 'https://loremflickr.com/800/500/seoul,korea,skyline?lock=1',
-        bestTime : 'Apr (fioritura) / Set-Ott'
+        bestTime: 'Apr (fioritura) / Set-Ott',
     },
     {
         id: 'xian',
@@ -91,9 +91,9 @@ const POI_DATA = [
             "Antica capitale imperiale (13 dinastie), capolinea orientale " +
             "della Via della Seta. Mura Ming ancora intatte e quartiere " +
             "musulmano storico. Vicino all'Esercito di Terracotta.",
-        tags: ['Via della Seta', 'Storia', 'Cucina Hui'],
+        tags: ['Città', 'Via della Seta', 'Storia', 'Cucina Hui'],
         image: 'https://loremflickr.com/800/500/xian,china,bell-tower?lock=1',
-        bestTime: 'Mar-Mag / Set-Nov'
+        bestTime: 'Mar-Mag / Set-Nov',
     },
     {
         id: 'chengdu',
@@ -106,9 +106,9 @@ const POI_DATA = [
             "Capitale del Sichuan, sinonimo di cucina piccante e panda " +
             "giganti. Ritmo più rilassato rispetto alle megalopoli " +
             "costiere. Case da tè, vicoli e mercati.",
-        tags: ['Cucina Sichuan', 'Panda', 'Slow'],
+        tags: ['Città', 'Cucina Sichuan', 'Panda', 'Slow'],
         image: 'https://loremflickr.com/800/500/chengdu,sichuan?lock=1',
-        bestTime: 'Mar-Giu / Set-Nov'
+        bestTime: 'Mar-Giu / Set-Nov',
     },
     {
         id: 'chongqing',
@@ -121,9 +121,9 @@ const POI_DATA = [
             "Megalopoli montuosa alla confluenza di Yangtze e Jialing. " +
             "Grattacieli, scale infinite, monorotaia che attraversa " +
             "edifici. Patria dell'hotpot piccante.",
-        tags: ['Megalopoli', 'Hotpot', 'Yangtze'],
+        tags: ['Città', 'Megalopoli', 'Hotpot', 'Yangtze'],
         image: 'https://loremflickr.com/800/500/chongqing,skyline,china?lock=1',
-        bestTime: 'Set-Nov (estati torride)'
+        bestTime: 'Set-Nov (estati torride)',
     },
 
     {
@@ -137,9 +137,11 @@ const POI_DATA = [
             "Complesso imperiale delle dinastie Ming e Qing, cuore " +
             "politico della Cina per quasi cinque secoli. Ospita il " +
             "Museo del Palazzo con oltre un milione di reperti.",
-        tags: ['UNESCO', 'Storia', 'Architettura'],
+        tags: ['Monumento', 'UNESCO', 'Storia', 'Architettura'],
         image: 'https://loremflickr.com/800/500/forbidden-city,beijing?lock=1',
-        bestTime: 'Apr-Mag / Set-Ott'
+        bestTime: 'Apr-Mag / Set-Ott',
+        openingDays: 'Mar-Dom 8:30-17:00',
+        priceLevel: 2
     },
     {
         id: 'great-wall',
@@ -156,9 +158,11 @@ const POI_DATA = [
             "(XIV-XVII sec.). Non è una linea continua: sono muri " +
             "paralleli, torri, forti e passi. Le sezioni sotto sono " +
             "le più significative da visitare.",
-        tags: ['UNESCO', 'Ming', 'Difesa'],
+        tags: ['Monumento', 'UNESCO', 'Ming', 'Difesa'],
         image: 'https://loremflickr.com/800/500/great-wall-of-china?lock=1',
         bestTime: 'Mag-Giu / Set-Ott',
+        openingDays: 'Ogni giorno (varia per sezione)',
+        priceLevel: 2,
         overlay: {
 
             polyline: [
@@ -189,7 +193,7 @@ const POI_DATA = [
                         "La 'Testa del Vecchio Drago' entra per circa 22 m " +
                         "nel mare — unico tratto della Muraglia che tocca " +
                         "l'acqua.",
-                    tags: ['Estremità Est', 'Costa', 'Ming'],
+                    tags: ['Muraglia', 'Estremità Est', 'Costa', 'Ming'],
                     image: 'https://loremflickr.com/800/500/shanhaiguan,great-wall?lock=1',
                     hint: "L'estremo est, sul mare"
                 },
@@ -204,7 +208,7 @@ const POI_DATA = [
                         "ogni ~100 m e restauri limitati che preservano " +
                         "l'aspetto originale. Trekking classico di 10 km " +
                         "fino a Simatai.",
-                    tags: ['Trekking', 'Poco affollato', 'Ming'],
+                    tags: ['Muraglia', 'Trekking', 'Poco affollato', 'Ming'],
                     image: 'https://loremflickr.com/800/500/jinshanling,great-wall?lock=1',
                     hint: 'Il tratto più fotografato'
                 },
@@ -219,7 +223,7 @@ const POI_DATA = [
                         "unico tratto della Muraglia visitabile anche di " +
                         "notte. Adiacente al borgo turistico ricostruito " +
                         "di Gubei Water Town.",
-                    tags: ['Selvaggio', 'Aperto di notte'],
+                    tags: ['Muraglia', 'Selvaggio', 'Aperto di notte'],
                     image: 'https://loremflickr.com/800/500/simatai,great-wall?lock=1',
                     hint: 'Visitabile anche di notte'
                 },
@@ -234,7 +238,7 @@ const POI_DATA = [
                         "Vegetazione boscosa, funivia in salita e slittino " +
                         "per la discesa. Ottimo compromesso tra accessibilità " +
                         "e atmosfera.",
-                    tags: ['Restaurato', 'Facile accesso'],
+                    tags: ['Muraglia', 'Restaurato', 'Facile accesso'],
                     image: 'https://loremflickr.com/800/500/mutianyu,great-wall?lock=1',
                     hint: 'La scelta più bilanciata'
                 },
@@ -249,7 +253,7 @@ const POI_DATA = [
                         "in ~30 min con treno veloce da Pechino. Restauro " +
                         "completo negli anni '50. Utile se hai poco tempo, " +
                         "ma aspettati folle.",
-                    tags: ['Treno diretto', 'Affollato'],
+                    tags: ['Muraglia', 'Treno diretto', 'Affollato'],
                     image: 'https://loremflickr.com/800/500/badaling,great-wall?lock=1',
                     hint: 'Il più accessibile da Pechino'
                 },
@@ -264,7 +268,7 @@ const POI_DATA = [
                         "mattoni sopra un colle, ai margini del deserto del " +
                         "Gobi. Storicamente ultimo posto di frontiera " +
                         "dell'impero verso la Via della Seta.",
-                    tags: ['Estremità Ovest', 'Via della Seta', 'Deserto'],
+                    tags: ['Muraglia', 'Estremità Ovest', 'Via della Seta', 'Deserto'],
                     image: 'https://loremflickr.com/800/500/jiayuguan,fortress?lock=1',
                     hint: "L'estremo ovest, nel deserto"
                 }
@@ -283,9 +287,11 @@ const POI_DATA = [
             "oltre 8.000 statue in terracotta a grandezza naturale, " +
             "ciascuna con tratti distinti. Scoperto nel 1974 da " +
             "contadini che scavavano un pozzo.",
-        tags: ['UNESCO', 'Archeologia', 'Storia'],
+        tags: ['Monumento', 'UNESCO', 'Archeologia', 'Storia'],
         image: 'https://loremflickr.com/800/500/terracotta-army,xian?lock=1',
-        bestTime: 'Mar-Mag / Set-Nov'
+        bestTime: 'Mar-Mag / Set-Nov',
+        openingDays: 'Ogni giorno 8:30-17:30',
+        priceLevel: 3
     },
 
     {
@@ -314,9 +320,11 @@ const POI_DATA = [
             "Centro di conservazione del panda gigante e del panda " +
             "rosso, fondato nel 1987. Su una collina boscosa a nord " +
             "di Chengdu, con recinti che riproducono l'habitat naturale.",
-        tags: ['Fauna', 'Conservazione'],
+        tags: ['Natura', 'Fauna', 'Conservazione'],
         image: 'https://loremflickr.com/800/500/panda,chengdu?lock=1',
-        bestTime: 'Mar-Giu (cuccioli)'
+        bestTime: 'Mar-Giu (cuccioli)',
+        openingDays: 'Ogni giorno 7:30-18:00',
+        priceLevel: 2
     },
 
     {
@@ -331,7 +339,7 @@ const POI_DATA = [
             "Il piatto tipico è servito con crêpes sottili, cipollotto, " +
             "cetriolo e salsa hoisin. Il link Google Maps qui sotto porta " +
             "alla scheda del locale con orari, foto e recensioni aggiornate.",
-        tags: ['Anatra Laccata', 'Cucina Pechinese'],
+        tags: ['Cibo', 'Anatra Laccata', 'Cucina Pechinese'],
         image: 'https://loremflickr.com/800/500/peking-duck,beijing?lock=1',
         mapsUrl: 'https://maps.app.goo.gl/DX4NHXTZTTDbyu7C8',
         bestTime: 'Prenotazione consigliata'
@@ -348,7 +356,7 @@ const POI_DATA = [
             "Principale via commerciale pedonale di Pechino. Grandi " +
             "magazzini (APM, Dongan Plaza), Snack Street con street food, " +
             "librerie internazionali. Ottima per una serata a piedi.",
-        tags: ['Pedonale', 'Snack Street', 'Turistico'],
+        tags: ['Shopping', 'Pedonale', 'Snack Street', 'Turistico'],
         image: 'https://loremflickr.com/800/500/wangfujing,beijing,street?lock=1'
     },
 
@@ -363,7 +371,7 @@ const POI_DATA = [
             "Hotel 5 stelle nel quartiere finanziario di Pechino. " +
             "283 camere, spa, ristorante fine dining. Base comoda per " +
             "muoversi verso i monumenti imperiali con la metro.",
-        tags: ['5 stelle', 'CBD', 'Lusso'],
+        tags: ['Hotel', '5 stelle', 'CBD', 'Lusso'],
         image: 'https://loremflickr.com/800/500/hotel,luxury,beijing?lock=1',
         checkIn: 'Dal 15:00',
         checkOut: 'Fino a 12:00'
@@ -380,9 +388,10 @@ const POI_DATA = [
             "Terminal high-speed a sud di Pechino. Treni CRH per " +
             "Shanghai (~4h30), Tianjin (~30 min), Nanjing (~3h30). " +
             "Servita dalle linee metro 4, 14 e 16.",
-        tags: ['CRH', 'High-Speed'],
+        tags: ['Stazione', 'CRH', 'High-Speed'],
         image: 'https://loremflickr.com/800/500/train-station,beijing?lock=1',
-        lines: 'CRH · Beijing-Shanghai HSR'
+        lines: 'CRH · Beijing-Shanghai HSR',
+        openingDays: 'Aperto 24/7'
     },
 
     {
@@ -396,9 +405,87 @@ const POI_DATA = [
             "Principale aeroporto di Pechino, hub di Air China. " +
             "Tre terminal (T1/T2/T3). Airport Express in metro fino al " +
             "centro in ~25 min, taxi ~45 min.",
-        tags: ['Hub', 'Air China'],
+        tags: ['Aeroporto', 'Hub', 'Air China'],
         image: 'https://loremflickr.com/800/500/airport,beijing,pek?lock=1',
-        iata: 'PEK'
+        iata: 'PEK',
+        openingDays: 'Aperto 24/7'
+    },
+
+    /* ---- Shanghai — POI aggiunti dall'utente ---- */
+    {
+        id: 'shanghai-bund',
+        name: 'The Bund',
+        city: 'Shanghai',
+        category: 'monument',
+        coords: [31.240444860520714, 121.49056728206448],
+        zoom: 14,
+        description:
+            "Il Bund (Wàitān, 'Riva Esterna') è il celebre viale pedonale " +
+            "sul lungofiume, sponda ovest dello Huangpu. 1,5 km lungo " +
+            "Zhongshan Road, con oltre 50 edifici storici in stile coloniale " +
+            "europeo (neoclassico, gotico, Art Déco dell'epoca delle " +
+            "Concessioni) contrapposti allo skyline futuristico di Lujiazui " +
+            "(Pudong) sulla sponda opposta. Uno dei simboli più iconici di " +
+            "Shanghai.",
+        tags: ['Monumento', 'Lungofiume', 'Skyline', 'Coloniale'],
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/6/64/The_Bund_at_Night.png',
+            'https://upload.wikimedia.org/wikipedia/commons/b/bc/The_Bund_at_night.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/4/4f/The_Bund%2C_Shanghai%2C_1.jpg'
+        ],
+        mapsUrl: 'https://maps.app.goo.gl/D2CR392UTzYdisNy5',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Meglio visitare', value: 'Di sera con le luci accese' }
+        ]
+    },
+    {
+        id: 'yu-garden',
+        name: 'Yu Garden',
+        city: 'Shanghai',
+        category: 'nature',
+        coords: [31.22727060429105, 121.49209830614264],
+        zoom: 15,
+        description:
+            "Il Giardino del Mandarino Yu (Yuyuan) è un celebre giardino " +
+            "classico cinese del XVI secolo, dinastia Ming. Due ettari " +
+            "nel cuore della Old City di Shanghai, con padiglioni storici, " +
+            "laghetti con carpe koi e formazioni rocciose. Uno degli esempi " +
+            "più raffinati di architettura tradizionale cinese.",
+        tags: ['Natura', 'Giardino', 'Ming', 'Old City'],
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Shanghai_-_Yu_Garden_-_0035.jpg/800px-Shanghai_-_Yu_Garden_-_0035.jpg'
+        ],
+        mapsUrl: 'https://maps.app.goo.gl/ZXK5fRwXx5g1bYyg8',
+        openingDays: 'Mar-Dom 9:00-16:00',
+        customMeta: [
+            { label: 'Biglietto', value: '30-40 ¥ (~5 €)' }
+        ]
+    },
+    {
+        id: 'yuyuan-old-street',
+        name: 'Yuyuan Old Street',
+        city: 'Shanghai',
+        category: 'shopping',
+        coords: [31.227419141089115, 121.49138720742127],
+        zoom: 15,
+        description:
+            "Vivace quartiere commerciale e storico nell'Old City di " +
+            "Shanghai, adiacente allo Yu Garden. Architettura Ming e Qing " +
+            "con facciate in legno intagliato, tetti spioventi, lanterne " +
+            "rosse. Si sviluppa attorno al ponte a zig-zag Jiu Qu Qiao. " +
+            "Street food (in particolare xiaolongbao), sale da tè storiche " +
+            "e botteghe di artigianato tradizionale.",
+        tags: ['Shopping', 'Street', 'Street food', 'Souvenir', 'Artigiani'],
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/2/29/Yuyuan_street_%283989857894%29.jpg'
+        ],
+        mapsUrl: 'https://maps.app.goo.gl/KGqqXPQHGch9Bykw7',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Negozi',          value: '~8:30-22:30' },
+            { label: 'Meglio visitare', value: 'Di sera con le luci accese' }
+        ]
     }
 ];
 
@@ -440,6 +527,13 @@ const CATEGORY_MARKER_COLOR = {
     hotel:    '#2f9990',   /* teal           */
     station:  '#6b6a63',   /* grigio scuro   */
     airport:  '#3a8fc9'    /* celeste cielo  */
+};
+
+const META_LABEL_OVERRIDES = {
+    monument: { priceLevel: 'Ingresso' },
+    nature:   { priceLevel: 'Ingresso' },
+    food:     { priceLevel: 'Prezzo medio' },
+    activity: { priceLevel: 'Prezzo' }
 };
 
 /* Icone SVG del marker (viewBox 24x24, Lucide-style).
@@ -846,9 +940,17 @@ function initSheetDrag() {
  * 0px quando sidebar chiusa o su mobile, 420px altrimenti.
  */
 function updateSidebarReservedSpace() {
-    const open = !dom.sidebar.classList.contains('is-closed');
-    const reserved = (open && !isMobileViewport()) ? '420px' : '0px';
-    document.documentElement.style.setProperty('--sidebar-reserved', reserved);
+    /* Disabilitato per scelta di design: la sidebar (380px) non è così
+       larga da giustificare lo spostamento della filter bar / sub-bar.
+       Manteniamo la variabile CSS a 0 così le regole calc() non hanno
+       effetto. Per riabilitare lo spostamento, ripristina la logica
+       commentata sotto. */
+    document.documentElement.style.setProperty('--sidebar-reserved', '0px');
+    /* Logica originale (attiva se scommentata):
+       const open = !dom.sidebar.classList.contains('is-closed');
+       const reserved = (open && !isMobileViewport()) ? '420px' : '0px';
+       document.documentElement.style.setProperty('--sidebar-reserved', reserved);
+    */
 }
 
 function openSidebar() {
@@ -933,8 +1035,10 @@ function renderSectionDetail(parent, section) {
         .map(t => `<span class="tag">${escapeHtml(t)}</span>`)
         .join('');
 
-    dom.detailMeta.innerHTML =
-        `<span>Sezione di: ${escapeHtml(parent.name)}</span>`;
+    const secRows = [metaRow('Sezione di', escapeHtml(parent.name))];
+    if (section.priceLevel)  secRows.push(metaRow('Costo', renderPriceLevel(section.priceLevel)));
+    if (section.openingDays) secRows.push(metaRow('Apertura', escapeHtml(section.openingDays)));
+    dom.detailMeta.innerHTML = secRows.join('');
 
     updateMapsButton(section.mapsUrl);
 
@@ -949,14 +1053,57 @@ function renderSectionDetail(parent, section) {
  * aeroporto: IATA, stazione: linee, ecc.) senza logica per categoria.
  */
 function buildMetaHtml(poi) {
-    const parts = [`<span>Categoria: ${escapeHtml(getCategoryLabel(poi.category))}</span>`];
-    if (poi.bestTime) parts.push(`<span>Periodo consigliato: ${escapeHtml(poi.bestTime)}</span>`);
-    if (poi.checkIn)  parts.push(`<span>Check-in: ${escapeHtml(poi.checkIn)}</span>`);
-    if (poi.checkOut) parts.push(`<span>Check-out: ${escapeHtml(poi.checkOut)}</span>`);
-    if (poi.iata)     parts.push(`<span>Codice IATA: ${escapeHtml(poi.iata)}</span>`);
-    if (poi.lines)    parts.push(`<span>Linee: ${escapeHtml(poi.lines)}</span>`);
-    if (poi.rating)   parts.push(`<span>Voto: ${escapeHtml(poi.rating)}</span>`);
-    return parts.join('');
+    const rows = [];
+    /* Campi built-in: label fissa a sinistra, valore del POI a destra.
+       Per rinominare una label (es. "Costo" -> "Ingresso"), cambia la
+       stringa qui sotto. Per aggiungere campi arbitrari per un singolo
+       POI usa invece `customMeta` (vedi sotto). */
+    if (poi.priceLevel) {
+        const override = (META_LABEL_OVERRIDES[poi.category] || {}).priceLevel;
+        rows.push(metaRow(override || 'Costo', renderPriceLevel(poi.priceLevel)));
+    }
+    if (poi.roomPrice)       rows.push(metaRow('Camera', escapeHtml(poi.roomPrice)));
+    if (poi.openingDays)     rows.push(metaRow('Apertura', escapeHtml(poi.openingDays)));
+    if (poi.checkIn)         rows.push(metaRow('Check-in', escapeHtml(poi.checkIn)));
+    if (poi.checkOut)        rows.push(metaRow('Check-out', escapeHtml(poi.checkOut)));
+    if (poi.iata)            rows.push(metaRow('Codice IATA', escapeHtml(poi.iata)));
+    if (poi.lines)           rows.push(metaRow('Linee', escapeHtml(poi.lines)));
+    if (poi.rating)          rows.push(metaRow('Voto', escapeHtml(poi.rating)));
+
+    /* Righe custom definite direttamente sul POI, in fondo al blocco.
+       Array di oggetti { label, value }. Utile quando serve una label
+       specifica per quel POI che non è coperta dai campi built-in
+       (es. "Numero binari" per una stazione, "Piani" per un hotel,
+       "Chef" per un ristorante). */
+    if (Array.isArray(poi.customMeta)) {
+        poi.customMeta.forEach(m => {
+            if (m && m.label && m.value !== undefined && m.value !== '') {
+                rows.push(metaRow(m.label, escapeHtml(String(m.value))));
+            }
+        });
+    }
+
+    return rows.join('');
+}
+
+/* Costruisce una riga meta LABEL / VALUE. valueHtml può contenere
+   markup (per renderPriceLevel); label viene sempre escapata. */
+function metaRow(label, valueHtml) {
+    return `<div class="meta-row">` +
+             `<span class="meta-label">${escapeHtml(label)}</span>` +
+             `<span class="meta-value">${valueHtml}</span>` +
+           `</div>`;
+}
+
+/* Rende priceLevel (1-5) come una fila di 5 simboli €:
+   i primi N in colore accento, i restanti in muted. */
+function renderPriceLevel(level) {
+    const n = Math.max(1, Math.min(5, Number(level) || 1));
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+        html += `<span class="euro-${i <= n ? 'on' : 'off'}">€</span>`;
+    }
+    return html;
 }
 
 function updateMapsButton(url) {
