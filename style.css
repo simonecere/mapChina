@@ -931,7 +931,7 @@ button { font-family: inherit; }
     color: var(--color-text-muted);
     font-weight: 500;
 }
-/* Primo tag = categoria: sfondo accent-soft, testo rosso, più prominente */
+/* Primo tag = categoria: sfondo accent-soft, testo f, più prominente */
 .detail-tags .tag:first-child {
     background: var(--color-accent-soft);
     border-color: transparent;

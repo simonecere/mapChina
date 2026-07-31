@@ -1,0 +1,21 @@
+{
+    "name": "Viaggio in Cina 2027",
+    "short_name": "Cina 2027",
+    "description": "Trip planner personale — mappa interattiva, itinerario, info pratiche del viaggio in Cina.",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#f6f5f2",
+    "theme_color": "#c8332a",
+    "lang": "it",
+    "dir": "ltr",
+    "icons": [
+        {
+            "src": "icons/app-icon.jpg",
+            "sizes": "any",
+            "type": "image/jpeg",
+            "purpose": "any"
+        }
+    ]
+}
