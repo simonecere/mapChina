@@ -1561,10 +1561,24 @@ function onBackClick() {
 ------------------------------------------------------------------ */
 
 const TRAVEL_MODES = {
+    walk: {
+        label: 'A piedi',
+        routeFactor: 1.25,                // strade + attraversamenti pedonali
+        speed: () => 5,                    // camminata media adulti (5 km/h)
+        maxDistance: 10                    // sopra 10 km il bottone sparisce
+    },
     car: {
         label: 'Auto',
         routeFactor: 1.35,
-        speed: km => km < 20 ? 45 : 70   // urbano (<20km) vs statale/autostrada
+        /* Velocità adattiva:
+             < 10 km  → 30 km/h  (urbano stretto, semafori)
+             < 20 km  → 45 km/h  (urbano/statale)
+             ≥ 20 km  → 70 km/h  (autostrada/statale extraurbana) */
+        speed: km => {
+            if (km < 10) return 30;
+            if (km < 20) return 45;
+            return 70;
+        }
     },
     train: {
         label: 'Treno',
@@ -1695,6 +1709,28 @@ function syncModeButtons() {
 function updateDistResult() {
     const from = distState.fromPoi;
     const to = POI_DATA.find(p => p.id === distState.toPoiId);
+
+    /* Prima calcola la distanza in linea d'aria per decidere se il
+       bottone "A piedi" deve comparire o sparire (soglia maxDistance). */
+    let airlineKm = 0;
+    if (from && to) {
+        airlineKm = haversine(from.coords[0], from.coords[1],
+                              to.coords[0], to.coords[1]);
+    }
+    const walkBtn = dom.distModes
+        && dom.distModes.querySelector('[data-mode="walk"]');
+    if (walkBtn) {
+        const walkable = airlineKm > 0
+            && airlineKm <= TRAVEL_MODES.walk.maxDistance;
+        walkBtn.classList.toggle('is-hidden', !walkable);
+        /* Se "A piedi" era selezionato ma non è più raggiungibile,
+           torna automaticamente in auto. */
+        if (!walkable && distState.mode === 'walk') {
+            distState.mode = 'car';
+            syncModeButtons();
+        }
+    }
+
     if (!from || !to) {
         dom.distKm.textContent = '—';
         dom.distTime.textContent = 'Seleziona destinazione';
@@ -1703,7 +1739,10 @@ function updateDistResult() {
     const { km, minutes } = computeTravel(from.coords, to.coords, distState.mode);
     const kmRounded = km < 10 ? km.toFixed(1) : Math.round(km);
     dom.distKm.textContent = `${kmRounded} km`;
-    dom.distTime.textContent = `${formatDuration(minutes)} in ${TRAVEL_MODES[distState.mode].label.toLowerCase()}`;
+    const modeLabel = distState.mode === 'walk'
+        ? 'a piedi'
+        : 'in ' + TRAVEL_MODES[distState.mode].label.toLowerCase();
+    dom.distTime.textContent = `${formatDuration(minutes)} ${modeLabel}`;
 }
 
 /* ------------------------------------------------------------------
