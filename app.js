@@ -35,6 +35,9 @@
 ------------------------------------------------------------------ */
 const POI_DATA = [
 
+    /* ------------------------------------------------------------------
+                                ---PECHINO---
+     ------------------------------------------------------------------*/
     {
         id: 'beijing',
         name: 'Pechino',
@@ -48,84 +51,7 @@ const POI_DATA = [
             "Proibita, Tempio del Cielo) e per la Grande Muraglia.",
         tags: ['Città', 'Capitale', 'Imperiale', 'Hub'],
         image: 'https://loremflickr.com/800/500/beijing,china?lock=1',
-        bestTime: 'Apr-Mag / Set-Ott',
     },
-    {
-        id: 'shanghai',
-        name: 'Shanghai',
-        city: 'Cina — Municipalità',
-        category: 'city',
-        coords: [31.2304, 121.4737],
-        zoom: 11,
-        description:
-            "Città più popolosa della Cina, cuore finanziario del Paese. " +
-            "Contrasto tra il lungofiume storico (The Bund) e lo skyline " +
-            "futurista di Pudong. Ottima cucina cantonese/shanghaiese.",
-        tags: ['Città', 'Skyline', 'Finanza', 'Cucina'],
-        image: 'https://loremflickr.com/800/500/shanghai,skyline,pudong?lock=1',
-        bestTime: 'Mar-Mag / Ott-Nov',
-    },
-    {
-        id: 'seoul',
-        name: 'Seul',
-        city: 'Corea del Sud — Capitale',
-        category: 'city',
-        coords: [37.5665, 126.9780],
-        zoom: 11,
-        description:
-            "Capitale sudcoreana, ~9,7 milioni di abitanti. Mix di " +
-            "palazzi Joseon (Gyeongbokgung), quartieri commerciali " +
-            "(Myeongdong, Gangnam) e cultura pop coreana.",
-        tags: ['Città', 'Corea', 'K-Pop', 'Cucina'],
-        image: 'https://loremflickr.com/800/500/seoul,korea,skyline?lock=1',
-        bestTime: 'Apr (fioritura) / Set-Ott',
-    },
-    {
-        id: 'xian',
-        name: "Xi'an",
-        city: 'Cina — Shaanxi',
-        category: 'city',
-        coords: [34.3416, 108.9398],
-        zoom: 11,
-        description:
-            "Antica capitale imperiale (13 dinastie), capolinea orientale " +
-            "della Via della Seta. Mura Ming ancora intatte e quartiere " +
-            "musulmano storico. Vicino all'Esercito di Terracotta.",
-        tags: ['Città', 'Via della Seta', 'Storia', 'Cucina Hui'],
-        image: 'https://loremflickr.com/800/500/xian,china,bell-tower?lock=1',
-        bestTime: 'Mar-Mag / Set-Nov',
-    },
-    {
-        id: 'chengdu',
-        name: 'Chengdu',
-        city: 'Cina — Sichuan',
-        category: 'city',
-        coords: [30.5728, 104.0668],
-        zoom: 11,
-        description:
-            "Capitale del Sichuan, sinonimo di cucina piccante e panda " +
-            "giganti. Ritmo più rilassato rispetto alle megalopoli " +
-            "costiere. Case da tè, vicoli e mercati.",
-        tags: ['Città', 'Cucina Sichuan', 'Panda', 'Slow'],
-        image: 'https://loremflickr.com/800/500/chengdu,sichuan?lock=1',
-        bestTime: 'Mar-Giu / Set-Nov',
-    },
-    {
-        id: 'chongqing',
-        name: 'Chongqing',
-        city: 'Cina — Municipalità',
-        category: 'city',
-        coords: [29.4316, 106.9123],
-        zoom: 11,
-        description:
-            "Megalopoli montuosa alla confluenza di Yangtze e Jialing. " +
-            "Grattacieli, scale infinite, monorotaia che attraversa " +
-            "edifici. Patria dell'hotpot piccante.",
-        tags: ['Città', 'Megalopoli', 'Hotpot', 'Yangtze'],
-        image: 'https://loremflickr.com/800/500/chongqing,skyline,china?lock=1',
-        bestTime: 'Set-Nov (estati torride)',
-    },
-
     {
         id: 'forbidden-city',
         name: 'Città Proibita',
@@ -143,6 +69,328 @@ const POI_DATA = [
         openingDays: 'Mar-Dom 8:30-17:00',
         priceLevel: 2
     },
+    {
+        id: 'wangfujing-example',
+        name: 'Wangfujing Street',
+        city: 'Pechino — Dongcheng',
+        category: 'shopping',
+        coords: [39.9127, 116.4103],
+        zoom: 16,
+        description:
+            "Principale via commerciale pedonale di Pechino. Grandi " +
+            "magazzini (APM, Dongan Plaza), Snack Street con street food, " +
+            "librerie internazionali. Ottima per una serata a piedi.",
+        tags: ['Shopping', 'Pedonale', 'Snack Street', 'Turistico'],
+        image: 'https://loremflickr.com/800/500/wangfujing,beijing,street?lock=1'
+    },
+    {
+        id: 'hotel-example',
+        name: 'Rosewood Beijing',
+        city: 'Pechino — CBD',
+        category: 'hotel',
+        coords: [39.9264, 116.4534],
+        zoom: 16,
+        description:
+            "Hotel 5 stelle nel quartiere finanziario di Pechino. " +
+            "283 camere, spa, ristorante fine dining. Base comoda per " +
+            "muoversi verso i monumenti imperiali con la metro.",
+        tags: ['Hotel', '5 stelle', 'CBD', 'Lusso'],
+        image: 'https://loremflickr.com/800/500/hotel,luxury,beijing?lock=1',
+        checkIn: 'Dal 15:00',
+        checkOut: 'Fino a 12:00'
+    },
+    {
+        id: 'pek-airport',
+        name: 'Aeroporto Internazionale Capital',
+        city: 'Pechino — PEK',
+        category: 'airport',
+        coords: [40.0801, 116.5846],
+        zoom: 12,
+        description:
+            "Principale aeroporto di Pechino, hub di Air China. " +
+            "Tre terminal (T1/T2/T3). Airport Express in metro fino al " +
+            "centro in ~25 min, taxi ~45 min.",
+        tags: ['Aeroporto', 'Hub', 'Air China'],
+        image: 'https://loremflickr.com/800/500/airport,beijing,pek?lock=1',
+        iata: 'PEK',
+        openingDays: 'Aperto 24/7'
+    },
+    {
+        id: 'beijing-south-station',
+        name: 'Stazione di Pechino Sud',
+        city: 'Beijingnan Zhan',
+        category: 'station',
+        coords: [39.8654, 116.3785],
+        zoom: 15,
+        description:
+            "Terminal high-speed a sud di Pechino. Treni CRH per " +
+            "Shanghai (~4h30), Tianjin (~30 min), Nanjing (~3h30). " +
+            "Servita dalle linee metro 4, 14 e 16.",
+        tags: ['Stazione', 'CRH', 'High-Speed'],
+        image: 'https://loremflickr.com/800/500/train-station,beijing?lock=1',
+        lines: 'CRH · Beijing-Shanghai HSR',
+        openingDays: 'Aperto 24/7'
+    },
+
+    /*=======================   CIBO+ PEK =============================*/
+    {
+        id: 'peking-duck-example',
+        name: "Anatra alla Pechinese",
+        city: 'Pechino',
+        category: 'food',
+        coords: [39.91834631837488, 116.40887272446551],
+        zoom: 16,
+        description:
+            "Ristorante specializzato in anatra laccata alla pechinese. " +
+            "Il piatto tipico è servito con crêpes sottili, cipollotto, " +
+            "cetriolo e salsa hoisin. Il link Google Maps qui sotto porta " +
+            "alla scheda del locale con orari, foto e recensioni aggiornate.",
+        tags: ['Cibo', 'Anatra Laccata', 'Cucina Pechinese'],
+        image: 'https://loremflickr.com/800/500/peking-duck,beijing?lock=1',
+        mapsUrl: 'https://maps.app.goo.gl/DX4NHXTZTTDbyu7C8',
+        bestTime: 'Prenotazione consigliata'
+    },
+
+
+
+
+    /* ------------------------------------------------------------------
+                            ---SHANGHAI---
+ ------------------------------------------------------------------*/
+    {
+        id: 'shanghai',
+        name: 'Shanghai',
+        city: 'Cina — Municipalità',
+        category: 'city',
+        coords: [31.2304, 121.4737],
+        zoom: 11,
+        description:
+            "Città più popolosa della Cina, cuore finanziario del Paese. " +
+            "Contrasto tra il lungofiume storico (The Bund) e lo skyline " +
+            "futurista di Pudong. Ottima cucina cantonese/shanghaiese.",
+        tags: ['Città', 'Skyline', 'Finanza', 'Cucina'],
+        image: 'https://loremflickr.com/800/500/shanghai,skyline,pudong?lock=1',
+    },
+    {
+        id: 'SHA-bund',
+        name: 'The Bund',
+        city: 'Shanghai',
+        category: 'monument',
+        coords: [31.240444860520714, 121.49056728206448],
+        zoom: 14,
+        description:
+            "Il Bund (Wàitān, 'Riva Esterna') è il celebre viale pedonale " +
+            "sul lungofiume, sponda ovest dello Huangpu. 1,5 km lungo " +
+            "Zhongshan Road, con oltre 50 edifici storici in stile coloniale " +
+            "europeo (neoclassico, gotico, Art Déco dell'epoca delle " +
+            "Concessioni) contrapposti allo skyline futuristico di Lujiazui " +
+            "(Pudong) sulla sponda opposta. Uno dei simboli più iconici di " +
+            "Shanghai.",
+        tags: ['Monumento', 'Lungofiume', 'Skyline', 'Stili misti'],
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/6/64/The_Bund_at_Night.png',
+            'https://upload.wikimedia.org/wikipedia/commons/b/bc/The_Bund_at_night.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/4/4f/The_Bund%2C_Shanghai%2C_1.jpg'
+        ],
+        mapsUrl: 'https://maps.app.goo.gl/D2CR392UTzYdisNy5',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Meglio visitare', value: 'Di sera con le luci accese' }
+        ]
+    },
+    {
+        id: 'yu-garden',
+        name: 'Yu Garden',
+        city: 'Shanghai',
+        category: 'nature',
+        coords: [31.22727060429105, 121.49209830614264],
+        zoom: 15,
+        description:
+            "Il Giardino del Mandarino Yu (Yuyuan) è un celebre giardino " +
+            "classico cinese del XVI secolo, dinastia Ming. Due ettari " +
+            "nel cuore della Old City di Shanghai, con padiglioni storici, " +
+            "laghetti con carpe koi e formazioni rocciose. Uno degli esempi " +
+            "più raffinati di architettura tradizionale cinese.",
+        tags: ['Natura', 'Giardino', 'Ming', 'Old City'],
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Shanghai_-_Yu_Garden_-_0035.jpg/800px-Shanghai_-_Yu_Garden_-_0035.jpg'
+        ],
+        mapsUrl: 'https://maps.app.goo.gl/ZXK5fRwXx5g1bYyg8',
+        openingDays: 'Mar-Dom 9:00-16:00',
+        customMeta: [
+            { label: 'Biglietto', value: '30-40 ¥ (~5 €)' }
+        ]
+    },
+    {
+        id: 'yuyuan-old-street',
+        name: 'Yuyuan Old Street',
+        city: 'Shanghai',
+        category: 'shopping',
+        coords: [31.227419141089115, 121.49138720742127],
+        zoom: 15,
+        description:
+            "Vivace quartiere commerciale e storico nell'Old City di " +
+            "Shanghai, adiacente allo Yu Garden. Architettura Ming e Qing " +
+            "con facciate in legno intagliato, tetti spioventi, lanterne " +
+            "rosse. Si sviluppa attorno al ponte a zig-zag Jiu Qu Qiao. " +
+            "Street food (in particolare xiaolongbao), sale da tè storiche " +
+            "e botteghe di artigianato tradizionale.",
+        tags: ['Shopping', 'Street', 'Street food', 'Souvenir', 'Artigiani'],
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/2/29/Yuyuan_street_%283989857894%29.jpg'
+        ],
+        mapsUrl: 'https://maps.app.goo.gl/KGqqXPQHGch9Bykw7',
+        openingDays: 'Aperto 24/7',
+        rating: 3,
+        customMeta: [
+            { label: 'Negozi',          value: '~8:30-22:30' },
+            { label: 'Meglio visitare', value: 'Di sera con le luci accese' }
+        ]
+    },
+
+
+
+    /*=======================   CIBO+ SHA =============================*/
+
+
+
+
+
+
+
+    /* ------------------------------------------------------------------
+                            ---SEUL---
+ ------------------------------------------------------------------*/
+    {
+        id: 'seoul',
+        name: 'Seul',
+        city: 'Corea del Sud — Capitale',
+        category: 'city',
+        coords: [37.5665, 126.9780],
+        zoom: 11,
+        description:
+            "Capitale sudcoreana, ~9,7 milioni di abitanti. Mix di " +
+            "palazzi Joseon (Gyeongbokgung), quartieri commerciali " +
+            "(Myeongdong, Gangnam) e cultura pop coreana.",
+        tags: ['Città', 'Corea', 'K-Pop', 'Cucina'],
+        image: 'https://loremflickr.com/800/500/seoul,korea,skyline?lock=1',
+    },
+
+
+
+    /*=======================   CIBO+ SEUL =============================*/
+
+
+
+
+    /* ------------------------------------------------------------------
+                            ---XI'AN---
+ ------------------------------------------------------------------*/
+    {
+        id: 'xian',
+        name: "Xi'an",
+        city: 'Cina — Shaanxi',
+        category: 'city',
+        coords: [34.3416, 108.9398],
+        zoom: 11,
+        description:
+            "Antica capitale imperiale (13 dinastie), capolinea orientale " +
+            "della Via della Seta. Mura Ming ancora intatte e quartiere " +
+            "musulmano storico. Vicino all'Esercito di Terracotta.",
+        tags: ['Città', 'Via della Seta', 'Storia', 'Cucina Hui'],
+        image: 'https://loremflickr.com/800/500/xian,china,bell-tower?lock=1',
+    },
+    {
+        id: 'terracotta-army',
+        name: 'Esercito di Terracotta',
+        city: "Xi'an",
+        category: 'monument',
+        coords: [34.3848, 109.2734],
+        zoom: 14,
+        description:
+            "Mausoleo dell'imperatore Qin Shi Huang (III sec. a.C.): " +
+            "oltre 8.000 statue in terracotta a grandezza naturale, " +
+            "ciascuna con tratti distinti. Scoperto nel 1974 da " +
+            "contadini che scavavano un pozzo.",
+        tags: ['Monumento', 'UNESCO', 'Archeologia', 'Storia'],
+        image: 'https://loremflickr.com/800/500/terracotta-army,xian?lock=1',
+        bestTime: 'Mar-Mag / Set-Nov',
+        openingDays: 'Ogni giorno 8:30-17:30',
+        priceLevel: 3
+    },
+
+
+    /*=======================   CIBO+ XI'AN   =============================*/
+
+
+
+
+    /* ------------------------------------------------------------------
+                            ---CHENGDU---
+ ------------------------------------------------------------------*/
+    {
+        id: 'chengdu',
+        name: 'Chengdu',
+        city: 'Cina — Sichuan',
+        category: 'city',
+        coords: [30.5728, 104.0668],
+        zoom: 11,
+        description:
+            "Capitale del Sichuan, sinonimo di cucina piccante e panda " +
+            "giganti. Ritmo più rilassato rispetto alle megalopoli " +
+            "costiere. Case da tè, vicoli e mercati.",
+        tags: ['Città', 'Cucina Sichuan', 'Panda', 'Slow'],
+        image: 'https://loremflickr.com/800/500/chengdu,sichuan?lock=1',
+    },
+    {
+        id: 'chengdu-panda',
+        name: 'Base di Ricerca dei Panda',
+        city: 'Chengdu',
+        category: 'nature',
+        coords: [30.7333, 104.1500],
+        zoom: 14,
+        description:
+            "Centro di conservazione del panda gigante e del panda " +
+            "rosso, fondato nel 1987. Su una collina boscosa a nord " +
+            "di Chengdu, con recinti che riproducono l'habitat naturale.",
+        tags: ['Natura', 'Fauna', 'Conservazione'],
+        image: 'https://loremflickr.com/800/500/panda,chengdu?lock=1',
+        openingDays: 'Ogni giorno 7:30-18:00',
+        priceLevel: 2,
+    },
+
+
+
+    /*=======================   CIBO+ CHEN =============================*/
+
+
+
+    /* ------------------------------------------------------------------
+                            ---CHONGQING---
+ ------------------------------------------------------------------*/
+    {
+        id: 'chongqing',
+        name: 'Chongqing',
+        city: 'Cina — Municipalità',
+        category: 'city',
+        coords: [29.4316, 106.9123],
+        zoom: 11,
+        description:
+            "Megalopoli montuosa alla confluenza di Yangtze e Jialing. " +
+            "Grattacieli, scale infinite, monorotaia che attraversa " +
+            "edifici. Patria dell'hotpot piccante.",
+        tags: ['Città', 'Megalopoli', 'Hotpot', 'Yangtze'],
+        image: 'https://loremflickr.com/800/500/chongqing,skyline,china?lock=1',
+    },
+
+    /*=======================   CIBO+ CHON =============================*/
+
+
+
+
+    /* ------------------------------------------------------------------
+                            ---ALTRO---
+ ------------------------------------------------------------------*/
     {
         id: 'great-wall',
         name: 'Grande Muraglia',
@@ -275,24 +523,7 @@ const POI_DATA = [
             ]
         }
     },
-    {
-        id: 'terracotta-army',
-        name: 'Esercito di Terracotta',
-        city: "Xi'an",
-        category: 'monument',
-        coords: [34.3848, 109.2734],
-        zoom: 14,
-        description:
-            "Mausoleo dell'imperatore Qin Shi Huang (III sec. a.C.): " +
-            "oltre 8.000 statue in terracotta a grandezza naturale, " +
-            "ciascuna con tratti distinti. Scoperto nel 1974 da " +
-            "contadini che scavavano un pozzo.",
-        tags: ['Monumento', 'UNESCO', 'Archeologia', 'Storia'],
-        image: 'https://loremflickr.com/800/500/terracotta-army,xian?lock=1',
-        bestTime: 'Mar-Mag / Set-Nov',
-        openingDays: 'Ogni giorno 8:30-17:30',
-        priceLevel: 3
-    },
+
 
     {
         id: 'li-river',
@@ -309,184 +540,6 @@ const POI_DATA = [
         image: 'https://loremflickr.com/800/500/li-river,guilin,karst?lock=1',
         bestTime: 'Apr-Ott'
     },
-    {
-        id: 'chengdu-panda',
-        name: 'Base di Ricerca dei Panda',
-        city: 'Chengdu',
-        category: 'nature',
-        coords: [30.7333, 104.1500],
-        zoom: 14,
-        description:
-            "Centro di conservazione del panda gigante e del panda " +
-            "rosso, fondato nel 1987. Su una collina boscosa a nord " +
-            "di Chengdu, con recinti che riproducono l'habitat naturale.",
-        tags: ['Natura', 'Fauna', 'Conservazione'],
-        image: 'https://loremflickr.com/800/500/panda,chengdu?lock=1',
-        bestTime: 'Mar-Giu (cuccioli)',
-        openingDays: 'Ogni giorno 7:30-18:00',
-        priceLevel: 2
-    },
-
-    {
-        id: 'peking-duck-example',
-        name: "Anatra alla Pechinese (esempio)",
-        city: 'Pechino',
-        category: 'food',
-        coords: [39.91834631837488, 116.40887272446551],
-        zoom: 16,
-        description:
-            "Ristorante specializzato in anatra laccata alla pechinese. " +
-            "Il piatto tipico è servito con crêpes sottili, cipollotto, " +
-            "cetriolo e salsa hoisin. Il link Google Maps qui sotto porta " +
-            "alla scheda del locale con orari, foto e recensioni aggiornate.",
-        tags: ['Cibo', 'Anatra Laccata', 'Cucina Pechinese'],
-        image: 'https://loremflickr.com/800/500/peking-duck,beijing?lock=1',
-        mapsUrl: 'https://maps.app.goo.gl/DX4NHXTZTTDbyu7C8',
-        bestTime: 'Prenotazione consigliata'
-    },
-
-    {
-        id: 'wangfujing-example',
-        name: 'Wangfujing Street',
-        city: 'Pechino — Dongcheng',
-        category: 'shopping',
-        coords: [39.9127, 116.4103],
-        zoom: 16,
-        description:
-            "Principale via commerciale pedonale di Pechino. Grandi " +
-            "magazzini (APM, Dongan Plaza), Snack Street con street food, " +
-            "librerie internazionali. Ottima per una serata a piedi.",
-        tags: ['Shopping', 'Pedonale', 'Snack Street', 'Turistico'],
-        image: 'https://loremflickr.com/800/500/wangfujing,beijing,street?lock=1'
-    },
-
-    {
-        id: 'hotel-example',
-        name: 'Rosewood Beijing (esempio)',
-        city: 'Pechino — CBD',
-        category: 'hotel',
-        coords: [39.9264, 116.4534],
-        zoom: 16,
-        description:
-            "Hotel 5 stelle nel quartiere finanziario di Pechino. " +
-            "283 camere, spa, ristorante fine dining. Base comoda per " +
-            "muoversi verso i monumenti imperiali con la metro.",
-        tags: ['Hotel', '5 stelle', 'CBD', 'Lusso'],
-        image: 'https://loremflickr.com/800/500/hotel,luxury,beijing?lock=1',
-        checkIn: 'Dal 15:00',
-        checkOut: 'Fino a 12:00'
-    },
-
-    {
-        id: 'beijing-south-station',
-        name: 'Stazione di Pechino Sud',
-        city: 'Beijingnan Zhan',
-        category: 'station',
-        coords: [39.8654, 116.3785],
-        zoom: 15,
-        description:
-            "Terminal high-speed a sud di Pechino. Treni CRH per " +
-            "Shanghai (~4h30), Tianjin (~30 min), Nanjing (~3h30). " +
-            "Servita dalle linee metro 4, 14 e 16.",
-        tags: ['Stazione', 'CRH', 'High-Speed'],
-        image: 'https://loremflickr.com/800/500/train-station,beijing?lock=1',
-        lines: 'CRH · Beijing-Shanghai HSR',
-        openingDays: 'Aperto 24/7'
-    },
-
-    {
-        id: 'pek-airport',
-        name: 'Aeroporto Internazionale Capital',
-        city: 'Pechino — PEK',
-        category: 'airport',
-        coords: [40.0801, 116.5846],
-        zoom: 12,
-        description:
-            "Principale aeroporto di Pechino, hub di Air China. " +
-            "Tre terminal (T1/T2/T3). Airport Express in metro fino al " +
-            "centro in ~25 min, taxi ~45 min.",
-        tags: ['Aeroporto', 'Hub', 'Air China'],
-        image: 'https://loremflickr.com/800/500/airport,beijing,pek?lock=1',
-        iata: 'PEK',
-        openingDays: 'Aperto 24/7'
-    },
-
-    /* ---- Shanghai — POI aggiunti dall'utente ---- */
-    {
-        id: 'shanghai-bund',
-        name: 'The Bund',
-        city: 'Shanghai',
-        category: 'monument',
-        coords: [31.240444860520714, 121.49056728206448],
-        zoom: 14,
-        description:
-            "Il Bund (Wàitān, 'Riva Esterna') è il celebre viale pedonale " +
-            "sul lungofiume, sponda ovest dello Huangpu. 1,5 km lungo " +
-            "Zhongshan Road, con oltre 50 edifici storici in stile coloniale " +
-            "europeo (neoclassico, gotico, Art Déco dell'epoca delle " +
-            "Concessioni) contrapposti allo skyline futuristico di Lujiazui " +
-            "(Pudong) sulla sponda opposta. Uno dei simboli più iconici di " +
-            "Shanghai.",
-        tags: ['Monumento', 'Lungofiume', 'Skyline', 'Coloniale'],
-        images: [
-            'https://upload.wikimedia.org/wikipedia/commons/6/64/The_Bund_at_Night.png',
-            'https://upload.wikimedia.org/wikipedia/commons/b/bc/The_Bund_at_night.jpg',
-            'https://upload.wikimedia.org/wikipedia/commons/4/4f/The_Bund%2C_Shanghai%2C_1.jpg'
-        ],
-        mapsUrl: 'https://maps.app.goo.gl/D2CR392UTzYdisNy5',
-        openingDays: 'Aperto 24/7',
-        customMeta: [
-            { label: 'Meglio visitare', value: 'Di sera con le luci accese' }
-        ]
-    },
-    {
-        id: 'yu-garden',
-        name: 'Yu Garden',
-        city: 'Shanghai',
-        category: 'nature',
-        coords: [31.22727060429105, 121.49209830614264],
-        zoom: 15,
-        description:
-            "Il Giardino del Mandarino Yu (Yuyuan) è un celebre giardino " +
-            "classico cinese del XVI secolo, dinastia Ming. Due ettari " +
-            "nel cuore della Old City di Shanghai, con padiglioni storici, " +
-            "laghetti con carpe koi e formazioni rocciose. Uno degli esempi " +
-            "più raffinati di architettura tradizionale cinese.",
-        tags: ['Natura', 'Giardino', 'Ming', 'Old City'],
-        images: [
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Shanghai_-_Yu_Garden_-_0035.jpg/800px-Shanghai_-_Yu_Garden_-_0035.jpg'
-        ],
-        mapsUrl: 'https://maps.app.goo.gl/ZXK5fRwXx5g1bYyg8',
-        openingDays: 'Mar-Dom 9:00-16:00',
-        customMeta: [
-            { label: 'Biglietto', value: '30-40 ¥ (~5 €)' }
-        ]
-    },
-    {
-        id: 'yuyuan-old-street',
-        name: 'Yuyuan Old Street',
-        city: 'Shanghai',
-        category: 'shopping',
-        coords: [31.227419141089115, 121.49138720742127],
-        zoom: 15,
-        description:
-            "Vivace quartiere commerciale e storico nell'Old City di " +
-            "Shanghai, adiacente allo Yu Garden. Architettura Ming e Qing " +
-            "con facciate in legno intagliato, tetti spioventi, lanterne " +
-            "rosse. Si sviluppa attorno al ponte a zig-zag Jiu Qu Qiao. " +
-            "Street food (in particolare xiaolongbao), sale da tè storiche " +
-            "e botteghe di artigianato tradizionale.",
-        tags: ['Shopping', 'Street', 'Street food', 'Souvenir', 'Artigiani'],
-        images: [
-            'https://upload.wikimedia.org/wikipedia/commons/2/29/Yuyuan_street_%283989857894%29.jpg'
-        ],
-        mapsUrl: 'https://maps.app.goo.gl/KGqqXPQHGch9Bykw7',
-        openingDays: 'Aperto 24/7',
-        customMeta: [
-            { label: 'Negozi',          value: '~8:30-22:30' },
-            { label: 'Meglio visitare', value: 'Di sera con le luci accese' }
-        ]
-    }
 ];
 
 /* ------------------------------------------------------------------
@@ -529,12 +582,6 @@ const CATEGORY_MARKER_COLOR = {
     airport:  '#3a8fc9'    /* celeste cielo  */
 };
 
-const META_LABEL_OVERRIDES = {
-    monument: { priceLevel: 'Ingresso' },
-    nature:   { priceLevel: 'Ingresso' },
-    food:     { priceLevel: 'Prezzo medio' },
-    activity: { priceLevel: 'Prezzo' }
-};
 
 /* Icone SVG del marker (viewBox 24x24, Lucide-style).
    Ogni valore è la sequenza di elementi figli dentro il tag <svg>.
@@ -708,8 +755,24 @@ const dom = {
     detailMeta:        document.getElementById('detail-meta'),
     mapsButton:        document.getElementById('maps-btn'),
     detailSections:    document.getElementById('detail-sections'),
-    sectionList:       document.getElementById('section-list')
+    sectionList:       document.getElementById('section-list'),
+
+    /* Modale "Calcola distanza" */
+    distBtn:           document.getElementById('dist-btn'),
+    distModal:         document.getElementById('dist-modal'),
+    distBackdrop:      document.getElementById('dist-modal-backdrop'),
+    distClose:         document.getElementById('dist-modal-close'),
+    distFrom:          document.getElementById('dist-from'),
+    distCat:           document.getElementById('dist-cat'),
+    distPoi:           document.getElementById('dist-poi'),
+    distModes:         document.getElementById('dist-result') ? document : null,
+    distKm:            document.getElementById('dist-km'),
+    distTime:          document.getElementById('dist-time')
 };
+
+/* distModes hack sopra è per fallback quando l'elemento non esiste
+   sulla home / il-file. Sovrascriviamo con il container reale. */
+dom.distModes = document.querySelector('.dist-modes');
 
 /* ------------------------------------------------------------------
    8) GALLERIA IMMAGINI
@@ -1055,20 +1118,45 @@ function renderSectionDetail(parent, section) {
 function buildMetaHtml(poi) {
     const rows = [];
     /* Campi built-in: label fissa a sinistra, valore del POI a destra.
-       Per rinominare una label (es. "Costo" -> "Ingresso"), cambia la
-       stringa qui sotto. Per aggiungere campi arbitrari per un singolo
-       POI usa invece `customMeta` (vedi sotto). */
-    if (poi.priceLevel) {
-        const override = (META_LABEL_OVERRIDES[poi.category] || {}).priceLevel;
-        rows.push(metaRow(override || 'Costo', renderPriceLevel(poi.priceLevel)));
+       Per rinominare una label (es. "Biglietto" -> "Ingresso"), cambia
+       la stringa qui sotto. Per aggiungere campi arbitrari per un
+       singolo POI usa invece `customMeta` (vedi sotto). */
+
+    /* Identità del POI (usato per le città: es. "Storia imperiale",
+       "Finanza e skyline"). Compare in cima come label identitaria. */
+    if (poi.focus)           rows.push(metaRow('Identità', escapeHtml(poi.focus)));
+
+    /* Biglietto: stringa libera con il prezzo esatto d'ingresso.
+       Da usare per monumenti, giardini, attività — dove c'è un prezzo
+       specifico e comunicabile. */
+    if (poi.ticketPrice)     rows.push(metaRow('Biglietto', escapeHtml(poi.ticketPrice)));
+
+    /* priceLevel (simboli €€€) riservato ai POI food: sui ristoranti
+       il prezzo esatto non ha senso, i simboli comunicano la fascia. */
+    if (poi.priceLevel && poi.category === 'food' || 'shopping') {
+        rows.push(metaRow('Costo', renderPriceLevel(poi.priceLevel)));
     }
+    /* freeEntry: booleano. Se true, mostra "Gratuito". Alternativa
+       concisa a ticketPrice quando il posto è pubblico e senza costo. */
+    if (poi.freeEntry)       rows.push(metaRow('Ingresso', 'Gratuito'));
     if (poi.roomPrice)       rows.push(metaRow('Camera', escapeHtml(poi.roomPrice)));
+
+    /* Time-related */
+    if (poi.visitDuration)   rows.push(metaRow('Durata', escapeHtml(poi.visitDuration)));
     if (poi.openingDays)     rows.push(metaRow('Apertura', escapeHtml(poi.openingDays)));
+    if (poi.reservation)     rows.push(metaRow('Prenotazione', escapeHtml(poi.reservation)));
     if (poi.checkIn)         rows.push(metaRow('Check-in', escapeHtml(poi.checkIn)));
     if (poi.checkOut)        rows.push(metaRow('Check-out', escapeHtml(poi.checkOut)));
+
+    /* Practical */
     if (poi.iata)            rows.push(metaRow('Codice IATA', escapeHtml(poi.iata)));
     if (poi.lines)           rows.push(metaRow('Linee', escapeHtml(poi.lines)));
-    if (poi.rating)          rows.push(metaRow('Voto', escapeHtml(poi.rating)));
+
+    /* Vibe / rating (icone su scala 1-5).
+       rating (fiamme): quanto sei hyped/consigliato il posto.
+       crowdLevel (omini): quanto è affollato (1 = tranquillo, 5 = molto). */
+    if (poi.rating)          rows.push(metaRow('Hype', renderFireLevel(poi.rating)));
+    if (poi.crowdLevel)      rows.push(metaRow('Affollamento', renderCrowdLevel(poi.crowdLevel)));
 
     /* Righe custom definite direttamente sul POI, in fondo al blocco.
        Array di oggetti { label, value }. Utile quando serve una label
@@ -1094,6 +1182,34 @@ function metaRow(label, valueHtml) {
              `<span class="meta-value">${valueHtml}</span>` +
            `</div>`;
 }
+
+/* SVG delle icone usate nelle scale a 5 (Hype / Affollamento).
+   Path prese da Lucide (lucide.dev), semplificate per la resa a 14px. */
+const FLAME_SVG =
+    '<svg viewBox="0 0 24 24" width="13" height="13"' +
+    ' fill="currentColor" stroke="none" aria-hidden="true">' +
+    '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143' +
+    '-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0' +
+    'c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>';
+
+const PERSON_SVG =
+    '<svg viewBox="0 0 24 24" width="12" height="12"' +
+    ' fill="currentColor" stroke="none" aria-hidden="true">' +
+    '<circle cx="12" cy="7" r="4"/>' +
+    '<path d="M4 22c0-4 4-7 8-7s8 3 8 7z"/></svg>';
+
+/* Rende una scala icona (0-5) come 5 span con l'icona ripetuta:
+   i primi N con classe "-on" (colorati), i restanti "-off" (spenti). */
+function renderIconLevel(level, iconHtml, cls) {
+    const n = Math.max(1, Math.min(5, Number(level) || 1));
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+        html += `<span class="${cls}-${i <= n ? 'on' : 'off'}">${iconHtml}</span>`;
+    }
+    return html;
+}
+function renderFireLevel(level)  { return renderIconLevel(level, FLAME_SVG,  'fire');  }
+function renderCrowdLevel(level) { return renderIconLevel(level, PERSON_SVG, 'crowd'); }
 
 /* Rende priceLevel (1-5) come una fila di 5 simboli €:
    i primi N in colore accento, i restanti in muted. */
@@ -1436,7 +1552,162 @@ function onBackClick() {
 }
 
 /* ------------------------------------------------------------------
-   14) EVENT BINDING GLOBALE
+   14) CALCOLA DISTANZA
+   ------------------------------------------------------------------
+   Stima distanza (linea d'aria via Haversine) e tempo di percorrenza
+   per tre mezzi: auto (velocità adattiva urbano/autostrada), treno,
+   aereo. Solo tempo effettivo, nessun overhead pre/post viaggio.
+   Modale aperto dal bottone .dist-btn nella sidebar del POI.
+------------------------------------------------------------------ */
+
+const TRAVEL_MODES = {
+    car: {
+        label: 'Auto',
+        routeFactor: 1.35,
+        speed: km => km < 20 ? 45 : 70   // urbano (<20km) vs statale/autostrada
+    },
+    train: {
+        label: 'Treno',
+        routeFactor: 1.15,
+        speed: () => 250                  // velocità media CRH high-speed
+    },
+    plane: {
+        label: 'Aereo',
+        routeFactor: 1.05,
+        speed: () => 750                  // velocità di crociera commerciale
+    }
+};
+
+/* Distanza in linea d'aria fra due coordinate, in km. Formula Haversine. */
+function haversine(lat1, lng1, lat2, lng2) {
+    const R = 6371; // raggio Terra in km
+    const toRad = deg => deg * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+    const a = Math.sin(dLat / 2) ** 2 +
+              Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+              Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+/* Formatta minuti totali in "Xh Ym" o "Ym" se meno di 1h. */
+function formatDuration(minutes) {
+    const total = Math.max(1, Math.round(minutes));
+    const h = Math.floor(total / 60);
+    const m = total % 60;
+    if (h === 0) return `${m} min`;
+    if (m === 0) return `${h}h`;
+    return `${h}h ${String(m).padStart(2, '0')}m`;
+}
+
+/* Calcola { km, minutes } per un mezzo. */
+function computeTravel(fromCoords, toCoords, modeKey) {
+    const mode = TRAVEL_MODES[modeKey];
+    const airline = haversine(fromCoords[0], fromCoords[1],
+                              toCoords[0], toCoords[1]);
+    const km = airline * mode.routeFactor;
+    const speed = mode.speed(km);
+    const hours = km / speed;
+    return { km, minutes: hours * 60 };
+}
+
+/* Stato attuale del modale distanza. */
+const distState = {
+    fromPoi: null,       // POI di partenza (quello aperto in sidebar)
+    toPoiId: null,       // id destinazione selezionata
+    catKey:  'all',      // filtro categoria del dropdown
+    mode:    'car'       // mezzo scelto
+};
+
+function openDistanceModal(fromPoi) {
+    distState.fromPoi = fromPoi;
+    distState.toPoiId = null;
+    distState.catKey  = 'all';
+    /* Mantiene l'ultimo mezzo scelto se già impostato, altrimenti car */
+    distState.mode = distState.mode || 'car';
+
+    dom.distFrom.textContent = fromPoi.name;
+    populateDistCategories();
+    populateDistPois();
+    syncModeButtons();
+    updateDistResult();
+
+    dom.distModal.hidden = false;
+}
+
+function closeDistanceModal() {
+    dom.distModal.hidden = true;
+}
+
+/* Popola il dropdown categorie con tutte le key foglia di CATEGORIES
+   (esclude i parent "esperienze"/"services" che sono contenitori). */
+function populateDistCategories() {
+    const opts = ['<option value="all">Tutte le categorie</option>'];
+    CATEGORIES.forEach(c => {
+        if (c.key === 'all') return;
+        if (c.sub) {
+            c.sub.forEach(s => {
+                opts.push(`<option value="${s.key}">${escapeHtml(s.label)}</option>`);
+            });
+        } else {
+            opts.push(`<option value="${c.key}">${escapeHtml(c.label)}</option>`);
+        }
+    });
+    dom.distCat.innerHTML = opts.join('');
+    dom.distCat.value = distState.catKey;
+}
+
+/* Popola il dropdown POI filtrando per categoria e escludendo il POI
+   di partenza. */
+function populateDistPois() {
+    const cat = distState.catKey;
+    const from = distState.fromPoi;
+    const list = POI_DATA.filter(p => {
+        if (p.id === from.id) return false;
+        if (cat === 'all') return true;
+        return p.category === cat;
+    });
+
+    if (list.length === 0) {
+        dom.distPoi.innerHTML = '<option value="">— nessun POI in questa categoria —</option>';
+        distState.toPoiId = null;
+        return;
+    }
+
+    dom.distPoi.innerHTML = list.map(p =>
+        `<option value="${p.id}">${escapeHtml(p.name)} · ${escapeHtml(p.city)}</option>`
+    ).join('');
+
+    /* Ripristina selezione precedente se ancora valida, altrimenti primo */
+    const still = list.find(p => p.id === distState.toPoiId);
+    distState.toPoiId = still ? still.id : list[0].id;
+    dom.distPoi.value = distState.toPoiId;
+}
+
+function syncModeButtons() {
+    dom.distModes.querySelectorAll('.dist-mode-btn').forEach(btn => {
+        const active = btn.dataset.mode === distState.mode;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', String(active));
+    });
+}
+
+function updateDistResult() {
+    const from = distState.fromPoi;
+    const to = POI_DATA.find(p => p.id === distState.toPoiId);
+    if (!from || !to) {
+        dom.distKm.textContent = '—';
+        dom.distTime.textContent = 'Seleziona destinazione';
+        return;
+    }
+    const { km, minutes } = computeTravel(from.coords, to.coords, distState.mode);
+    const kmRounded = km < 10 ? km.toFixed(1) : Math.round(km);
+    dom.distKm.textContent = `${kmRounded} km`;
+    dom.distTime.textContent = `${formatDuration(minutes)} in ${TRAVEL_MODES[distState.mode].label.toLowerCase()}`;
+}
+
+/* ------------------------------------------------------------------
+   15) EVENT BINDING GLOBALE
    ------------------------------------------------------------------
    Registrazione degli event listener sui pulsanti statici.
    I filtri usano event delegation dentro renderFilterBar.
@@ -1467,6 +1738,49 @@ function bindEvents() {
     document.addEventListener('keydown', evt => {
         if (evt.key === 'Escape' && !dom.sidebar.classList.contains('is-closed')) {
             closeSidebar();
+        }
+    });
+
+    /* ---- Modale "Calcola distanza" ---- */
+    if (dom.distBtn) {
+        dom.distBtn.addEventListener('click', () => {
+            if (!state.activePoiId) return;
+            const poi = POI_DATA.find(p => p.id === state.activePoiId);
+            if (poi) openDistanceModal(poi);
+        });
+    }
+    if (dom.distClose) {
+        dom.distClose.addEventListener('click', closeDistanceModal);
+    }
+    if (dom.distBackdrop) {
+        dom.distBackdrop.addEventListener('click', closeDistanceModal);
+    }
+    if (dom.distCat) {
+        dom.distCat.addEventListener('change', () => {
+            distState.catKey = dom.distCat.value;
+            populateDistPois();
+            updateDistResult();
+        });
+    }
+    if (dom.distPoi) {
+        dom.distPoi.addEventListener('change', () => {
+            distState.toPoiId = dom.distPoi.value;
+            updateDistResult();
+        });
+    }
+    if (dom.distModes) {
+        dom.distModes.addEventListener('click', evt => {
+            const btn = evt.target.closest('.dist-mode-btn');
+            if (!btn) return;
+            distState.mode = btn.dataset.mode;
+            syncModeButtons();
+            updateDistResult();
+        });
+    }
+    /* Esc chiude anche il modale distanza (se aperto) */
+    document.addEventListener('keydown', evt => {
+        if (evt.key === 'Escape' && dom.distModal && !dom.distModal.hidden) {
+            closeDistanceModal();
         }
     });
 }

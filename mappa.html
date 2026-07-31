@@ -187,6 +187,28 @@
                             <span>Apri in Google Maps</span>
                         </a>
 
+                        <!-- Pulsante "Calcola distanza": apre la modale
+                             per calcolare distanza+tempo dal POI corrente
+                             a un altro POI, con scelta del mezzo. -->
+                        <button
+                            type="button"
+                            class="dist-btn"
+                            id="dist-btn"
+                        >
+                            <svg viewBox="0 0 24 24" width="14" height="14"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21.3 15.3 15 21.6a2 2 0 0 1-2.8 0L2.4 11.8a2 2 0 0 1 0-2.8L8.6 2.7a2 2 0 0 1 2.8 0l9.8 9.8a2 2 0 0 1 .1 2.8Z"/>
+                                <path d="M9 8l1 1"/>
+                                <path d="M12 5l1 1"/>
+                                <path d="M15 8l1 1"/>
+                                <path d="M8 13l1 1"/>
+                                <path d="M12 16l1 1"/>
+                            </svg>
+                            <span>Calcola distanza</span>
+                        </button>
+
                         <!-- Elenco sezioni (usato solo per la Muraglia).
                              Popolato in renderSectionButtons(). -->
                         <div class="detail-sections" id="detail-sections" hidden>
@@ -198,6 +220,99 @@
             </section>
 
         </aside>
+    </div>
+
+    <!-- =========================================================
+         Modale "Calcola distanza": overlay centrato sopra la mappa.
+         Backdrop scuro + card glass; mostra POI di partenza,
+         dropdown categoria + POI destinazione, tre mode buttons,
+         area risultato.
+    ========================================================== -->
+    <div class="dist-modal" id="dist-modal" hidden>
+        <div class="dist-modal-backdrop" id="dist-modal-backdrop"></div>
+        <div class="dist-modal-card" role="dialog" aria-label="Calcola distanza">
+            <header class="dist-modal-header">
+                <h2 class="dist-modal-title">Calcola distanza</h2>
+                <button type="button" class="dist-modal-close"
+                        id="dist-modal-close" aria-label="Chiudi">
+                    <svg viewBox="0 0 24 24" width="14" height="14"
+                         fill="none" stroke="currentColor"
+                         stroke-width="2.4" stroke-linecap="round"
+                         aria-hidden="true">
+                        <line x1="5" y1="5" x2="19" y2="19"/>
+                        <line x1="19" y1="5" x2="5" y2="19"/>
+                    </svg>
+                </button>
+            </header>
+
+            <div class="dist-modal-body">
+                <div class="dist-row">
+                    <span class="dist-label">Da</span>
+                    <span class="dist-from" id="dist-from">—</span>
+                </div>
+
+                <div class="dist-row">
+                    <span class="dist-label">A</span>
+                    <div class="dist-to-wrap">
+                        <select class="dist-select" id="dist-cat">
+                            <!-- popolato da JS -->
+                        </select>
+                        <select class="dist-select" id="dist-poi">
+                            <!-- popolato da JS in base alla categoria -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="dist-row">
+                    <span class="dist-label">Con</span>
+                    <div class="dist-modes" role="radiogroup"
+                         aria-label="Mezzo di trasporto">
+                        <button type="button" class="dist-mode-btn is-active"
+                                data-mode="car" aria-pressed="true">
+                            <svg viewBox="0 0 24 24" width="20" height="20"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="1.8" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/>
+                                <circle cx="6.5" cy="16.5" r="2.5"/>
+                                <circle cx="16.5" cy="16.5" r="2.5"/>
+                            </svg>
+                            <span>Auto</span>
+                        </button>
+                        <button type="button" class="dist-mode-btn"
+                                data-mode="train" aria-pressed="false">
+                            <svg viewBox="0 0 24 24" width="20" height="20"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="1.8" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/>
+                                <path d="M9 15L8 14"/>
+                                <path d="M15 15l1-1"/>
+                                <path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z"/>
+                                <path d="m8 19-2 3"/>
+                                <path d="m16 19 2 3"/>
+                            </svg>
+                            <span>Treno</span>
+                        </button>
+                        <button type="button" class="dist-mode-btn"
+                                data-mode="plane" aria-pressed="false">
+                            <svg viewBox="0 0 24 24" width="20" height="20"
+                                 fill="none" stroke="currentColor"
+                                 stroke-width="1.8" stroke-linecap="round"
+                                 stroke-linejoin="round" aria-hidden="true">
+                                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+                            </svg>
+                            <span>Aereo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dist-result" id="dist-result">
+                    <div class="dist-result-km" id="dist-km">—</div>
+                    <div class="dist-result-time" id="dist-time">Seleziona destinazione</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Leaflet JS (CDN ufficiale) -->

@@ -976,6 +976,20 @@ button { font-family: inherit; }
     margin-left: 1px;
 }
 
+/* Scale icone (rating fiamme + affollamento omini): 5 span piccoli
+   allineati, i primi N in colore attivo, i restanti in grigio spento. */
+.fire-on, .fire-off,
+.crowd-on, .crowd-off {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 1px;
+    vertical-align: middle;
+}
+.fire-on  { color: #e0641a; }        /* arancione fuoco */
+.fire-off { color: var(--color-border); }
+.crowd-on  { color: var(--color-text); }
+.crowd-off { color: var(--color-border); }
+
 .maps-btn {
     display: inline-flex;
     align-items: center;
@@ -1002,6 +1016,220 @@ button { font-family: inherit; }
 }
 .maps-btn svg {
     flex-shrink: 0;
+}
+
+/* Pulsante secondario "Calcola distanza" — pill grigia-crema. */
+.dist-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    margin-top: 6px;
+    padding: 8px 14px;
+    background: var(--color-surface-alt);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background   .15s var(--ease-out),
+        border-color .15s var(--ease-out),
+        transform    .15s var(--ease-out);
+}
+.dist-btn:hover {
+    background: var(--color-surface);
+    border-color: var(--color-accent-soft);
+    transform: translateY(-1px);
+}
+.dist-btn svg {
+    flex-shrink: 0;
+    color: var(--color-accent);
+}
+
+/* ---------- Modale "Calcola distanza" ------------------------ */
+.dist-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+}
+.dist-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 18, 15, 0.35);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    animation: distFadeIn .2s ease-out;
+}
+.dist-modal-card {
+    position: relative;
+    width: min(460px, calc(100vw - 32px));
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.22),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 22px 24px 26px;
+    animation: distPopIn .25s cubic-bezier(0.2, 0.9, 0.35, 1);
+}
+@keyframes distFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes distPopIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+.dist-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.dist-modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.dist-modal-close {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition:
+        background .15s var(--ease-out),
+        color      .15s var(--ease-out),
+        transform  .2s var(--ease-out);
+}
+.dist-modal-close:hover {
+    background: var(--color-accent);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.dist-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.dist-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.dist-label {
+    flex: 0 0 42px;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+}
+.dist-from {
+    flex: 1 1 auto;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+.dist-to-wrap {
+    flex: 1 1 auto;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.dist-select {
+    flex: 1 1 100px;
+    min-width: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: border-color .15s var(--ease-out);
+}
+.dist-select:hover  { border-color: var(--color-accent-soft); }
+.dist-select:focus  { outline: none; border-color: var(--color-accent); }
+
+.dist-modes {
+    display: flex;
+    gap: 6px;
+    flex: 1 1 auto;
+}
+.dist-mode-btn {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 6px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background   .15s var(--ease-out),
+        border-color .15s var(--ease-out),
+        color        .15s var(--ease-out);
+}
+.dist-mode-btn:hover {
+    background: var(--color-surface-alt);
+    color: var(--color-text);
+}
+.dist-mode-btn.is-active {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.dist-result {
+    margin-top: 6px;
+    padding: 18px 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+.dist-result-km {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+.dist-result-time {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+@media (max-width: 500px) {
+    .dist-modal-card { padding: 18px 18px 22px; }
+    .dist-label      { flex-basis: 36px; font-size: 11px; }
+    .dist-modes      { flex-wrap: wrap; }
+    .dist-mode-btn   { min-width: 30%; }
+    .dist-result-km  { font-size: 24px; }
 }
 
 .poi-list-wrapper {
