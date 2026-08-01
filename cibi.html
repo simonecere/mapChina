@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viaggio in Cina — Cibi</title>
+
+    <!-- PWA metadata -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#c8332a" />
+    <link rel="apple-touch-icon" href="icons/app-icon-180.png" />
+    <link rel="icon" href="icons/app-icon-192.png" type="image/png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Cina 2027" />
+
+    <!-- Font Inter da Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- Foglio di stile condiviso -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-doc">
+
+    <!-- Mount point del menu di navigazione condiviso -->
+    <div id="menu-mount"></div>
+
+    <!-- =========================================================
+         Cibi: catalogo dei piatti tipici da provare.
+         Grid di dish-card, ciascuna con carousel foto orizzontale
+         (scroll-snap CSS-only), regione, nome, descrizione breve.
+    ========================================================== -->
+    <main class="doc">
+        <header class="doc-header">
+            <h1 class="doc-title">Cibi</h1>
+            <p class="doc-subtitle">
+                Che te sgargarozzi fratè?
+            </p>
+        </header>
+
+        <section class="dish-grid">
+
+            <!-- Piatto: Anatra alla pechinese -->
+            <article class="dish-card">
+                <div class="dish-gallery">
+                    <div class="dish-track">
+                        <div class="dish-slide">
+                            <img loading="lazy" alt="Anatra alla pechinese"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Peking_Duck_2.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-body">
+                    <span class="dish-region">Pechino</span>
+                    <h3 class="dish-name">Anatra alla pechinese</h3>
+                    <p class="dish-desc">
+                        Anatra intera cotta in forno chiuso, pelle laccata e croccante.
+                        Servita a fette con crêpes sottili, cipollotto, cetriolo e salsa
+                        hoisin. Piatto imperiale della cucina della capitale.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Piatto: Xiaolongbao -->
+            <article class="dish-card">
+                <div class="dish-gallery">
+                    <div class="dish-track">
+                        <div class="dish-slide">
+                            <img loading="lazy" alt="Xiaolongbao"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/8/80/Xiaolongbao-Wiki.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-body">
+                    <span class="dish-region">Shanghai</span>
+                    <h3 class="dish-name">Xiaolongbao</h3>
+                    <p class="dish-desc">
+                        Ravioli al vapore ripieni di carne e brodo. Si mangiano
+                        praticando un piccolo buco per bere il brodo, poi il resto in
+                        un boccone. Simbolo della cucina jiangnan.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Piatto: Hotpot -->
+            <article class="dish-card">
+                <div class="dish-gallery">
+                    <div class="dish-track">
+                        <div class="dish-slide">
+                            <img loading="lazy" alt="Hotpot Sichuan"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Sichuan_hotpot.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-body">
+                    <span class="dish-region">Chongqing / Sichuan</span>
+                    <h3 class="dish-name">Hotpot</h3>
+                    <p class="dish-desc">
+                        Pentola bollente al centro tavola in cui immergere carne, pesce,
+                        verdure, funghi, tofu. La versione Sichuan è famosa per il brodo
+                        piccante al peperoncino e pepe di Sichuan (la lingua "vibra").
+                    </p>
+                </div>
+            </article>
+
+            <!-- Piatto: Mapo Tofu -->
+            <article class="dish-card">
+                <div class="dish-gallery">
+                    <div class="dish-track">
+                        <div class="dish-slide">
+                            <img loading="lazy" alt="Mapo Tofu"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Ma_Po_Doufu_%281%29.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-body">
+                    <span class="dish-region">Sichuan</span>
+                    <h3 class="dish-name">Mapo Tofu</h3>
+                    <p class="dish-desc">
+                        Tofu in salsa piccante di doubanjiang (pasta di fagioli
+                        fermentati) e pepe di Sichuan, con carne macinata di maiale o
+                        manzo. Piccante ma non aggressivo — piatto simbolo di Chengdu.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Piatto: Biang Biang Noodles -->
+            <article class="dish-card">
+                <div class="dish-gallery">
+                    <div class="dish-track">
+                        <div class="dish-slide">
+                            <img loading="lazy" alt="Biang Biang Noodles"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/7/74/Biangbiang_Mian.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-body">
+                    <span class="dish-region">Xi'an</span>
+                    <h3 class="dish-name">Biang Biang Noodles</h3>
+                    <p class="dish-desc">
+                        Noodles larghi come cinture di pasta, tirati a mano. Il nome
+                        arriva dal suono che fanno battuti sul tavolo durante la
+                        preparazione. Serviti con salsa piccante, aceto, cipollotto.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Piatto: Jianbing -->
+            <article class="dish-card">
+                <div class="dish-gallery">
+                    <div class="dish-track">
+                        <div class="dish-slide">
+                            <img loading="lazy" alt="Jianbing"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Jianbing_making_at_market.jpg" />
+                        </div>
+                    </div>
+                </div>
+                <div class="dish-body">
+                    <span class="dish-region">Nord Cina</span>
+                    <h3 class="dish-name">Jianbing</h3>
+                    <p class="dish-desc">
+                        Crêpe salata da strada, preparata al momento su piastra tonda.
+                        Uovo, cipollotti, salsa hoisin, coriandolo, cracker croccante
+                        dentro. Colazione classica dei pendolari cinesi.
+                    </p>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Menu di navigazione condiviso -->
+    <script src="menu.js"></script>
+</body>
+</html>

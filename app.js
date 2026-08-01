@@ -49,8 +49,8 @@ const POI_DATA = [
             "Capitale della Repubblica Popolare Cinese, oltre 21 milioni " +
             "di abitanti. Base logica per i monumenti imperiali (Città " +
             "Proibita, Tempio del Cielo) e per la Grande Muraglia.",
-        tags: ['Città', 'Capitale', 'Imperiale', 'Hub'],
-        image: 'https://loremflickr.com/800/500/beijing,china?lock=1',
+        tags: ['Città', 'Capitale', 'Imperiale'],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590756/citta-pechino1_ulw2tc.jpg',
     },
     {
         id: 'forbidden-city',
@@ -64,40 +64,12 @@ const POI_DATA = [
             "politico della Cina per quasi cinque secoli. Ospita il " +
             "Museo del Palazzo con oltre un milione di reperti.",
         tags: ['Monumento', 'UNESCO', 'Storia', 'Architettura'],
-        image: 'https://loremflickr.com/800/500/forbidden-city,beijing?lock=1',
+        images: [
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593148/mon-PEKcitProibita1_ior41e.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593150/mon-PEKcitProibita2_u9emaw.jpg'
+        ],
         bestTime: 'Apr-Mag / Set-Ott',
-        openingDays: 'Mar-Dom 8:30-17:00',
-        priceLevel: 2
-    },
-    {
-        id: 'wangfujing-example',
-        name: 'Wangfujing Street',
-        city: 'Pechino — Dongcheng',
-        category: 'shopping',
-        coords: [39.9127, 116.4103],
-        zoom: 16,
-        description:
-            "Principale via commerciale pedonale di Pechino. Grandi " +
-            "magazzini (APM, Dongan Plaza), Snack Street con street food, " +
-            "librerie internazionali. Ottima per una serata a piedi.",
-        tags: ['Shopping', 'Pedonale', 'Snack Street', 'Turistico'],
-        image: 'https://loremflickr.com/800/500/wangfujing,beijing,street?lock=1'
-    },
-    {
-        id: 'hotel-example',
-        name: 'Rosewood Beijing',
-        city: 'Pechino — CBD',
-        category: 'hotel',
-        coords: [39.9264, 116.4534],
-        zoom: 16,
-        description:
-            "Hotel 5 stelle nel quartiere finanziario di Pechino. " +
-            "283 camere, spa, ristorante fine dining. Base comoda per " +
-            "muoversi verso i monumenti imperiali con la metro.",
-        tags: ['Hotel', '5 stelle', 'CBD', 'Lusso'],
-        image: 'https://loremflickr.com/800/500/hotel,luxury,beijing?lock=1',
-        checkIn: 'Dal 15:00',
-        checkOut: 'Fino a 12:00'
+        openingDays: 'Mar-Dom 8:30-17:00'
     },
     {
         id: 'pek-airport',
@@ -115,42 +87,9 @@ const POI_DATA = [
         iata: 'PEK',
         openingDays: 'Aperto 24/7'
     },
-    {
-        id: 'beijing-south-station',
-        name: 'Stazione di Pechino Sud',
-        city: 'Beijingnan Zhan',
-        category: 'station',
-        coords: [39.8654, 116.3785],
-        zoom: 15,
-        description:
-            "Terminal high-speed a sud di Pechino. Treni CRH per " +
-            "Shanghai (~4h30), Tianjin (~30 min), Nanjing (~3h30). " +
-            "Servita dalle linee metro 4, 14 e 16.",
-        tags: ['Stazione', 'CRH', 'High-Speed'],
-        image: 'https://loremflickr.com/800/500/train-station,beijing?lock=1',
-        lines: 'CRH · Beijing-Shanghai HSR',
-        openingDays: 'Aperto 24/7'
-    },
+
 
     /*=======================   CIBO+ PEK =============================*/
-    {
-        id: 'peking-duck-example',
-        name: "Anatra alla Pechinese",
-        city: 'Pechino',
-        category: 'food',
-        coords: [39.91834631837488, 116.40887272446551],
-        zoom: 16,
-        description:
-            "Ristorante specializzato in anatra laccata alla pechinese. " +
-            "Il piatto tipico è servito con crêpes sottili, cipollotto, " +
-            "cetriolo e salsa hoisin. Il link Google Maps qui sotto porta " +
-            "alla scheda del locale con orari, foto e recensioni aggiornate.",
-        tags: ['Cibo', 'Anatra Laccata', 'Cucina Pechinese'],
-        image: 'https://loremflickr.com/800/500/peking-duck,beijing?lock=1',
-        mapsUrl: 'https://maps.app.goo.gl/DX4NHXTZTTDbyu7C8',
-        bestTime: 'Prenotazione consigliata'
-    },
-
 
 
 
@@ -169,7 +108,7 @@ const POI_DATA = [
             "Contrasto tra il lungofiume storico (The Bund) e lo skyline " +
             "futurista di Pudong. Ottima cucina cantonese/shanghaiese.",
         tags: ['Città', 'Skyline', 'Finanza', 'Cucina'],
-        image: 'https://loremflickr.com/800/500/shanghai,skyline,pudong?lock=1',
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-shanghai1_jqzhib.jpg',
     },
     {
         id: 'SHA-bund',
@@ -187,11 +126,7 @@ const POI_DATA = [
             "(Pudong) sulla sponda opposta. Uno dei simboli più iconici di " +
             "Shanghai.",
         tags: ['Monumento', 'Lungofiume', 'Skyline', 'Stili misti'],
-        images: [
-            'https://upload.wikimedia.org/wikipedia/commons/6/64/The_Bund_at_Night.png',
-            'https://upload.wikimedia.org/wikipedia/commons/b/bc/The_Bund_at_night.jpg',
-            'https://upload.wikimedia.org/wikipedia/commons/4/4f/The_Bund%2C_Shanghai%2C_1.jpg'
-        ],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593151/mon-SHAbund1_sxl0uf.jpg',
         mapsUrl: 'https://maps.app.goo.gl/D2CR392UTzYdisNy5',
         openingDays: 'Aperto 24/7',
         customMeta: [
@@ -213,7 +148,8 @@ const POI_DATA = [
             "più raffinati di architettura tradizionale cinese.",
         tags: ['Natura', 'Giardino', 'Ming', 'Old City'],
         images: [
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Shanghai_-_Yu_Garden_-_0035.jpg/800px-Shanghai_-_Yu_Garden_-_0035.jpg'
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593173/nat-SHAyuGarden1_p1adbt.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593174/nat-SHAyuGarden2_wwnl8t.webp'
         ],
         mapsUrl: 'https://maps.app.goo.gl/ZXK5fRwXx5g1bYyg8',
         openingDays: 'Mar-Dom 9:00-16:00',
@@ -236,9 +172,7 @@ const POI_DATA = [
             "Street food (in particolare xiaolongbao), sale da tè storiche " +
             "e botteghe di artigianato tradizionale.",
         tags: ['Shopping', 'Street', 'Street food', 'Souvenir', 'Artigiani'],
-        images: [
-            'https://upload.wikimedia.org/wikipedia/commons/2/29/Yuyuan_street_%283989857894%29.jpg'
-        ],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593191/sho-SHAyuyuanSt1_edtat1.avif',
         mapsUrl: 'https://maps.app.goo.gl/KGqqXPQHGch9Bykw7',
         openingDays: 'Aperto 24/7',
         rating: 3,
@@ -273,7 +207,10 @@ const POI_DATA = [
             "palazzi Joseon (Gyeongbokgung), quartieri commerciali " +
             "(Myeongdong, Gangnam) e cultura pop coreana.",
         tags: ['Città', 'Corea', 'K-Pop', 'Cucina'],
-        image: 'https://loremflickr.com/800/500/seoul,korea,skyline?lock=1',
+        images: [
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-seul1_jepy7u.png',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-seul2_jjzoo6.jpg'
+        ]
     },
 
 
@@ -298,7 +235,10 @@ const POI_DATA = [
             "della Via della Seta. Mura Ming ancora intatte e quartiere " +
             "musulmano storico. Vicino all'Esercito di Terracotta.",
         tags: ['Città', 'Via della Seta', 'Storia', 'Cucina Hui'],
-        image: 'https://loremflickr.com/800/500/xian,china,bell-tower?lock=1',
+        images: [
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-xian1_uy9dzt.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-xian2_pvrlz7.webp'
+        ]
     },
     {
         id: 'terracotta-army',
@@ -313,7 +253,7 @@ const POI_DATA = [
             "ciascuna con tratti distinti. Scoperto nel 1974 da " +
             "contadini che scavavano un pozzo.",
         tags: ['Monumento', 'UNESCO', 'Archeologia', 'Storia'],
-        image: 'https://loremflickr.com/800/500/terracotta-army,xian?lock=1',
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593151/mon-XIAesercitoTer1_ayplnb.jpg',
         bestTime: 'Mar-Mag / Set-Nov',
         openingDays: 'Ogni giorno 8:30-17:30',
         priceLevel: 3
@@ -340,23 +280,11 @@ const POI_DATA = [
             "giganti. Ritmo più rilassato rispetto alle megalopoli " +
             "costiere. Case da tè, vicoli e mercati.",
         tags: ['Città', 'Cucina Sichuan', 'Panda', 'Slow'],
-        image: 'https://loremflickr.com/800/500/chengdu,sichuan?lock=1',
-    },
-    {
-        id: 'chengdu-panda',
-        name: 'Base di Ricerca dei Panda',
-        city: 'Chengdu',
-        category: 'nature',
-        coords: [30.7333, 104.1500],
-        zoom: 14,
-        description:
-            "Centro di conservazione del panda gigante e del panda " +
-            "rosso, fondato nel 1987. Su una collina boscosa a nord " +
-            "di Chengdu, con recinti che riproducono l'habitat naturale.",
-        tags: ['Natura', 'Fauna', 'Conservazione'],
-        image: 'https://loremflickr.com/800/500/panda,chengdu?lock=1',
-        openingDays: 'Ogni giorno 7:30-18:00',
-        priceLevel: 2,
+        images: [
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-chengdu1_wnri87.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-chengdu2_kaastq.jpg'
+        ]
+
     },
 
 
@@ -380,7 +308,10 @@ const POI_DATA = [
             "Grattacieli, scale infinite, monorotaia che attraversa " +
             "edifici. Patria dell'hotpot piccante.",
         tags: ['Città', 'Megalopoli', 'Hotpot', 'Yangtze'],
-        image: 'https://loremflickr.com/800/500/chongqing,skyline,china?lock=1',
+        images: [
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-chongqing1_mmmvuh.webp',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590755/citta-chongqing2_gyofdb.jpg'
+        ]
     },
 
     /*=======================   CIBO+ CHON =============================*/
@@ -407,27 +338,27 @@ const POI_DATA = [
             "paralleli, torri, forti e passi. Le sezioni sotto sono " +
             "le più significative da visitare.",
         tags: ['Monumento', 'UNESCO', 'Ming', 'Difesa'],
-        image: 'https://loremflickr.com/800/500/great-wall-of-china?lock=1',
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593156/mon-ALTmuraglia1_c4fbxh.jpg',
         bestTime: 'Mag-Giu / Set-Ott',
         openingDays: 'Ogni giorno (varia per sezione)',
         priceLevel: 2,
         overlay: {
 
             polyline: [
-                [39.9628, 119.7972], 
-                [40.4297, 118.4820], 
-                [40.6795, 117.2439], 
-                [40.6845, 117.1660], 
-                [40.4319, 116.5704], 
-                [40.3564, 116.0166], 
-                [40.0918, 113.2947], 
-                [38.9998, 111.7028], 
-                [38.2854, 109.7341], 
-                [38.4872, 106.2309], 
-                [37.5171, 105.1898], 
-                [37.9299, 102.6407], 
-                [38.9333, 100.4517], 
-                [39.8018, 98.2896]   
+                [39.9628, 119.7972],
+                [40.4297, 118.4820],
+                [40.6795, 117.2439],
+                [40.6845, 117.1660],
+                [40.4319, 116.5704],
+                [40.3564, 116.0166],
+                [40.0918, 113.2947],
+                [38.9998, 111.7028],
+                [38.2854, 109.7341],
+                [38.4872, 106.2309],
+                [37.5171, 105.1898],
+                [37.9299, 102.6407],
+                [38.9333, 100.4517],
+                [39.8018, 98.2896]
             ],
             sections: [
                 {
@@ -442,7 +373,7 @@ const POI_DATA = [
                         "nel mare — unico tratto della Muraglia che tocca " +
                         "l'acqua.",
                     tags: ['Muraglia', 'Estremità Est', 'Costa', 'Ming'],
-                    image: 'https://loremflickr.com/800/500/shanhaiguan,great-wall?lock=1',
+                    image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593147/mon-MURshanhaiguan1_ury1af.jpg',
                     hint: "L'estremo est, sul mare"
                 },
                 {
@@ -457,7 +388,7 @@ const POI_DATA = [
                         "l'aspetto originale. Trekking classico di 10 km " +
                         "fino a Simatai.",
                     tags: ['Muraglia', 'Trekking', 'Poco affollato', 'Ming'],
-                    image: 'https://loremflickr.com/800/500/jinshanling,great-wall?lock=1',
+                    image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593156/mon-MURjinshanling1_kc9zdk.jpg',
                     hint: 'Il tratto più fotografato'
                 },
                 {
@@ -472,7 +403,10 @@ const POI_DATA = [
                         "notte. Adiacente al borgo turistico ricostruito " +
                         "di Gubei Water Town.",
                     tags: ['Muraglia', 'Selvaggio', 'Aperto di notte'],
-                    image: 'https://loremflickr.com/800/500/simatai,great-wall?lock=1',
+                    images: [
+                        'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593148/mon-MURsimatai1_n5m0pt.jpg',
+                        'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593147/mon-MURsimitai2_vud8tk.jpg'
+                    ],
                     hint: 'Visitabile anche di notte'
                 },
                 {
@@ -487,7 +421,7 @@ const POI_DATA = [
                         "per la discesa. Ottimo compromesso tra accessibilità " +
                         "e atmosfera.",
                     tags: ['Muraglia', 'Restaurato', 'Facile accesso'],
-                    image: 'https://loremflickr.com/800/500/mutianyu,great-wall?lock=1',
+                    image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593147/mon-MURmutianyu1_qomkdz.jpg',
                     hint: 'La scelta più bilanciata'
                 },
                 {
@@ -502,7 +436,7 @@ const POI_DATA = [
                         "completo negli anni '50. Utile se hai poco tempo, " +
                         "ma aspettati folle.",
                     tags: ['Muraglia', 'Treno diretto', 'Affollato'],
-                    image: 'https://loremflickr.com/800/500/badaling,great-wall?lock=1',
+                    image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593152/mon-MURbadaling1_ae2kyy.jpg',
                     hint: 'Il più accessibile da Pechino'
                 },
                 {
@@ -517,30 +451,14 @@ const POI_DATA = [
                         "Gobi. Storicamente ultimo posto di frontiera " +
                         "dell'impero verso la Via della Seta.",
                     tags: ['Muraglia', 'Estremità Ovest', 'Via della Seta', 'Deserto'],
-                    image: 'https://loremflickr.com/800/500/jiayuguan,fortress?lock=1',
+                    image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593153/mon-MURjiayuguan1_fqozs8.webp',
                     hint: "L'estremo ovest, nel deserto"
                 }
             ]
         }
-    },
-
-
-    {
-        id: 'li-river',
-        name: 'Fiume Li',
-        city: 'Guilin — Yangshuo',
-        category: 'nature',
-        coords: [24.7619, 110.4859],
-        zoom: 11,
-        description:
-            "Tratto fluviale di ~83 km tra Guilin e Yangshuo, celebre " +
-            "per i pinnacoli carsici e i villaggi di pescatori. Il " +
-            "paesaggio compare sul retro della banconota da 20 yuan.",
-        tags: ['Natura', 'Crociera', 'Paesaggio'],
-        image: 'https://loremflickr.com/800/500/li-river,guilin,karst?lock=1',
-        bestTime: 'Apr-Ott'
-    },
+    }
 ];
+
 
 /* ------------------------------------------------------------------
    2) TASSONOMIA CATEGORIE
@@ -1133,7 +1051,7 @@ function buildMetaHtml(poi) {
 
     /* priceLevel (simboli €€€) riservato ai POI food: sui ristoranti
        il prezzo esatto non ha senso, i simboli comunicano la fascia. */
-    if (poi.priceLevel && poi.category === 'food' || 'shopping') {
+    if (poi.priceLevel && (poi.category === 'food' || poi.category === 'shopping')) {
         rows.push(metaRow('Costo', renderPriceLevel(poi.priceLevel)));
     }
     /* freeEntry: booleano. Se true, mostra "Gratuito". Alternativa
