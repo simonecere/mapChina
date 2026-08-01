@@ -176,6 +176,9 @@ const POI_DATA = [
         mapsUrl: 'https://maps.app.goo.gl/KGqqXPQHGch9Bykw7',
         openingDays: 'Aperto 24/7',
         rating: 3,
+        freeEntry: true,
+        priceLevel: 4,
+        crowdLevel: 3,
         customMeta: [
             { label: 'Negozi',          value: '~8:30-22:30' },
             { label: 'Meglio visitare', value: 'Di sera con le luci accese' }
