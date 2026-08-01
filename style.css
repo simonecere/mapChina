@@ -49,7 +49,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    min-height: 100%;
     background: var(--color-bg);
     color: var(--color-text);
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -491,7 +491,15 @@ button { font-family: inherit; }
 
 @media (max-width: 600px) {
     .page-doc  { padding: 72px 12px 40px; }
-    .page-home { padding: 72px 16px 32px; }
+    /* Su mobile la home ha 3 card impilate + titolo: la somma è
+       più alta del viewport. Servono padding minori e allineamento
+       in alto invece che centrato (altrimenti il contenuto "sfora"
+       centrato e la parte alta esce dallo schermo). */
+    .page-home {
+        padding: 32px 16px 32px;
+        align-items: flex-start;
+    }
+    .home-header { margin-bottom: 28px; }
     .doc-section { padding: 20px 18px; }
     .home-card   { padding: 22px 20px; }
 }
