@@ -83,7 +83,7 @@ const POI_DATA = [
             "Tre terminal (T1/T2/T3). Airport Express in metro fino al " +
             "centro in ~25 min, taxi ~45 min.",
         tags: ['Aeroporto', 'Hub', 'Air China'],
-        image: 'https://loremflickr.com/800/500/airport,beijing,pek?lock=1',
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785595388/ser-PEKairportPEK1_nxn5t0.jpg',
         iata: 'PEK',
         openingDays: 'Aperto 24/7'
     },
