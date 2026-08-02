@@ -57,7 +57,7 @@ const POI_DATA = [
         name: 'Città Proibita',
         city: 'Pechino',
         category: 'monument',
-        coords: [39.9163, 116.3972],
+        coords: [39.917024511195464, 116.39707721086508],
         zoom: 15,
         description:
             "Complesso imperiale delle dinastie Ming e Qing, cuore " +
@@ -71,23 +71,6 @@ const POI_DATA = [
         bestTime: 'Apr-Mag / Set-Ott',
         openingDays: 'Mar-Dom 8:30-17:00'
     },
-    {
-        id: 'pek-airport',
-        name: 'Aeroporto Internazionale Capital',
-        city: 'Pechino — PEK',
-        category: 'airport',
-        coords: [40.0801, 116.5846],
-        zoom: 12,
-        description:
-            "Principale aeroporto di Pechino, hub di Air China. " +
-            "Tre terminal (T1/T2/T3). Airport Express in metro fino al " +
-            "centro in ~25 min, taxi ~45 min.",
-        tags: ['Aeroporto', 'Hub', 'Air China'],
-        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785595388/ser-PEKairportPEK1_nxn5t0.jpg',
-        iata: 'PEK',
-        openingDays: 'Aperto 24/7'
-    },
-
 
     /*=======================   CIBO+ PEK =============================*/
 
@@ -176,13 +159,86 @@ const POI_DATA = [
         mapsUrl: 'https://maps.app.goo.gl/KGqqXPQHGch9Bykw7',
         openingDays: 'Aperto 24/7',
         rating: 3,
-        freeEntry: true,
-        priceLevel: 4,
-        crowdLevel: 3,
         customMeta: [
             { label: 'Negozi',          value: '~8:30-22:30' },
             { label: 'Meglio visitare', value: 'Di sera con le luci accese' }
         ]
+    },
+    {
+        id: 'oriental-pearl-tower',
+        name: 'Oriental Pearl Tower',
+        city: 'Shanghai',
+        category: 'monument',
+        coords: [31.23981191062612, 121.49976793662005],
+        zoom: 15,
+        description: "Iconica torre della televisione situata nel distretto di " +
+        "Pudong, alta 468 metri e famosa per le sue 11 sfere di varie " +
+                "dimensioni. Tra le sue attrazioni principali offre un ponte di " +
+            "osservazione con pavimento trasparente in vetro a 259 metri d'altezza " +
+            "e un ristorante girevole panoramico. Uno dei simboli più riconosciuti " +
+            "dello skyline futuristico di Shanghai.",
+        tags: ["Monumenti", "Tesla 4 elisir", "Skyline"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785673756/mon-oriPearlTow1_gmygyi.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/Wn2J6XKAbLFf2CJXA',
+        ticketPrice: '200 ¥ (~26 € - 28 €)',
+        openingDays: 'Ogni giorno 8:30-21:00'
+    },
+    {
+        id: 'nanjing-road',
+        name: 'Nanjing Road',
+        city: 'Shanghai',
+        category: 'shopping',
+        coords: [31.235977642166063, 121.47969485765319],
+        zoom: 15,
+        description: "Il celebre viale pedonale dello shopping e dello " +
+            "struscio nel cuore di Shanghai, che si estende per oltre 5 " +
+            "chilometri da Piazza del Popolo fino al Bund. Un vivace " +
+            "contrasto visivo tra storici edifici coloniali, facciate " +
+            "illuminate da megaschermi al neon, marchi internazionali e " +
+            "storici negozi cinesi, animato giorno e notte da milioni " +
+            "di visitatori.",
+        tags: ["Shopping", "Centro storico", "Alti marchi"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785673770/sho-nanjing1_t4ishz.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785673772/sho-nanjing2_l3i565.webp'],
+        mapsUrl: 'https://maps.app.goo.gl/ZDFwzjgV2FJGwJAcA',
+    },
+    {
+        id: '1000-trees',
+        name: '1000 Trees',
+        city: 'Shanghai',
+        category: 'shopping',
+        coords: [31.24965636705894, 121.44707942659562],
+        zoom: 15,
+        description: "Straordinario complesso architettonico a Shanghai progettato " +
+            "dall'architetto Thomas Heatherwick lungo il Suzhou Creek, " +
+            "vicino al quartiere d'arte M50. Noto anche come Tian An 1000 Trees, " +
+            "l'edificio si sviluppa come una montagna artificiale terrazzata, " +
+            "coperta da migliaia di alberi e piante che fondono natura e " +
+            "design urbano all'avanguardia.",
+        tags: ["Shopping", "Centro commerciale"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785673774/sho-trees1_lezakb.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785673771/sho-trees2_r861u4.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/3JottyDkjGRMGYEw6',
+        crowdLevel: 1
+    },
+    {
+        id: 'tianzifang',
+        name: 'Tianzifang',
+        city: 'Shanghai',
+        category: 'shopping',
+        coords: [31.20896796976884, 121.46893018293333],
+        zoom: 15,
+        description: "Caratteristico quartiere artistico nato dalla riqualificazione " +
+            "di tradizionali vicoli ed edifici Shikumen nella Concessione " +
+            "Francese. Un labirinto pedonale ricco di boutique artigianali, " +
+            "gallerie d'arte, bar e caffetterie all'aperto, famoso per aver " +
+            "conservato un'atmosfera intima e bohémien nel cuore della " +
+            "moderna Shanghai.",
+        tags: ["Shopping", "Caratteristico", "Città vecchia", "Souvenir"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785673773/sho-tianzifang1_jo9ypj.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785673772/sho-tianzifang2_nwlyxp.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/Br11JcJmvbQunkZg6',
+        crowdLevel: 3,
     },
 
 
@@ -522,6 +578,7 @@ const POI_DATA = [
     'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666263/nat-zhangjiajie2_v9x0ul.webp'],
     mapsUrl: 'https://maps.app.goo.gl/j45KkgQgoneQkK4u5',
     ticketPrice: '225-239 ¥ (~29-36 €) valido 4 giorni + bus interni inclusi',
+    openingDays: 'Ogni giorno 7:00-17:00',
     visitDuration: '1 giorno in fast, 2 con più calma (consigliato)',
     customMeta: [
         { label: 'Ascensore Bailong',       value: '326m in 88s - 65 ¥ (~8,50 €)' },
@@ -547,8 +604,254 @@ const POI_DATA = [
     'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-tianmenPorta1_iqm8fl.webp'],
     mapsUrl: 'https://maps.app.goo.gl/GQeN8KezcWUeMyfE9',
     ticketPrice: 'All-Inclusive 278 ¥ (~36 €), comprende bus interni, cheat scala mobile per i gradini e una seggiovia',
+    openingDays: 'Ogni giorno ~7:30-18:30',
     visitDuration: '4-5 ore',
-}
+},
+
+
+    /* ------------------------------------------------------------------
+                          --- AEROPORTI PRINCIPALI ---
+    ------------------------------------------------------------------ */
+
+    {
+        id: 'pkx-airport',
+        name: 'Aeroporto di Pechino Daxing',
+        city: 'Pechino — PKX',
+        category: 'airport',
+        coords: [39.5098, 116.4106],
+        zoom: 12,
+        description:
+            "Aeroporto inaugurato nel 2019, iconico terminal a stella " +
+            "progettato da Zaha Hadid. Hub in crescita per i voli " +
+            "internazionali, in complemento a PEK.",
+        tags: ['Aeroporto', 'Nuovo', 'Zaha Hadid'],
+        iata: 'PKX',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~55-75 min · ~180 ¥ · 46 km' },
+            { label: 'Mezzi pubblici', value: 'Daxing Airport Express metro · ~30 min al centro' }
+        ]
+    },
+
+    {
+        id: 'pvg-airport',
+        name: 'Aeroporto Internazionale Pudong',
+        city: 'Shanghai — PVG',
+        category: 'airport',
+        coords: [31.1443, 121.8083],
+        zoom: 12,
+        description:
+            "Principale aeroporto internazionale di Shanghai, sull'estremità " +
+            "orientale di Pudong. Hub per China Eastern, la maggior parte " +
+            "dei voli intercontinentali passa da qui.",
+        tags: ['Aeroporto', 'Hub', 'International'],
+        iata: 'PVG',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~50-70 min · ~200 ¥ · 32 km' },
+            { label: 'Mezzi pubblici', value: 'Maglev 7 min a Longyang + metro L2 · totale ~40 min · oppure metro L2 diretta ~55 min' }
+        ]
+    },
+
+    {
+        id: 'sha-airport',
+        name: 'Aeroporto Hongqiao',
+        city: 'Shanghai — SHA',
+        category: 'airport',
+        coords: [31.1979, 121.3363],
+        zoom: 13,
+        description:
+            "Aeroporto domestico principale + alcuni voli internazionali " +
+            "brevi (Corea, Giappone, Taiwan). Adiacente alla stazione HSR " +
+            "Hongqiao. Vicino al centro, molto comodo.",
+        tags: ['Aeroporto', 'Domestico', 'HSR-Hub'],
+        iata: 'SHA',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~25-35 min · ~80 ¥ · 13 km' },
+            { label: 'Mezzi pubblici', value: 'Metro L2 / L10 · ~30 min al centro' }
+        ]
+    },
+
+    {
+        id: 'icn-airport',
+        name: 'Aeroporto Internazionale Incheon',
+        city: 'Seul — ICN',
+        category: 'airport',
+        coords: [37.4602, 126.4407],
+        zoom: 12,
+        description:
+            "Principale hub della Corea del Sud, su un'isola artificiale " +
+            "a ovest di Seul. Costantemente premiato come uno dei " +
+            "migliori aeroporti al mondo per servizi e pulizia.",
+        tags: ['Aeroporto', 'Hub', 'Premiato'],
+        iata: 'ICN',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~60-80 min · ~55.000-70.000 KRW · 52 km' },
+            { label: 'Mezzi pubblici', value: 'AREX Express · 43 min a Seoul Station · ~9.000 KRW' }
+        ]
+    },
+
+    {
+        id: 'gmp-airport',
+        name: 'Aeroporto di Gimpo',
+        city: 'Seul — GMP',
+        category: 'airport',
+        coords: [37.5583, 126.7906],
+        zoom: 13,
+        description:
+            "Aeroporto secondario di Seul, vicino al centro. Voli " +
+            "domestici + alcuni shuttle internazionali brevi verso " +
+            "Tokyo-Haneda, Osaka, Shanghai-Hongqiao, Pechino, Taipei.",
+        tags: ['Aeroporto', 'Domestico', 'Shuttle'],
+        iata: 'GMP',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~25-35 min · ~25.000 KRW · 18 km' },
+            { label: 'Mezzi pubblici', value: 'Metro L5 / L9 · ~35-45 min al centro' }
+        ]
+    },
+
+    {
+        id: 'xiy-airport',
+        name: 'Aeroporto Internazionale Xianyang',
+        city: 'Xi\'an — XIY',
+        category: 'airport',
+        coords: [34.4436, 108.7519],
+        zoom: 12,
+        description:
+            "Unico grande aeroporto della zona di Xi'an, hub secondario " +
+            "di China Eastern. Voli domestici capillari + rotte " +
+            "internazionali su Bangkok, Seoul, Osaka.",
+        tags: ['Aeroporto', 'Hub'],
+        iata: 'XIY',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~50-70 min · ~120 ¥ · 40 km' },
+            { label: 'Mezzi pubblici', value: 'Metro L14 · ~40 min · oppure bus Airport Line 2 · ~50 min' }
+        ]
+    },
+
+    {
+        id: 'ctu-airport',
+        name: 'Aeroporto Shuangliu',
+        city: 'Chengdu — CTU',
+        category: 'airport',
+        coords: [30.5785, 103.9471],
+        zoom: 13,
+        description:
+            "Storico aeroporto principale di Chengdu, hub di Sichuan " +
+            "Airlines. Molto vicino al centro. Voli domestici + " +
+            "internazionali, anche se molti si stanno spostando su TFU.",
+        tags: ['Aeroporto', 'Hub'],
+        iata: 'CTU',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~30-45 min · ~80 ¥ · 16 km' },
+            { label: 'Mezzi pubblici', value: 'Metro L10 · ~40 min al centro' }
+        ]
+    },
+
+    {
+        id: 'tfu-airport',
+        name: 'Aeroporto Internazionale Tianfu',
+        city: 'Chengdu — TFU',
+        category: 'airport',
+        coords: [30.3125, 104.4413],
+        zoom: 12,
+        description:
+            "Nuovo aeroporto inaugurato nel 2021, a sud di Chengdu. " +
+            "La maggior parte dei voli internazionali si sta trasferendo " +
+            "qui. Più moderno di CTU ma più lontano dal centro.",
+        tags: ['Aeroporto', 'Nuovo', 'International'],
+        iata: 'TFU',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~50-75 min · ~150 ¥ · 50 km' },
+            { label: 'Mezzi pubblici', value: 'Metro L18 / L19 · ~45 min al centro' }
+        ]
+    },
+
+    {
+        id: 'ckg-airport',
+        name: 'Aeroporto Jiangbei',
+        city: 'Chongqing — CKG',
+        category: 'airport',
+        coords: [29.7194, 106.6416],
+        zoom: 12,
+        description:
+            "Unico grande aeroporto di Chongqing, hub per Chongqing " +
+            "Airlines e Sichuan Airlines. Voli domestici capillari + " +
+            "collegamenti internazionali su Asia e Europa.",
+        tags: ['Aeroporto', 'Hub'],
+        iata: 'CKG',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~30-45 min · ~50 ¥ · 19 km' },
+            { label: 'Mezzi pubblici', value: 'Metro L3 / L10 · ~40 min al centro' }
+        ]
+    },
+
+    {
+        id: 'hkg-airport',
+        name: 'Aeroporto Internazionale di Hong Kong',
+        city: 'Hong Kong — HKG',
+        category: 'airport',
+        coords: [22.3080, 113.9185],
+        zoom: 12,
+        description:
+            "Costruito sull'isola artificiale di Chek Lap Kok, uno degli " +
+            "aeroporti più trafficati e premiati al mondo. Hub di Cathay " +
+            "Pacific. Base per collegamenti Asia-Pacifico.",
+        tags: ['Aeroporto', 'Hub', 'Cathay Pacific'],
+        iata: 'HKG',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~35-50 min · ~370 HKD · 34 km' },
+            { label: 'Mezzi pubblici', value: 'Airport Express · 24 min a Central Station · ~115 HKD' }
+        ]
+    },
+
+    {
+        id: 'szx-airport',
+        name: 'Aeroporto Bao\'an',
+        city: 'Shenzhen — SZX',
+        category: 'airport',
+        coords: [22.6392, 113.8106],
+        zoom: 12,
+        description:
+            "Principale aeroporto di Shenzhen, servizi capillari per " +
+            "l'area del Pearl River Delta. Hub Shenzhen Airlines. " +
+            "In forte crescita internazionale negli ultimi anni.",
+        tags: ['Aeroporto', 'Hub'],
+        iata: 'SZX',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~30-45 min · ~110 ¥ · 32 km' },
+            { label: 'Mezzi pubblici', value: 'Metro L11 · ~35 min a Futian (centro)' }
+        ]
+    },
+    {
+        id: 'pek-airport',
+        name: 'Aeroporto Internazionale Capital',
+        city: 'Pechino — PEK',
+        category: 'airport',
+        coords: [40.0801, 116.5846],
+        zoom: 12,
+        description:
+            "Principale aeroporto di Pechino, hub di Air China. " +
+            "Tre terminal (T1/T2/T3). Storicamente il più trafficato " +
+            "della Cina, oggi affiancato da PKX Daxing per i voli " +
+            "internazionali crescenti.",
+        tags: ['Aeroporto', 'Hub', 'Air China'],
+        iata: 'PEK',
+        openingDays: 'Aperto 24/7',
+        customMeta: [
+            { label: 'Taxi',           value: '~45-60 min · ~150 ¥ · 28 km' },
+            { label: 'Mezzi pubblici', value: 'Airport Express metro · ~25 min al centro' }
+        ]
+    },
 ];
 
 
@@ -815,15 +1118,16 @@ function renderGallery(item, altName) {
         galleryObserver = null;
     }
 
+    /* Nessuna immagine → nascondi la galleria del tutto invece di
+       mostrare il placeholder rotto. Sensato per POI dove la foto
+       non serve (es. aeroporti) o dove ancora non è stata caricata. */
     if (images.length === 0) {
-        track.innerHTML =
-            '<div class="gallery-item is-broken">' +
-                '<img alt="" src="" style="visibility:hidden">' +
-            '</div>';
-        dots.innerHTML = '';
-        dom.detailGallery.classList.add('is-single');
+        dom.detailGallery.classList.add('is-hidden');
+        track.innerHTML = '';
+        dots.innerHTML  = '';
         return;
     }
+    dom.detailGallery.classList.remove('is-hidden');
 
     track.innerHTML = images.map((url, i) => (
         `<div class="gallery-item">` +

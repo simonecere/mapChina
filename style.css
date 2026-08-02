@@ -508,14 +508,43 @@ button { font-family: inherit; }
 /* ============================================================
    PAGINA "CIBI" (cibi.html)
    ------------------------------------------------------------
-   Grid di dish-card, ognuna con carousel foto orizzontale
-   basato su scroll-snap CSS-only (nessun JS per-card).
+   Sezioni per regione, ciascuna con un titolo (stile Il File)
+   e una grid di dish-card con carousel foto scroll-snap CSS-only.
    ============================================================ */
+
+/* Sezione regionale: gruppo di piatti sotto uno stesso titolo. */
+.dish-section {
+    margin-bottom: 44px;
+}
+.dish-section:last-child {
+    margin-bottom: 0;
+}
+/* Il titolo della sezione condivide lo stile .doc-section-title
+   (barra rossa a sinistra), ma qui vogliamo più aria sotto
+   prima della grid delle card. */
+.dish-section > .doc-section-title {
+    margin-bottom: 18px;
+}
+
+/* Testo esplicativo/segnaposto per sezioni ancora vuote
+   (es. "Generali", "Snack & condimenti"): tono discreto,
+   corsivo, un filo di padding per aria attorno. */
+.dish-section-placeholder {
+    margin: 0 0 16px;
+    color: var(--color-text-muted, #7a7a7a);
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.55;
+}
 
 .dish-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
+}
+/* Grid vuota (sezioni ancora da popolare): nessuna altezza fantasma. */
+.dish-grid:empty {
+    display: none;
 }
 
 .dish-card {
@@ -898,6 +927,12 @@ button { font-family: inherit; }
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Se il POI non ha immagini (es. aeroporti o dati incompleti),
+   la galleria è completamente nascosta invece di mostrare un placeholder. */
+.detail-gallery.is-hidden {
+    display: none;
 }
 
 /* Galleria immagini: carousel orizzontale con scroll-snap nativo.
