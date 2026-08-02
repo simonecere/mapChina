@@ -323,6 +323,49 @@ const POI_DATA = [
 
 
     /* ------------------------------------------------------------------
+                               ---HONG-KONG---
+    ------------------------------------------------------------------*/
+    {
+        id: 'hong-kong',
+        name: 'Hong Kong',
+        city: 'Regione Amministrativa Speciale',
+        category: 'city',
+        coords: [22.31932662376619, 114.16931173018067],
+
+        zoom: 6,
+        description: "Metropoli verticale incastonata tra mare e montagne, dove Oriente e Occidente si incontrano." +
+            "Offre un contrasto unico tra grattacieli futuristici, mercati di strada tradizionali" +
+            "e uno degli skyline più iconici al mondo.",
+
+        tags: ["Città", "Grattacieli", "Skyline"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666247/cit-hongkong1_dlz3mc.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/kXXUAxZ1R15Ms2D9A',
+    },
+
+
+
+
+    /* ------------------------------------------------------------------
+                           ---SHENZHEN---
+------------------------------------------------------------------*/
+    {
+        id: 'shenzhen',
+        name: 'Shenzhen',
+        city: 'Guangdong',
+        category: 'city',
+        coords: [22.54003885705979, 114.05962268417684],
+        zoom: 8,
+        description: "La Silicon Valley della Cina: una megalopoli ultramoderna nata" +
+            "da un villaggio di pescatori. È il cuore pulsante dell'innovazione" +
+            "tecnologica globale, famosa per i suoi mercati dell'elettronica e l'architettura avveniristica.",
+        tags: ["Città", "Tech", "Futuristica"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666247/cit-shenzhen1_dunsah.webp',
+        mapsUrl: 'https://maps.app.goo.gl/f9Tgt5BR7nxNQKJw9',
+    },
+
+
+
+    /* ------------------------------------------------------------------
                             ---ALTRO---
  ------------------------------------------------------------------*/
     {
@@ -459,7 +502,53 @@ const POI_DATA = [
                 }
             ]
         }
-    }
+    },
+
+    {
+    id: 'parco-zhangjiajie',
+        name: 'Parco nazionale forestale di Zhangjiajie',
+    city: 'Hunan',
+    category: 'nature',
+    coords: [29.31755833750445, 110.43485017927311],
+    zoom: 13,
+    description: "Parco Forestale Nazionale celebre per i suoi imponenti " +
+"pilastri di pietra arenaria che hanno ispirato le montagne " +
+"fluttuanti del film Avatar. Un paesaggio mozzafiato caratterizzato " +
+"dall'ardito ascensore Bailong e dal famoso e vertiginoso " +
+"Ponte di Vetro sul Grand Canyon. Uno dei luoghi naturali più " +
+"spettacolari della Cina.",
+    tags: ["Natura", "Chiavatar", "Immenso"],
+    images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-zhangjiajie1_ueklqa.png',
+    'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666263/nat-zhangjiajie2_v9x0ul.webp'],
+    mapsUrl: 'https://maps.app.goo.gl/j45KkgQgoneQkK4u5',
+    ticketPrice: '225-239 ¥ (~29-36 €) valido 4 giorni + bus interni inclusi',
+    visitDuration: '1 giorno in fast, 2 con più calma (consigliato)',
+    customMeta: [
+        { label: 'Ascensore Bailong',       value: '326m in 88s - 65 ¥ (~8,50 €)' },
+        { label: 'Funivia Tianzi Mountain', value: 'Ottima vista sui picchi forestali, 75¥ (~9,50 €)' },
+        { label: 'Funivia Yangjiajie',      value: 'Comoda per raggiungere la Natural Great Wall, 79 ¥ (~10 €)' },
+        { label: 'Occhio alle scimmie',     value: 'Scippano come a N...' }
+    ]
+},
+{
+    id: 'porta-del-cielo',
+        name: 'Porta del Cielo',
+    city: 'Monte Tianmen - Hunan',
+    category: 'nature',
+    coords: [29.068640150042604, 110.47542853076597],
+    zoom: 14,
+    description: "Spettacolare cavità naturale aperta nella roccia del Monte " +
+    "Tianmen, raggiungibile con una scalinata da 999 gradini o con " +
+    "la funivia urbana più lunga del mondo (7,5 km). Famosa per le " +
+    "sue passerelle di vetro a picco sul vuoto e la strada tortuosa " +
+    "delle 99 curve. Uno dei luoghi più sacri e scenografici della Cina.",
+    tags: ["Natura", "Piottata", "Mozzafiato"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-tianmenPorta2_w7h4pk.jpg',
+    'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-tianmenPorta1_iqm8fl.webp'],
+    mapsUrl: 'https://maps.app.goo.gl/GQeN8KezcWUeMyfE9',
+    ticketPrice: 'All-Inclusive 278 ¥ (~36 €), comprende bus interni, cheat scala mobile per i gradini e una seggiovia',
+    visitDuration: '4-5 ore',
+}
 ];
 
 
@@ -1096,9 +1185,16 @@ function buildMetaHtml(poi) {
 }
 
 /* Costruisce una riga meta LABEL / VALUE. valueHtml può contenere
-   markup (per renderPriceLevel); label viene sempre escapata. */
+   markup (per renderPriceLevel / renderFireLevel / renderCrowdLevel).
+   Layout adattivo: sotto ~25 caratteri il valore va inline a destra
+   della label; sopra, va stacked sotto (a tutta larghezza, wrap
+   naturale). I valori che contengono HTML (icone) sono sempre inline
+   perché occupano visivamente poco spazio. */
 function metaRow(label, valueHtml) {
-    return `<div class="meta-row">` +
+    const hasHtml = /<[a-z]/i.test(valueHtml);
+    const isShort = hasHtml || valueHtml.length <= 25;
+    const cls = 'meta-row ' + (isShort ? 'meta-row--short' : 'meta-row--long');
+    return `<div class="${cls}">` +
              `<span class="meta-label">${escapeHtml(label)}</span>` +
              `<span class="meta-value">${valueHtml}</span>` +
            `</div>`;
