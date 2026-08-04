@@ -68,13 +68,119 @@ const POI_DATA = [
             'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593148/mon-PEKcitProibita1_ior41e.jpg',
             'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593150/mon-PEKcitProibita2_u9emaw.jpg'
         ],
-        bestTime: 'Apr-Mag / Set-Ott',
-        openingDays: 'Mar-Dom 8:30-17:00'
+        openingDays: 'Mar-Dom 8:30-17:00',
+    },
+    {
+        id: 'palazzo-estate',
+        name: 'Palazzo d\'Estate (Yíhéyuán)',
+        city: 'Pechino',
+        category: 'monument',
+        coords: [40.000097334158525, 116.27548205459539],
+        zoom: 15,
+        description: "Il Palazzo d'Estate (Yíhéyuán) è il più grande e celebre giardino imperiale " +
+            "della Cina, esteso su quasi 3 km² attorno alla Collina della Longevità e " +
+            "al Lago Kunming. Commissionato dall'Imperatrice Vedova Cixi e " +
+            "Patrimonio UNESCO, fonde perfettamente templi, padiglioni, gallerie " +
+            "dipinte e ponti in marmo con il paesaggio naturale circostante.",
+        tags: ["Monumento", "UNESCO", "Natura", "Giardino Imperiale"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785859854/mon-palazzoest1_fn0tzb.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785859853/mon-palazzoest2_hyqxne.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/rb2CCjFaQ3o6wDXr9',
+        openingDays: 'Alta stagione (1/04-31/10): 6:00-20:00\nBassa stagione 6:30-19:00',
+        visitDuration: '2 - 3/4 ore',
+        ticketPrice: 'Solo parco 30 ¥ (~3,80 €), biglietto all-inclusive 60 ¥ (~7,60 €)'
+    },
+    {
+        id: 'tempio-paradiso',
+        name: 'Tempio del Paradiso',
+        city: 'Pechino',
+        category: 'monument',
+        coords: [39.882365533474974, 116.40663782340609],
+        zoom: 15,
+        description: "Il Tempio del Paradiso (Tiāntán) è un maestoso complesso " +
+            "di edifici religiosi eretto nel 1420 durante la dinastia Ming. " +
+            "Utilizzato dagli imperatori delle dinastie Ming e Qing per " +
+            "le cerimonie di preghiera per il buon raccolto, si distingue " +
+            "per la sua iconica Sala della Preghiera per i Buoni Raccolti, " +
+            "interamente in legno senza l'uso di chiodi. L'architettura " +
+            "riflette la cosmologia cinese con forme circolari (il cielo) " +
+            "e quadrate (la terra).",
+        tags: ["Monumento", "Tempio", "Storia", "Parco"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785859859/mon-tempiopar1_jlnkcs.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/se3Ww8VK5dvFpnMN9',
+        openingDays: 'Parco tutti i giorni, 6:00-22:00',
+        visitDuration: '1,5/2 ore',
+        reservation: 'Obbligatoria in anticipo (7g max)',
+        ticketPrice: 'Solo parco 15 ¥ (~1,90 €), biglietto all-inclusive 34 ¥ (~4,30 €)',
+    },
+    {
+        id: 'national-museum',
+        name: 'Museo nazionale della Cina',
+        city: 'Pechino',
+        category: 'monument',
+        coords: [39.905724873337114, 116.4016584817068],
+        zoom: 15,
+        description: "Il Museo Nazionale della Cina (Guójiā Bówùguǎn) si affaccia " +
+            "sul lato est di Piazza Tiananmen ed è uno dei musei più " +
+            "grandi al mondo per superficie ed estensione. Custodisce " +
+            "oltre 1,4 milioni di reperti che ripercorrono l'intera storia " +
+            "cinese, dalle prime civiltà preistoriche alla fine dell'era " +
+            "imperiale e oltre. Tra i suoi tesori spiccano bronzi antichi, " +
+            "porcellane raffinate e opere d'arte in giada di valore inestimabile.",
+        tags: ["Monumento", "Arte", "Storia", "Museo"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785859855/mon-nationalMus1_sbkxw9.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/Kr6skBdUkv9uRiqd6',
+        openingDays: 'Mar-Dom 9:00-17:00',
+        visitDuration: '2 - 5 ore',
+        freeEntry: true,
+        reservation: 'Obbligatoria in anticipo (7g max)',
+    },
+    {
+        id: 'lama-temple',
+        name: 'Lama Temple',
+        city: 'Pechino',
+        category: 'monument',
+        coords: [39.947840689498165, 116.41727245900996],
+        zoom: 15,
+        description: "Il Tempio del Lama (Yōnghégōng, 'Palazzo dell'Armonia e della " +
+            "Pace') è il più importante e famoso tempio buddista tibetano " +
+            "fuori dal Tibet. Originariamente residenza principesca nel 1694 " +
+            "e poi monastero imperiale della dinastia Qing, è celebre per le " +
+            "sue spettacolari statue, tra cui l'imponente Buddha Maitreya " +
+            "di 18 metri scolpito da un unico blocco di legno di sandalo " +
+            "proveniente dal Tibet.",
+        tags: ["Monument", "Tempio", "Buddismo"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785859859/mon-lamaTemple1_xgps9k.webp',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785859854/mon-lamaTemple2_d979dn.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/J6XTxCvjfZziYMUH6',
+        openingDays: '9:00-16:30',
+        visitDuration: '1 - 2 ore',
+        ticketPrice: '25 ¥ (~3,15 €)',
+        reservation: 'Consigliata',
     },
 
     /*=======================   CIBO+ PEK =============================*/
-
-
+    {
+        id: 'quanjude',
+        name: 'Quanjude',
+        city: 'Pechino',
+        category: 'food',
+        coords: [39.913979593453305, 116.41587221295595],
+        zoom: 15,
+        description: "Quanjude è la più famosa e storica catena di ristoranti di " +
+            "Pechino, fondata nel 1864 durante la dinastia Qing. Celebre " +
+            "in tutto il mondo per l'autentica Anatra alla Pechinese " +
+            "servita con croccante pelle dorata, viene preparata " +
+            "secondo il metodo tradizionale sospeso in forni aperti alimentati " +
+            "da legna di frutteto. Un'esperienza gastronomica " +
+            "e culturale imperdibile nella capitale.",
+        tags: ["Cibo", "Anatra", "Michelin"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785859839/food-quanjude1_pnryqh.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/8dzgfhyqhKCan68v7',
+        openingDays: '11:00-14:00  16:30-21:00',
+        priceLevel: 4,
+        reservation: 'Consigliata per orari di punta'
+    },
 
     /* ------------------------------------------------------------------
                             ---SHANGHAI---
@@ -443,7 +549,6 @@ const POI_DATA = [
         image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593156/mon-ALTmuraglia1_c4fbxh.jpg',
         bestTime: 'Mag-Giu / Set-Ott',
         openingDays: 'Ogni giorno (varia per sezione)',
-        priceLevel: 2,
         overlay: {
 
             polyline: [
