@@ -377,6 +377,43 @@ const POI_DATA = [
             'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-seul2_jjzoo6.jpg'
         ]
     },
+    {
+        id: 'gwanghwamun-gate',
+        name: 'Gwanghwamun Gate',
+        city: 'Seul',
+        category: 'monument',
+        coords: [37.57639586861782, 126.97690500325896],
+        zoom: 15,
+        description: "",
+        tags: ["Monumento", "Storia"],
+        images: ['', ''],
+        mapsUrl: 'https://maps.app.goo.gl/Z9Sbd3tdgwUGHtTz9',
+    },
+    {
+        id: 'myeong-dong-market',
+        name: 'Myeongdong Night Market',
+        city: 'Seul',
+        category: 'shopping',
+        coords: [37.561919288875266, 126.98569357337766],
+        zoom: 15,
+        description: "",
+        tags: ["Shopping", "Street Market", "Street food"],
+        images: ['', ''],
+        mapsUrl: 'https://maps.app.goo.gl/xygx3RZUkFFxjhig7',
+    },
+    {
+        id: 'gyeongbokgung-palace',
+        name: 'Gyeongbokgung',
+        city: 'Seul',
+        category: 'monument',
+        coords: [37.57970199873027, 126.97699808122107],
+        zoom: 15,
+        description: "",
+        tags: ["Palazzo", "Negher"],
+        images: ['', ''],
+        mapsUrl: 'https://maps.app.goo.gl/PwHQkfga7qQTMfpj9',
+    },
+
 
 
 
