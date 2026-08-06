@@ -384,10 +384,22 @@ const POI_DATA = [
         category: 'monument',
         coords: [37.57639586861782, 126.97690500325896],
         zoom: 15,
-        description: "",
+        description: "Gwanghwamun è la porta principale e più grande del palazzo " +
+            "Gyeongbokgung a Seul. Costruita originariamente nel 1395, " +
+            "è un simbolo storico della Corea del Sud, famosa per le sue " +
+            "tre entrate ad arco e il padiglione a due piani sopra di esse. " +
+            "Si affaccia sulla grande Piazza Gwanghwamun e ospita " +
+            "quotidianamente la suggestiva cerimonia del cambio della guardia.",
         tags: ["Monumento", "Storia"],
-        images: ['', ''],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026336/mon-gwanghamunGate1_f7rgra.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026336/mon-gwanghamunGate2_be1mkq.jpg'],
         mapsUrl: 'https://maps.app.goo.gl/Z9Sbd3tdgwUGHtTz9',
+        openingDays: 'Aperto 24/7',
+        visitDuration: '20 minuti',
+        freeEntry: true,
+        customMeta: [
+            { label: 'Cambio della guardia',     value:'10:00 e 14:00' }
+        ]
     },
     {
         id: 'myeong-dong-market',
@@ -396,10 +408,21 @@ const POI_DATA = [
         category: 'shopping',
         coords: [37.561919288875266, 126.98569357337766],
         zoom: 15,
-        description: "",
+        description: "Il Myeongdong Night Market è uno dei mercati serali più " +
+            "venerati e vivaci di Seul, situato nel cuore dello shopping. " +
+            "Nel tardo pomeriggio la via pedonale si riempie di decine " +
+            "di bancarelle che offrono lo street food più famoso della " +
+            "Corea, dagli spiedini di tteokbokki e formaggio grigliato " +
+            "ai dolci tradizionali, circondati da luci a neon e negozi di cosmetica.",
         tags: ["Shopping", "Street Market", "Street food"],
-        images: ['', ''],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026669/sho-myeongdongMarket1_ujz90s.jpg',
         mapsUrl: 'https://maps.app.goo.gl/xygx3RZUkFFxjhig7',
+        openingDays: 'Ogni giorno ~17:00 - 01:00',
+        priceLevel: 2,
+        customMeta: [
+            { label: 'Consigli',     value:'Portare qualcosa in contanti e ' +
+                    'prezzo medio 4k-10k ₩' }
+        ]
     },
     {
         id: 'gyeongbokgung-palace',
@@ -408,13 +431,220 @@ const POI_DATA = [
         category: 'monument',
         coords: [37.57970199873027, 126.97699808122107],
         zoom: 15,
-        description: "",
-        tags: ["Palazzo", "Negher"],
-        images: ['', ''],
+        description: "Gyeongbokgung ('Palazzo Grandemente Benedetto dal Cielo') è " +
+            "il più grande e maestoso dei cinque grandi palazzi reali " +
+            "edificati durante la dinastia Joseon. Costruito nel 1395, " +
+            "comprende l'imponente sala del trono Geunjeongjeon, " +
+            "il padiglione sull'acqua Gyeonghoeru e bellissimi giardini " +
+            "reali che offrono uno scorcio unico sul passato coreano.",
+        tags: ["Monumento", "Palazzo"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026336/mon-gyeongbokgung1_mnznsl.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026337/mon-gyeongbokgung2_w2oyum.jpg'],
         mapsUrl: 'https://maps.app.goo.gl/PwHQkfga7qQTMfpj9',
+        openingDays: '9:00 - 17/18:00',
+        visitDuration: '1-2 ore',
+        ticketPrice: '3.000 ₩ (~2,10 €)'
     },
-
-
+    {
+        id: 'hongdae-shopping-street',
+        name: 'Hongdae Shopping Street',
+        city: 'Seul',
+        category: 'shopping',
+        coords: [37.554449504782234, 126.92238332776883],
+        zoom: 15,
+        description: "Hongdae è l'emblema della cultura giovanile ed eclettica " +
+            "di Seul, situata attorno alla Hongik University. La via " +
+            "pedonale principale è celebre per gli spettacoli di " +
+            "street performer (busking), boutique di moda indie, " +
+            "locali alla moda e una vivace vita notturna. Un quartiere " +
+            "dinamico che rappresenta il cuore creativo e underground " +
+            "della capitale coreana.",
+        tags: ["Shopping", "Vita notturna", "Giovani"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026668/sho-hongdaeStr1_lghnv6.avif',
+        mapsUrl: 'https://maps.app.goo.gl/BcKfLGBFubbfSjbv7',
+        customMeta: [
+            { label: 'Negozi',     value:'11:00 - 22:00' }
+        ]
+    },
+    {
+        id: 'n-seul-tower',
+        name: 'Seul Tower',
+        city: 'Seul',
+        category: 'monument',
+        coords: [37.5516627217384, 126.9881627477384],
+        zoom: 15,
+        description: "La N Seoul Tower sorge sulla cima del monte Namsan a " +
+            "480 metri sul livello del mare, offrendo una vista " +
+            "spettacolare a 360 gradi sull'intera metropoli di Seul. " +
+            "Famosa per la sua terrazza ricoperta dai 'lucchetti dell'amore' " +
+            "e per l'illuminazione a LED della sera, è un'icona " +
+            "imperdibile e romantica del panorama urbano coreano.",
+        tags: ["Tower", "Punti panoramici"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026337/mon-seulTower1_pqu39l.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/Hagvfjkfm5SijVB36',
+        openingDays: 'Lun-Ven 10:30 - 22:30\nSab-Dom 10:00 - 23:00\n' +
+            'La biglietteria chiude 30 minuti prima',
+        visitDuration: '1,5/2 ore',
+        ticketPrice: 'Piazza base + terrazza lucchetti, free\n' +
+            'Biglietto osservatorio, 21.000 ₩ (~14,50 €)' +
+            'Funivia (Namsan Cable Car - opzionale): 15.000 ₩ (~10,30 €) A/R',
+        customMeta: [
+            { label: 'Meglio visitare', value: 'Un\'ora prima del tramonto' }
+        ]
+    },
+    {
+        id: 'gwangjang-market',
+        name: 'Gwangjang Market',
+        city: 'Seoul',
+        category: 'shopping',
+        coords: [37.57028215697589, 126.99953922693201],
+        zoom: 15,
+        description: "Inaugurato nel 1905, Gwangjang Market è il più antico " +
+            "mercato tradizionale coperto ancora in funzione della Corea. " +
+            "Famoso in tutto il mondo per il suo autentico street food, " +
+            "è il posto perfetto per gustare le frittelle di fagioli " +
+            "mungo (bindaetteok), il tteokbokki, i mayak gimbap " +
+            "e la tartare di manzo con uovo crudo (yukhoe).",
+        tags: ["Shopping", "Street food", "Souvenir"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026668/sho-gwangjangMarket1_qf4unu.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/iMpk23mQKscAbsfV8',
+        openingDays: '09:00 - 23:00',
+        priceLevel: 3,
+        crowdLevel: 4,
+        customMeta: [
+            { label: 'Consigli',     value:'Portare qualcosa in contanti e ' +
+                    'prezzo medio 4k-10k ₩' }
+        ]
+    },
+    {
+        id: 'bukchon-hanok-village',
+        name: 'Bukchon Hanok Village',
+        city: 'Seul',
+        category: 'monument',
+        coords: [37.58162032547799, 126.98499210182949],
+        zoom: 14,
+        description: "Il Bukchon Hanok Village è uno storico quartiere residenziale " +
+            "di Seul situato tra i palazzi Gyeongbokgung e Changdeokgung. " +
+            "Custodisce centinaia di 'hanok', le tradizionali case " +
+            "coreane risalenti alla dinastia Joseon. Con i suoi stradelli " +
+            "in salita, i tetti in tegole lavorate e i cortili interni, " +
+            "offre un affascinante tuffo nell'architettura del passato.",
+        tags: ["Quartiere storico", "Tradizione"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026338/mon-bukchonVill1_j0vcu8.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026338/mon-bukchonVill2_r26ucs.webp'],
+        mapsUrl: 'https://maps.app.goo.gl/bfVTyRqpqzUaPr276',
+        openingDays: 'Lun-Sab 10:00 - 17:00\nPer rispetto dei residenti',
+        visitDuration: '~1 ora',
+    },
+    {
+        id: 'gangnam-hands',
+        name: 'Gangnam',
+        city: 'Seul',
+        category: 'monument',
+        coords: [37.51379657037621, 127.06079878620051],
+        zoom: 15,
+        description: "Gangnam è il quartiere più moderno, glamour e finanziario " +
+            "di Seul, reso famoso in tutto il mondo dal successo della " +
+            "canzone di Psy. Tra grattacieli futuristici, boutique di alta " +
+            "moda e cliniche d'avanguardia, ospita la celebre statua " +
+            "gigante in bronzo 'Mani d'Oro' (Gangnam Style Statue) situata " +
+            "proprio davanti all'ingresso del centro commerciale COEX.",
+        tags: ["Quartiere", "Statua", "PSY"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026297/city-gangam1_zzaw1m.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026336/mon-gangam2_o4vgnp.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/7LmaenELTosPPgM88',
+    },
+    {
+        id: 'namdaemun-market',
+        name: 'Namdaemun Market',
+        city: 'Seul',
+        category: 'shopping',
+        coords: [37.559370554897924, 126.97757415386383],
+        zoom: 15,
+        description: "Namdaemun è il più grande e antico mercato tradizionale " +
+            "della Corea del Sud, risalente al 1414. Una tentacolare " +
+            "rete di stradine pedonali in cui oltre 10.000 banchi vendita " +
+            "offrono di tutto: da articoli d'abbigliamento e utensili " +
+            "per la casa, fino alle famose corsie del cibo di strada " +
+            "specializzate in noodles caldi, ravioli al vapore e ginseng.",
+        tags: ["Mercato", "Street food"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026671/sho-namdaemunMarket_hkovoc.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/ajRL27w6bJWzvZgcA',
+        openingDays: 'Lun-Sab 09:00 - 17:30',
+        customMeta: [
+            { label: 'Street food e banchi serali',     value:'10:00 - 21:00' }
+        ],
+        priceLevel: 2,
+    },
+    {
+        id: 'deoksugung-palace',
+        name: 'Deoksugung Palace',
+        city: 'Seul',
+        category: 'monument',
+        coords: [37.565948490098606, 126.97486247895333],
+        zoom: 15,
+        description: "Deoksugung è uno dei cinque grandi palazzi reali di Seul, " +
+            "famoso per la sua suggestiva fusione tra architettura " +
+            "tradizionale cromaticamente ricca e imponenti edifici " +
+            "in stile occidentale neoclassico. Residenza preferita dell'Imperatore " +
+            "Gojong durante la fine del XIX secolo, è celebre per il " +
+            "suo viale alberato con mura in pietra e per essere l'unico " +
+            "palazzo reale aperto fino a tarda sera.",
+        tags: ["Palazzo", "Architettura"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026337/mon-doeksugungpalace1_eaaymq.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026337/mon-doeksugungpalace2_uo3goe.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/LiRQXhJyrKVNYA9A6',
+        openingDays: 'Tutti i giorni, 09:00 - 21:00',
+        visitDuration: '45 min - 1 ora',
+        ticketPrice: '1.000 ₩ (~0,70 €)',
+        customMeta: [
+            { label: 'Cambio della guardia',     value:'11:00, 14:00 e 15:30' }
+        ]
+    },
+    {
+        id: 'memorial-kor-war',
+        name: 'Memoriale della Guerra della Corea',
+        city: 'Seul',
+        category: 'monument',
+        coords: [37.537296426678125, 126.97727821072802],
+        zoom: 15,
+        description: "Il Memoriale della Guerra della Corea (War Memorial of Korea) " +
+            "è un imponente museo ed esibizione permanente a Yongsan. " +
+            "Ripercorre la complessa storia militare della Corea antica fino " +
+            "al conflitto del 1950-1953. Con sei ampie sale " +
+            "interne ed un'incredibile piazza esterna gremita di vere " +
+            "navi, aerei, carri armati e pezzi d'artiglieria, rappresenta " +
+            "una testimonianza toccante della storia moderna.",
+        tags: ["Museo", "Storia", "Guerra"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026337/mon-memoriale1_dpro0s.webp',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026337/mon-memoriale2_qxrvsl.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/g7pgALWCr2tws5D36',
+        openingDays: 'Tutti i giorni, 09:30 - 18:00',
+        visitDuration: '~1,5 - 2 ore',
+        freeEntry: true,
+    },
+    {
+        id: 'cheonggyecheon',
+        name: 'Cheonggyecheon',
+        city: 'Seul',
+        category: 'nature',
+        coords: [37.570616794486554, 126.97873465626606],
+        zoom: 15,
+        description: "Cheonggyecheon è un suggestivo corso d'acqua artificiale " +
+            "che scorre per circa 11 km nel cuore di Seul. Frutto di un " +
+            "imponente progetto di riqualificazione urbana che ha " +
+            "riportato alla luce un antico fiume interrato, è " +
+            "un'oasi verde immersa tra i grattacieli. Tra cascate " +
+            "illuminate, ponticelli e installazioni artistiche, è " +
+            "uno dei luoghi più amati da residenti e turisti per passeggiare.",
+        tags: ["Natura", "Fiume artificiale", "Passeggiata"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026681/nat-cheonggyecheon1_lloyx6.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026682/nat-cheonggyecheon2_lt2cpr.webp'],
+        mapsUrl: 'https://maps.app.goo.gl/S4ALvj4X2XE8icQ97',
+        customMeta: [
+            { label: 'Meglio visitare', value: 'Al tramonto' }
+        ]
+    },
 
 
     /*=======================   CIBO+ SEUL =============================*/
@@ -562,6 +792,28 @@ const POI_DATA = [
         mapsUrl: 'https://maps.app.goo.gl/f9Tgt5BR7nxNQKJw9',
     },
 
+    /* ------------------------------------------------------------------
+                       ---OSAKA---
+------------------------------------------------------------------*/
+    {
+        id: 'osaka',
+        name: 'Osaka',
+        city: 'Japan',
+        category: 'city',
+        coords: [34.6990252321527, 135.49804993198111],
+        zoom: 10,
+        description: "Osaka è la terza città più grande del Giappone e la capitale " +
+            "gastronomica del Paese, famosa per la sua vivace cultura " +
+            "popolare e l'atmosfera informale. Celebre per le luci a neon " +
+            "di Dotonbori, il maestoso Castello di Osaka e la cultura del " +
+            "'Kuidaore' (mangiare fino a sfinirsi), offre un perfetto " +
+            "connubio tra storia imperiale, quartieri futuristici e la " +
+            "street food più famosa del Giappone.",
+        tags: ["Città", "Japan"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026296/city-osaka1_algtyk.webp',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026296/city-osaka2_q0uajo.webp'],
+        mapsUrl: 'https://maps.app.goo.gl/EC4PnWvmWX9jG5XUA',
+    },
 
 
     /* ------------------------------------------------------------------
@@ -768,7 +1020,6 @@ const POI_DATA = [
             "internazionali, in complemento a PEK.",
         tags: ['Aeroporto', 'Nuovo', 'Zaha Hadid'],
         iata: 'PKX',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~55-75 min · ~180 ¥ · 46 km' },
             { label: 'Mezzi pubblici', value: 'Daxing Airport Express metro · ~30 min al centro' }
@@ -788,7 +1039,6 @@ const POI_DATA = [
             "dei voli intercontinentali passa da qui.",
         tags: ['Aeroporto', 'Hub', 'International'],
         iata: 'PVG',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~50-70 min · ~200 ¥ · 32 km' },
             { label: 'Mezzi pubblici', value: 'Maglev 7 min a Longyang + metro L2 · totale ~40 min · oppure metro L2 diretta ~55 min' }
@@ -808,7 +1058,6 @@ const POI_DATA = [
             "Hongqiao. Vicino al centro, molto comodo.",
         tags: ['Aeroporto', 'Domestico', 'HSR-Hub'],
         iata: 'SHA',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~25-35 min · ~80 ¥ · 13 km' },
             { label: 'Mezzi pubblici', value: 'Metro L2 / L10 · ~30 min al centro' }
@@ -828,7 +1077,6 @@ const POI_DATA = [
             "migliori aeroporti al mondo per servizi e pulizia.",
         tags: ['Aeroporto', 'Hub', 'Premiato'],
         iata: 'ICN',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~60-80 min · ~55.000-70.000 KRW · 52 km' },
             { label: 'Mezzi pubblici', value: 'AREX Express · 43 min a Seoul Station · ~9.000 KRW' }
@@ -848,7 +1096,6 @@ const POI_DATA = [
             "Tokyo-Haneda, Osaka, Shanghai-Hongqiao, Pechino, Taipei.",
         tags: ['Aeroporto', 'Domestico', 'Shuttle'],
         iata: 'GMP',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~25-35 min · ~25.000 KRW · 18 km' },
             { label: 'Mezzi pubblici', value: 'Metro L5 / L9 · ~35-45 min al centro' }
@@ -868,7 +1115,6 @@ const POI_DATA = [
             "internazionali su Bangkok, Seoul, Osaka.",
         tags: ['Aeroporto', 'Hub'],
         iata: 'XIY',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~50-70 min · ~120 ¥ · 40 km' },
             { label: 'Mezzi pubblici', value: 'Metro L14 · ~40 min · oppure bus Airport Line 2 · ~50 min' }
@@ -888,7 +1134,6 @@ const POI_DATA = [
             "internazionali, anche se molti si stanno spostando su TFU.",
         tags: ['Aeroporto', 'Hub'],
         iata: 'CTU',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~30-45 min · ~80 ¥ · 16 km' },
             { label: 'Mezzi pubblici', value: 'Metro L10 · ~40 min al centro' }
@@ -908,7 +1153,6 @@ const POI_DATA = [
             "qui. Più moderno di CTU ma più lontano dal centro.",
         tags: ['Aeroporto', 'Nuovo', 'International'],
         iata: 'TFU',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~50-75 min · ~150 ¥ · 50 km' },
             { label: 'Mezzi pubblici', value: 'Metro L18 / L19 · ~45 min al centro' }
@@ -928,7 +1172,6 @@ const POI_DATA = [
             "collegamenti internazionali su Asia e Europa.",
         tags: ['Aeroporto', 'Hub'],
         iata: 'CKG',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~30-45 min · ~50 ¥ · 19 km' },
             { label: 'Mezzi pubblici', value: 'Metro L3 / L10 · ~40 min al centro' }
@@ -948,7 +1191,6 @@ const POI_DATA = [
             "Pacific. Base per collegamenti Asia-Pacifico.",
         tags: ['Aeroporto', 'Hub', 'Cathay Pacific'],
         iata: 'HKG',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~35-50 min · ~370 HKD · 34 km' },
             { label: 'Mezzi pubblici', value: 'Airport Express · 24 min a Central Station · ~115 HKD' }
@@ -968,7 +1210,6 @@ const POI_DATA = [
             "In forte crescita internazionale negli ultimi anni.",
         tags: ['Aeroporto', 'Hub'],
         iata: 'SZX',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~30-45 min · ~110 ¥ · 32 km' },
             { label: 'Mezzi pubblici', value: 'Metro L11 · ~35 min a Futian (centro)' }
@@ -988,7 +1229,6 @@ const POI_DATA = [
             "internazionali crescenti.",
         tags: ['Aeroporto', 'Hub', 'Air China'],
         iata: 'PEK',
-        openingDays: 'Aperto 24/7',
         customMeta: [
             { label: 'Taxi',           value: '~45-60 min · ~150 ¥ · 28 km' },
             { label: 'Mezzi pubblici', value: 'Airport Express metro · ~25 min al centro' }
@@ -1638,7 +1878,11 @@ function buildMetaHtml(poi) {
    perché occupano visivamente poco spazio. */
 function metaRow(label, valueHtml) {
     const hasHtml = /<[a-z]/i.test(valueHtml);
-    const isShort = hasHtml || valueHtml.length <= 25;
+    // Solo valori davvero brevi restano inline (es. codici IATA a 3
+    // lettere, priceLevel a icone). Tutto il resto va a capo, per
+    // evitare troncamenti e mantenere una griglia visiva prevedibile
+    // nella sidebar/pannello dettaglio (già stretti su mobile).
+    const isShort = hasHtml || valueHtml.length <= 3;
     const cls = 'meta-row ' + (isShort ? 'meta-row--short' : 'meta-row--long');
     return `<div class="${cls}">` +
              `<span class="meta-label">${escapeHtml(label)}</span>` +
@@ -1821,6 +2065,7 @@ function updateFilterBarActive() {
  *   - Click sullo stesso parent già aperto: chiudi e torna a 'all'.
  *   - Click su primary leaf: chiudi sub-bar, filtra a quella key.
  *   - Click su sub item: filtra al sub, sub-bar resta aperta.
+ *   - Click su "Tutti" (key === 'all'): comportamento speciale, vedi sotto.
  */
 function onFilterClick(evt) {
     /* Burger integrato: delega al burger fisso di menu.js
@@ -1837,6 +2082,25 @@ function onFilterClick(evt) {
     const key = btn.dataset.category;
     const cat = findCategoryByKey(key);
     if (!cat) return;
+
+    /* --- Caso speciale: click su "Tutti" ---------------------------
+       L'utente tipicamente sta esplorando un'area zoommata (es. una
+       città) e clicca Tutti per far riapparire i marker delle altre
+       categorie SENZA essere sbalzato via dall'area corrente.
+         - Primo click (Tutti non ancora attivo): mostra tutti i
+           marker ma NON muove la mappa (skipFly).
+         - Secondo click (Tutti già attivo): fly-to-bounds su tutti
+           i POI → equivale a "torna alla vista iniziale".
+    ------------------------------------------------------------------ */
+    if (key === 'all') {
+        const wasAlreadyAll = state.activeCategory === 'all';
+        closeSubBar();
+        state.activeCategory = 'all';
+        updateFilterBarActive();
+        clearOverlay();
+        applyCategoryFilter({ skipFly: !wasAlreadyAll });
+        return;
+    }
 
     const hasSub    = !!cat.sub;
     const isSubItem = btn.classList.contains('filter-sub-btn');
@@ -1864,9 +2128,13 @@ function onFilterClick(evt) {
 /**
  * Mostra/nasconde i marker della mappa in base alla categoria attiva,
  * e chiude la sidebar se il POI attivo viene filtrato via.
- * Applica anche un fit-bounds automatico sui POI rimasti visibili.
+ * Applica anche un fit-bounds automatico sui POI rimasti visibili,
+ * salvo che venga passato { skipFly: true } (usato dal click su "Tutti"
+ * per lasciare l'utente sulla vista corrente).
  */
-function applyCategoryFilter() {
+function applyCategoryFilter(opts = {}) {
+    const skipFly = opts.skipFly === true;
+
     const visible    = getVisiblePois();
     const visibleIds = new Set(visible.map(p => p.id));
 
@@ -1882,6 +2150,8 @@ function applyCategoryFilter() {
     if (state.activePoiId && !visibleIds.has(state.activePoiId)) {
         closeSidebar();
     }
+
+    if (skipFly) return;
 
     if (visible.length >= 2) {
         const bounds = L.latLngBounds(visible.map(p => p.coords));
