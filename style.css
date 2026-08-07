@@ -432,6 +432,24 @@ button { font-family: inherit; }
     font-style: italic;
 }
 
+/* Nota informativa (NON placeholder): usata per evidenziare
+   un'informazione reale dentro una sezione. Sfondo appena accennato
+   sul colore accent, barra rossa a sinistra. Testo normale (no italic)
+   per distinguerla visivamente da .doc-placeholder. */
+.doc-note {
+    color: var(--color-text);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 8px 0 16px;
+    padding: 10px 14px;
+    background: var(--color-surface-alt);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 4px;
+}
+.doc-note strong {
+    font-weight: 700;
+}
+
 .doc-list, .doc-timeline {
     margin: 8px 0;
     padding-left: 22px;
@@ -442,15 +460,30 @@ button { font-family: inherit; }
 .doc-list li, .doc-timeline li {
     margin-bottom: 6px;
 }
+/* La timeline dell'itinerario è semanticamente un <ol> (ordine
+   cronologico), ma NON mostriamo i numeri progressivi: sarebbero
+   ridondanti visto che ogni riga inizia già con "Giorno N". */
 .doc-timeline {
-    list-style: decimal;
+    list-style: none;
+    padding-left: 0;
 }
 
+/* Griglia di card dentro una .doc-section (Voli, Bagagli, Treni…).
+   Su mobile auto-fit ripiega naturalmente su 1 colonna. Su desktop
+   cappiamo a 2 colonne: con 3+ card affiancate le info interne
+   (doc-kv, segmenti treno) diventano troppo strette per essere
+   leggibili. La media query condivide il breakpoint 600px con il
+   resto del layout mobile. */
 .doc-subgrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 14px;
     margin: 10px 0 18px;
+}
+@media (min-width: 600px) {
+    .doc-subgrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 .doc-card {
     background: var(--color-surface-alt);
@@ -487,6 +520,58 @@ button { font-family: inherit; }
     font-style: normal;
     color: var(--color-text);
     font-weight: 500;
+}
+
+/* ---------- Card treno con trasferimento -----------------------
+   Dentro una .doc-card, ogni "leg" del viaggio è un .doc-segment
+   con la sua .doc-kv. Fra un segmento e l'altro un .doc-transfer
+   marca il cambio treno. Alla fine, .doc-kv--total riassume durata
+   totale e data.
+--------------------------------------------------------------- */
+.doc-segment {
+    margin-top: 8px;
+}
+.doc-segment:first-of-type {
+    margin-top: 4px;
+}
+.doc-segment-title {
+    margin: 0 0 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Riga di trasferimento fra due segmenti: bordino accent
+   sinistra, sfondo appena accennato, un filo di padding.
+   Serve visivamente a "spezzare" i due tratti di treno. */
+.doc-transfer {
+    margin: 10px 0;
+    padding: 6px 10px;
+    background: rgba(200, 51, 42, 0.06);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--color-text);
+    line-height: 1.4;
+}
+
+/* Riepilogo totale in coda a una card multi-segmento:
+   linea di separazione più marcata sopra + testo leggermente
+   più in evidenza rispetto alle doc-kv dei segmenti. */
+.doc-kv--total {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border);
+}
+.doc-kv--total li {
+    border-bottom: none;
+    padding: 3px 0;
+}
+.doc-kv--total li > span {
+    font-weight: 600;
+    color: var(--color-text);
 }
 
 @media (max-width: 600px) {
@@ -1497,21 +1582,27 @@ button { font-family: inherit; }
 }
 
 /* ---------- 7. Marker Leaflet e popup ---------------------- */
-/* Marker "goccia" ruotato di -45°, testo interno ruotato di 45°
-   così torna dritto. Ombra rossastra e transizione hover. */
 /* Marker "goccia" con colore dinamico per categoria.
-   --marker-bg è impostato inline da buildIcon() in app.js.
+   --marker-bg è dichiarato qui col default = color-accent, e viene
+   sovrascritto inline da buildIcon() in app.js (es. style="--marker-bg:#…")
+   in base alla categoria del POI. Dichiararlo qui evita il warning
+   "Cannot resolve custom property" degli analizzatori statici, che non
+   vedono l'assegnazione runtime da JS.
    Il box-shadow deriva dal colore del marker via color-mix, così
-   ogni categoria ha un alone coerente col proprio background. */
+   ogni categoria ha un alone coerente col proprio background.
+   Il marker è ruotato di -45° (forma a goccia); il testo/SVG interno
+   è contro-ruotato di 45° in .marker-icon per apparire dritto. */
 .custom-marker {
+    --marker-bg: var(--color-accent);
+
     width: 32px; height: 32px;
     display: grid; place-items: center;
-    background: var(--marker-bg, var(--color-accent));
+    background: var(--marker-bg);
     color: #ffffff;
     border-radius: 50% 50% 50% 0;
     transform: rotate(-45deg);
-    box-shadow: 0 4px 12px color-mix(in srgb,
-        var(--marker-bg, var(--color-accent)) 45%, transparent);
+    box-shadow: 0 4px 12px
+        color-mix(in srgb, var(--marker-bg) 45%, transparent);
     border: 2px solid #fff;
     transition: transform .25s var(--ease-out);
 }
