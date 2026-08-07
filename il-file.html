@@ -46,7 +46,7 @@
 
         <!-- 1. Itinerario ufficiale -->
         <section class="doc-section" id="sez-itinerario">
-            <h2 class="doc-section-title">Itinerario ufficiale</h2>
+            <h2 class="doc-section-title">Itinerario provvisorio</h2>
             <!-- Esempio di lista giornaliera. Sostituisci quando pronto. -->
             <ol class="doc-timeline">
                 <li>
@@ -178,38 +178,94 @@
             <h2 class="doc-section-title">Spostamenti interni</h2>
 
             <p class="doc-note">
-                Prenotazione consigliata via <strong>Trip.com</strong> o
-                <strong>12306</strong> (app ufficiale delle ferrovie cinesi).
-                Le tratte con più di un treno usano la variante "con
-                trasferimento" sotto (vedi Chengdu &rarr; Zhangjiajie come modello).
+                Prenotazione <strong>OBBLIGATORIA</strong> via <strong>Trip.com</strong> o
+                <strong>12306</strong>.
+                I biglietti si possono comprare <strong>due settimane prima</strong>
+                alle 08:00. <br>
+                Con trip.com c'è una funzione bot-like che ti permette di
+                selezionare le date e ti vengono riservati i posti in anticipo.
+                Non sarebbe troppo un problema ma per le cuccette bisogna per forza
+                prenderle su alcune tratte (visto che gli hotel saranno prenotati mesi prima)
+                non possiamo permetterci di non avere i treni perfetti.
+                </br>
             </p>
+
 
             <div class="doc-subgrid">
 
-                <!-- CARD TRENO DIRETTO (un solo segmento).
-                     Stessa struttura di una card volo: titolo + doc-kv. -->
-                <div class="doc-card">
-                    <h3 class="doc-card-title">Pechino &rarr; Xi'an</h3>
-                    <ul class="doc-kv">
-                        <li><span>Treno</span><em>D19</em></li>
-                        <li><span>Partenza</span><em>Beijingxi - 20:41</em></li>
-                        <li><span>Arrivo</span><em>Xi'an - 08:35 +1</em></li>
-                        <li><span>Durata</span><em>~12h</em></li>
-                        <li><span>Data</span><em>-</em></li>
-                        <li><span>Costo</span><em>66,30€</em></li>
-                    </ul>
+
+                <!-- PECHINO - XI'AN -->
+                <div class="doc-card" data-variants>
+                    <div class="doc-card-header">
+                        <h3 class="doc-card-title">Pechino &rarr; Xi'an</h3>
+                        <div class="doc-variant-switch" role="tablist" aria-label="Tipo treno">
+                            <button type="button" class="doc-variant-btn"
+                                    data-variant="fast" role="tab">Veloce</button>
+                            <button type="button" class="doc-variant-btn is-active"
+                                    data-variant="night" role="tab">Notturno</button>
+                        </div>
+                    </div>
+
+                    <!--  VELOCE  -->
+                    <div class="doc-variant is-hidden" data-variant="fast">
+                        <ul class="doc-kv">
+                            <li><span>Treno</span><em>G-veloci</em></li>
+                            <li><span>Partenza</span><em>Mattino presto</em></li>
+                            <li><span>Arrivo</span><em>12/14</em></li>
+                            <li><span>Durata</span><em>4.5/6 h</em></li>
+                            <li><span>Data</span><em>-</em></li>
+                            <li><span>Costo</span><em>63-77 €</em></li>
+                        </ul>
+                    </div>
+
+                    <!--  NOTTURNO  -->
+                    <div class="doc-variant" data-variant="night">
+                        <ul class="doc-kv">
+                            <li><span>Treno</span><em>D-notturno</em></li>
+                            <li><span>Partenza</span><em>Beijingxi - 20:40</em></li>
+                            <li><span>Arrivo</span><em>Xi'an - 08:35<sup class="day-plus">+1</sup></em></li>
+                            <li><span>Durata</span><em>12h</em></li>
+                            <li><span>Data</span><em>-</em></li>
+                            <li><span>Costo</span><em>67 €</em></li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="doc-card">
-                    <h3 class="doc-card-title">Xi'an &rarr; Chengdu</h3>
-                    <ul class="doc-kv">
-                        <li><span>Treno</span><em>K385</em></li>
-                        <li><span>Partenza</span><em>Xiandong - 21:00</em></li>
-                        <li><span>Arrivo</span><em>Chengduxi - 08:10</em></li>
-                        <li><span>Durata</span><em>~11h</em></li>
-                        <li><span>Data</span><em>-</em></li>
-                        <li><span>Costo</span><em>48,90€</em></li>
-                    </ul>
+                <!--  XI'AN - CHENGDU -->
+                <div class="doc-card" data-variants>
+                    <div class="doc-card-header">
+                        <h3 class="doc-card-title">Xi'an &rarr; Chengdu</h3>
+                        <div class="doc-variant-switch" role="tablist" aria-label="Tipo treno">
+                            <button type="button" class="doc-variant-btn"
+                                    data-variant="fast" role="tab">Veloce</button>
+                            <button type="button" class="doc-variant-btn is-active"
+                                    data-variant="night" role="tab">Notturno</button>
+                        </div>
+                    </div>
+
+                    <!--  VELOCE  -->
+                    <div class="doc-variant is-hidden" data-variant="fast">
+                        <ul class="doc-kv">
+                            <li><span>Treno</span><em>D-veloci</em></li>
+                            <li><span>Partenza</span><em>Xiandong/Xi'an Bei</em></li>
+                            <li><span>Arrivo</span><em>Chengdudong</em></li>
+                            <li><span>Durata</span><em>3/4 ore</em></li>
+                            <li><span>Data</span><em>-</em></li>
+                            <li><span>Costo</span><em>33-37 €</em></li>
+                        </ul>
+                    </div>
+
+                    <!--  NOTTURNO  -->
+                    <div class="doc-variant" data-variant="night">
+                        <ul class="doc-kv">
+                            <li><span>Treno</span><em>K-notturni</em></li>
+                            <li><span>Partenza</span><em>Xiandong - 21:00</em></li>
+                            <li><span>Arrivo</span><em>Chengduxi - 08:10<sup class="day-plus">+1</sup></em></li>
+                            <li><span>Durata</span><em>~12h</em></li>
+                            <li><span>Data</span><em>-</em></li>
+                            <li><span>Costo</span><em>50 €</em></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- CARD TRENO CON TRASFERIMENTO (più segmenti).
@@ -251,15 +307,66 @@
                     </ul>
                 </div>
 
+                <!-- ZHANGJIAJIE - SHANGHAI -->
+                <div class="doc-card" data-variants>
+                    <div class="doc-card-header">
+                        <h3 class="doc-card-title">Zhangjiajie &rarr; Shanghai</h3>
+                        <div class="doc-variant-switch" role="tablist" aria-label="Tipo treno">
+                            <button type="button" class="doc-variant-btn"
+                                    data-variant="fast" role="tab">Veloce</button>
+                            <button type="button" class="doc-variant-btn is-active"
+                                    data-variant="night" role="tab">Notturno</button>
+                        </div>
+                    </div>
+
+                    <!--  VELOCE  -->
+                    <div class="doc-variant is-hidden" data-variant="fast">
+                        <ul class="doc-kv">
+                            <li><span>Treno</span><em>G-veloci</em></li>
+                            <li><span>Partenza</span><em></em></li>
+                            <li><span>Arrivo</span><em></em></li>
+                            <li><span>Durata</span><em>-</em></li>
+                            <li><span>Data</span><em>-</em></li>
+                            <li><span>Costo</span><em>-</em></li>
+                        </ul>
+                    </div>
+
+                    <!--  NOTTURNO  -->
+                    <div class="doc-variant" data-variant="night">
+                        <ul class="doc-kv">
+                            <li><span>Treno</span><em></em></li>
+                            <li><span>Partenza</span><em></em></li>
+                            <li><span>Arrivo</span><em><sup class="day-plus">+1</sup></em></li>
+                            <li><span>Durata</span><em></em></li>
+                            <li><span>Data</span><em>-</em></li>
+                            <li><span>Costo</span><em></em></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--  SHANGHAI - SEOUL  -->
                 <div class="doc-card">
-                    <h3 class="doc-card-title">Zhangjiajie &rarr; Shanghai</h3>
+                    <h3 class="doc-card-title">Shanghai &rarr; Seoul</h3>
                     <ul class="doc-kv">
-                        <li><span>Treno</span><em>-</em></li>
-                        <li><span>Partenza</span><em>- · -</em></li>
-                        <li><span>Arrivo</span><em>- · -</em></li>
+                        <li><span>Compagnia</span><em>-</em></li>
+                        <li><span>Partenza</span><em>-</em></li>
+                        <li><span>Arrivo</span><em>-</em></li>
                         <li><span>Durata</span><em>-</em></li>
                         <li><span>Data</span><em>-</em></li>
-                        <li><span>Costo</span><em>-</em></li>
+                        <li><span>Costo</span><em>115-130 €</em></li>
+                    </ul>
+                </div>
+
+                <!--  SEOUL - OSAKA  -->
+                <div class="doc-card">
+                    <h3 class="doc-card-title">Seoul &rarr; Osaka</h3>
+                    <ul class="doc-kv">
+                        <li><span>Compagnia</span><em>-</em></li>
+                        <li><span>Partenza</span><em>-</em></li>
+                        <li><span>Arrivo</span><em>-</em></li>
+                        <li><span>Durata</span><em>-</em></li>
+                        <li><span>Data</span><em>-</em></li>
+                        <li><span>Costo</span><em>100-120 €</em></li>
                     </ul>
                 </div>
 
@@ -323,7 +430,6 @@
                     Usa Google Translate + WeChat "scan" per menu e cartelli.</li>
                 <li>Elettricità: prese di tipo A/C/I, 220V. Adattatore utile.</li>
                 <li>Acqua: bere solo in bottiglia, evitare acqua del rubinetto.</li>
-                <li><em>(aggiungi le regole specifiche del gruppo)</em></li>
             </ul>
         </section>
 
@@ -331,5 +437,33 @@
 
     <!-- Menu di navigazione condiviso -->
     <script src="menu.js"></script>
+
+    <!-- Toggle varianti per le card marcate con [data-variants].
+         Delegazione singola sul document: intercetta il click sui
+         .doc-variant-btn, aggiorna .is-active sui bottoni della
+         stessa card e .is-hidden sui pannelli. Nessuna dipendenza,
+         zero listener per-card, funziona anche se aggiungi nuove
+         card con varianti in futuro senza modificare questo script. -->
+    <script>
+        document.addEventListener('click', function (evt) {
+            var btn = evt.target.closest('.doc-variant-btn');
+            if (!btn) return;
+
+            var card = btn.closest('[data-variants]');
+            if (!card) return;
+
+            var key = btn.dataset.variant;
+
+            // Bottoni: solo quello cliccato resta .is-active.
+            card.querySelectorAll('.doc-variant-btn').forEach(function (b) {
+                b.classList.toggle('is-active', b === btn);
+            });
+
+            // Pannelli: visibile solo quello col data-variant che matcha.
+            card.querySelectorAll('.doc-variant').forEach(function (panel) {
+                panel.classList.toggle('is-hidden', panel.dataset.variant !== key);
+            });
+        });
+    </script>
 </body>
 </html>

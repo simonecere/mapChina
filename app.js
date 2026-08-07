@@ -487,7 +487,7 @@ const POI_DATA = [
         visitDuration: '1,5/2 ore',
         ticketPrice: 'Piazza base + terrazza lucchetti, free\n' +
             'Biglietto osservatorio, 21.000 ₩ (~14,50 €)' +
-            'Funivia (Namsan Cable Car - opzionale): 15.000 ₩ (~10,30 €) A/R',
+            '\nFunivia (Namsan Cable Car - opzionale): 15.000 ₩ (~10,30 €) A/R',
         customMeta: [
             { label: 'Meglio visitare', value: 'Un\'ora prima del tramonto' }
         ]
@@ -533,7 +533,7 @@ const POI_DATA = [
         images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026338/mon-bukchonVill1_j0vcu8.jpg',
             'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786026338/mon-bukchonVill2_r26ucs.webp'],
         mapsUrl: 'https://maps.app.goo.gl/bfVTyRqpqzUaPr276',
-        openingDays: 'Lun-Sab 10:00 - 17:00\nPer rispetto dei residenti',
+        openingDays: 'Lun-Sab 10:00 - 17:00 per rispetto dei residenti',
         visitDuration: '~1 ora',
     },
     {

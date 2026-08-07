@@ -522,6 +522,90 @@ button { font-family: inherit; }
     font-weight: 500;
 }
 
+/* ---------- Card con varianti (es. treno veloce / notturno) ----
+   Una .doc-card con attributo [data-variants] contiene:
+     - un header .doc-card-header con titolo + .doc-variant-switch
+       (segmented control a 2+ bottoni)
+     - N pannelli .doc-variant, uno per opzione, con data-variant="key"
+   Il JS in il-file.html (in fondo alla pagina) gestisce il toggle
+   aggiungendo/rimuovendo la classe .is-active sui bottoni e
+   .is-hidden sui pannelli non attivi.
+--------------------------------------------------------------- */
+.doc-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+    /* nowrap: lo switch resta SEMPRE sulla stessa riga del titolo.
+       Se lo spazio manca è il titolo che, avendo min-width: 0,
+       si adatta (in casi estremi va a capo con word-break normale). */
+    flex-wrap: nowrap;
+}
+.doc-card-header .doc-card-title {
+    margin: 0;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.doc-variant-switch {
+    /* flex-shrink: 0 = lo switch conserva la sua larghezza intera;
+       la contrazione la subisce il titolo (che ha più margine visivo). */
+    flex-shrink: 0;
+    display: inline-flex;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 1px;
+    gap: 1px;
+}
+.doc-variant-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    padding: 3px 9px;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        background .15s var(--ease-out),
+        color      .15s var(--ease-out);
+    letter-spacing: 0.02em;
+}
+.doc-variant-btn:hover:not(.is-active) {
+    color: var(--color-text);
+}
+.doc-variant-btn.is-active {
+    background: var(--color-accent);
+    color: #ffffff;
+}
+
+.doc-variant.is-hidden {
+    display: none;
+}
+
+/* Indicatore "+1" (o "+2") per orari che sforano il giorno successivo.
+   Usato tipicamente dentro un <em> della doc-kv, es. arrivo di un treno
+   notturno: <em>08:35 <sup class="day-plus">+1</sup></em>.
+   Piccolo, rosso, alzato in stile apice: leggibile senza appesantire
+   la lettura dell'orario principale.
+   line-height: 0 evita che l'apice espanda l'altezza della riga. */
+.day-plus {
+    color: var(--color-accent);
+    font-size: 0.7em;
+    font-weight: 700;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 1px;
+    letter-spacing: 0.02em;
+}
+
+
 /* ---------- Card treno con trasferimento -----------------------
    Dentro una .doc-card, ogni "leg" del viaggio è un .doc-segment
    con la sua .doc-kv. Fra un segmento e l'altro un .doc-transfer
@@ -1238,6 +1322,12 @@ button { font-family: inherit; }
     line-height: 1.5;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    /* Rispetta i newline (\n) presenti nelle stringhe di value:
+       il browser normalmente collassa \n in uno spazio, con pre-line
+       invece li rende come vera interruzione di riga. Gli altri
+       whitespace (spazi multipli, tab) continuano a essere collassati
+       normalmente, quindi il resto del rendering non cambia. */
+    white-space: pre-line;
 }
 .meta-row--short .meta-value {
     font-size: 14px;
