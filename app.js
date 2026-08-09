@@ -716,8 +716,164 @@ const POI_DATA = [
             'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-chengdu1_wnri87.jpg',
             'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785590754/citta-chengdu2_kaastq.jpg'
         ]
-
     },
+    {
+        id: 'dujiangyan',
+        name: 'Dujiangyan',
+        city: 'Sichuan - Chengdu',
+        category: 'city',
+        coords: [30.990262891008882, 103.61664969263762],
+        zoom: 11,
+        description: "Dujiangyan è una rinomata città-distretto a circa 50 km " +
+            "da Chengdu, celebre nel mondo per il suo straordinario " +
+            "sistema di irrigazione privo di dighe. Progettato nel " +
+            "256 a.C. dal governatore Li Bing, il complesso incanala " +
+            "il fiume Minjiang sfruttando la topografia naturale per " +
+            "prevenire inondazioni e irrigare la pianura del Sichuan, " +
+            "rendendolo un capolavoro di ingegneria riconosciuto dall'UNESCO.",
+        tags: ["Città", "Panda", "Fiume"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292840/city-dujiangyan_crqg0u.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/kWy5cjKaivk1uLYZA',
+    },
+    {
+        id: 'panda-valley',
+        name: 'Panda Valley',
+        city: 'Dujiangyan - Chengdu',
+        category: 'nature',
+        coords: [30.967303674382045, 103.59092972817113],
+        zoom: 15,
+        description: "La Panda Valley di Dujiangyan è una struttura immersa nella " +
+            "natura progettata specificamente per la reintroduzione " +
+            "graduale dei panda giganti nel loro ambiente selvaggio. " +
+            "Meno affollata e più intima rispetto alla base principale di " +
+            "Chengdu, offre un'atmosfera tranquilla con un percorso tra " +
+            "colline e bambù, oltre a un'area dedicata alla passeggiata " +
+            "libera tra i panda rossi.",
+        tags: ["Natura", "Panda", "Attività"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292869/nat-pandaValley1_ujskxj.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292869/nat-pandaValley2_dgfxj9.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/S78pKovvYuYHqUm7A',
+        openingDays: 'Tutti i giorni, 07:30 - 17:00',
+        visitDuration: '1.5/2 ore',
+        ticketPrice: '55 ¥ (~7,00 €)',
+        reservation: 'Obbligatoria con Trip.com',
+        customMeta: [
+            { label: 'Meglio visitare', value: 'Al mattino presto, all\'apertura; la mattina' +
+                    ' i panda sono attivi e mangiano, mentre nelle altre ore generalmente dormono.'},
+            { label: 'Consigliato',    value: 'Ottima alternativa alla base di' +
+                    ' Chengdu per chi cerca un\'esperienza più rilassante e con meno code' },
+            { label: 'Come arrivare?',   value: 'Raggiungibile con treno veloce + taxi, ' +
+                    'abbinando la visita della città', }
+        ]
+    },
+    {
+        id: 'south-bridge-dujiangyan',
+        name: 'South Bridge (Nanqiao Bridge)',
+        city: 'Dujiangyan - Chengdu',
+        category: 'monument',
+        coords: [30.996601929734275, 103.61596531009786],
+        zoom: 15,
+        description: "Il Ponte Nanqiao (Ponte del Sud) è un maestoso ponte " +
+            "coperto in stile tradizionale che scavalca il impetuoso " +
+            "fiume Minjiang. Decorato con intagli in legno, dipinti " +
+            "e sculture di draghi, è famoso in tutta la Cina per " +
+            "lo spettacolo serale: le luci blu proiettate sull'acqua " +
+            "creano l'illusione di un fiume di giada fluorescente.",
+        tags: ["Ponte", "Acqua colorata", "Fuego"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292856/mon-southBridgeDuj2_glhlnr.webp',
+        mapsUrl: 'https://maps.app.goo.gl/fEoLDLUQaKfLLeGn8',
+    },
+    {
+        id: 'research-base-panda',
+        name: 'Research Base of Giant Panda breeding',
+        city: 'Chengdu',
+        category: 'activity',
+        coords: [30.733114140225204, 104.14578341426495],
+        zoom: 15,
+        description: "La Base di Ricerca di Chengdu per l'Allevamento dei Panda " +
+            "Giganti è una famosa struttura no-profit focalizzata sulla " +
+            "conservazione e tutela del panda gigante e di altre specie " +
+            "rare. Immersa in oltre 200 ettari di rigogliose foreste di " +
+            "bambù, riproduce l'habitat naturale dei panda, consentendo " +
+            "ai visitatori di osservare da vicino cuccioli, adulti e " +
+            "i simpatici panda rossi nei loro ampi recinto all'aperto.",
+        tags: ["Attività", "Panda", "Natura"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292869/nat-chengduResearchPanda2_kpjuz1.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/CAgiKZsYkck88k3F6',
+        openingDays: 'Tutti i giorni, 07:30 - 17:00',
+        visitDuration: '2-3 ore',
+        ticketPrice: '55 ¥ (~7,00 €)',
+        reservation: 'Obbligatoria con passaporto (slot orari prefissati)',
+        customMeta: [
+            { label: 'Meglio visitare', value: 'Al mattino presto, all\'apertura; la mattina' +
+            ' i panda sono attivi e mangiano, mentre nelle altre ore generalmente dormono.'}
+        ]
+    },
+
+    {
+        id: 'wenshu-monastery',
+        name: 'Wenshu Yuan Monastery',
+        city: 'Chengdu',
+        category: 'monument',
+        coords: [30.676284349582133, 104.07169196486855],
+        zoom: 15,
+        description: "Il Monastero di Wenshu è il tempio buddista zen meglio " +
+            "conservato di Chengdu, risalente alla dinastia Tang. " +
+            "Dedicato al Bodhisattva Manjushri, ospita preziose " +
+            "reliquie, dipinti antichi e centinaia di statue di " +
+            "bronzo e giada. Con i suoi giardini silenziosi e la celebre " +
+            "casa da tè all'aperto, offre un'oasi di pace nel cuore urbano.",
+        tags: ["Temple", "Buddista"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292855/mon-wenshuMon1_z31atu.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292857/mon-wenshuMon2_h2gfzj.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/gZJL8byayXohdmvPA',
+        openingDays: 'Tutti i giorni, 08:00 - 17:00',
+        visitDuration: '~1 ora',
+        freeEntry: true,
+    },
+    {
+        id: 'anshun-bridge',
+        name: 'Anshun Bridge',
+        city: 'Chengdu',
+        category: 'monument',
+        coords: [30.64250280647144, 104.08597743933059],
+        zoom: 15,
+        description: "Il Ponte Anshun è uno storico ponte coperto che " +
+            "scavalca il fiume Jinjiang, citato persino da Marco " +
+            "Polo nei suoi viaggi. Ricostruito nel 2003 nello stile " +
+            "architettonico tradizionale Ming e Qing, ospita un " +
+            "famoso ristorante al suo interno ed è circondato " +
+            "da una delle zone serali più vivaci di Chengdu.",
+        tags: ["Ponte", "Serale"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292856/mon-anshunBridge_p6w2qm.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/5NCVPE7PDpRLCyRB7',
+        openingDays: 'Aperto 24/7\nIlluminazione 18:30 - 23:00',
+        customMeta: [
+            { label: 'Consigli',   value: 'Visitare al tramonto o la sera.\n'+
+            'Poco lontano, il quartiere Jiuyanqiao è centro di vita notturna,' +
+            'con pub e musica live (rock)' },
+        ]
+    },
+    {
+        id: 'kuan-zhai-alley',
+        name: 'Kuan & Zhai Alley',
+        city: 'Chengdu',
+        category: 'shopping',
+        coords: [30.66360265247733, 104.0524005932643],
+        zoom: 15,
+        description: "Kuanzhai Xiangzi (Vicoli Largo e Stretto) è uno storico " +
+            "quartiere composto da tre vicoli paralleli risalenti " +
+            "alla dinastia Qing. Perfettamente restaurati, uniscono " +
+            "l'architettura cortiliva della Cina antica a caffè " +
+            "moderni, boutique di design, bar da tè ed esibizioni " +
+            "di artisti di strada, offrendo un affascinante " +
+            "contrasto tra passato e modernità.",
+        tags: ["Shopping", "Street food"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786292879/sho-kuanZhaiAll1_h9hqxq.webp',
+        mapsUrl: 'https://maps.app.goo.gl/swrYjrrJ7ypSSHPq9',
+        openingDays: 'Aperto 24/7\nNegozi 09:00 - 22:00',
+    },
+
 
 
 
