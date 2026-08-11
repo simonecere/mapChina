@@ -42,6 +42,7 @@ const POI_DATA = [
         id: 'beijing',
         name: 'Pechino',
         city: 'Cina — Capitale',
+        cityKey: 'pechino',
         category: 'city',
         coords: [39.9042, 116.4074],
         zoom: 11,
@@ -56,6 +57,7 @@ const POI_DATA = [
         id: 'forbidden-city',
         name: 'Città Proibita',
         city: 'Pechino',
+        subcategory: 'palace',
         category: 'monument',
         coords: [39.917024511195464, 116.39707721086508],
         zoom: 15,
@@ -73,6 +75,7 @@ const POI_DATA = [
     {
         id: 'palazzo-estate',
         name: 'Palazzo d\'Estate (Yíhéyuán)',
+        subcategory: 'palace',
         city: 'Pechino',
         category: 'monument',
         coords: [40.000097334158525, 116.27548205459539],
@@ -93,6 +96,7 @@ const POI_DATA = [
     {
         id: 'tempio-paradiso',
         name: 'Tempio del Paradiso',
+        subcategory: 'temple',
         city: 'Pechino',
         category: 'monument',
         coords: [39.882365533474974, 116.40663782340609],
@@ -116,6 +120,7 @@ const POI_DATA = [
     {
         id: 'national-museum',
         name: 'Museo nazionale della Cina',
+        subcategory: 'museum',
         city: 'Pechino',
         category: 'monument',
         coords: [39.905724873337114, 116.4016584817068],
@@ -138,6 +143,7 @@ const POI_DATA = [
     {
         id: 'lama-temple',
         name: 'Lama Temple',
+        subcategory: 'temple',
         city: 'Pechino',
         category: 'monument',
         coords: [39.947840689498165, 116.41727245900996],
@@ -158,6 +164,57 @@ const POI_DATA = [
         ticketPrice: '25 ¥ (~3,15 €)',
         reservation: 'Consigliata',
     },
+    {
+        id: 'shichahai',
+        name: 'Shichahai',
+        city: 'Pechino',
+        category: 'quartieri',
+        coords: [39.94191090033168, 116.38244254368172],
+        zoom: 14,
+        description: "Shichahai è una celebre e panoramica area composta " +
+            "da tre laghi (Qianhai, Houhai e Xihai) situata a nord " +
+            "della Città Proibita. Circondata da storici vicoli " +
+            "(hutong), residenze principesche e antichi ponti in pietra, " +
+            "offre un'atmosfera unica: di giorno rilassante tra " +
+            "giri in barca e da tè, di sera centro della vita " +
+            "notturna con pub e musica dal vivo.",
+        tags: ["Quartiere", "Hutong", "Templi", "Storia"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462321/mon-shichahai1_yq9oid.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462324/mon-shichahai2_xg474a.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/DXSyZJWoQjNVxtGR9',
+        visitDuration: '~1 - 1,5 ore',
+        customMeta: [
+            { label: 'Consigli',     value: 'Il ponte Yinding (Silver Ingot Bridge) è ' +
+                    'il punto di separazione tra il lago Qianhai e l\'Houhai, famoso ' +
+                    'per la vista sulle montagne circostanti e le foto al tramonto.' }
+        ]
+    },
+    {
+        id: 'fragrant-hills',
+        name: 'Fragrant Hills Park',
+        city: 'Pechino',
+        category: 'nature',
+        coords: [39.98603861748186, 116.18681519741064],
+        zoom: 14,
+        description: "Le Colline Profumate (Xiāngshān) sono un vasto parco " +
+            "forestale situato ai piedi delle montagne a nord-ovest " +
+            "di Pechino. Antica riserva imperiale di caccia della " +
+            "dinastia Qing, il parco si estende tra colline, padiglioni " +
+            "storici e templi tranquilli. È rinomato in tutta la Cina " +
+            "per i suoi spettacolari colori autunnali quando i ginkgo e " +
+            "gli aceri tingono la montagna di rosso e oro.",
+        tags: ["Natura", "Autunno"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462288/nat-fragrantHills1_iil7yf.jpg',
+                'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462290/nat-fragrantHills2_axbbd4.jpg',
+                'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462291/nat-fragrantHills3_tfhbrd.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/4zQK1Y3vfDeevtCK6',
+        openingDays: 'Tutti i giorni, 06:00 - 18:30',
+        visitDuration: '2/3 ore',
+        ticketPrice: '10 ¥ (~1,30 €)',
+    },
+
+
+
 
     /*=======================   CIBO+ PEK =============================*/
     {
@@ -189,6 +246,7 @@ const POI_DATA = [
         id: 'shanghai',
         name: 'Shanghai',
         city: 'Cina — Municipalità',
+        cityKey: 'shanghai',
         category: 'city',
         coords: [31.2304, 121.4737],
         zoom: 11,
@@ -346,6 +404,28 @@ const POI_DATA = [
         mapsUrl: 'https://maps.app.goo.gl/Br11JcJmvbQunkZg6',
         crowdLevel: 3,
     },
+    {
+        id: 'tempio-dio-città',
+        name: 'Tempio del Dio della Città',
+        subcategory: 'temple',
+        city: 'Shanghai',
+        category: 'monument',
+        coords: [31.225786029266185, 121.4925070745964],
+        zoom: 15,
+        description: "Il Tempio del Dio della Città (Cénghuángmiào) è uno dei " +
+            "templi taoisti più importanti e storici di Shanghai. " +
+            "Originariamente costruito durante la dinastia Ming, è " +
+            "dedicato ai protettori spirituali della città. " +
+            "Situato adiacente ai Giardini Yu, è il cuore di un vivace " +
+            "quartiere tradizionale ricco di architetture d'epoca, " +
+            "negozi di artigianato e banchi di cibi tipici.",
+        tags: ["Temple", "Taoista"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462330/mon-tempioDioCitt1_vezhqp.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/46f2Lh3e2bHhSaeW9',
+        openingDays: 'Tutti i giorni, 08:30 - 16:30',
+        visitDuration: '30 - 45 minuti',
+        ticketPrice: '10 ¥ (~1,30 €)',
+    },
 
 
 
@@ -364,6 +444,7 @@ const POI_DATA = [
         id: 'seoul',
         name: 'Seul',
         city: 'Corea del Sud — Capitale',
+        cityKey: 'seoul',
         category: 'city',
         coords: [37.5665, 126.9780],
         zoom: 11,
@@ -380,7 +461,7 @@ const POI_DATA = [
     {
         id: 'gwanghwamun-gate',
         name: 'Gwanghwamun Gate',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'monument',
         coords: [37.57639586861782, 126.97690500325896],
         zoom: 15,
@@ -404,7 +485,7 @@ const POI_DATA = [
     {
         id: 'myeong-dong-market',
         name: 'Myeongdong Night Market',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'shopping',
         coords: [37.561919288875266, 126.98569357337766],
         zoom: 15,
@@ -426,8 +507,9 @@ const POI_DATA = [
     },
     {
         id: 'gyeongbokgung-palace',
+        subcategory: 'palace',
         name: 'Gyeongbokgung',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'monument',
         coords: [37.57970199873027, 126.97699808122107],
         zoom: 15,
@@ -448,7 +530,7 @@ const POI_DATA = [
     {
         id: 'hongdae-shopping-street',
         name: 'Hongdae Shopping Street',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'shopping',
         coords: [37.554449504782234, 126.92238332776883],
         zoom: 15,
@@ -469,7 +551,7 @@ const POI_DATA = [
     {
         id: 'n-seul-tower',
         name: 'Seul Tower',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'monument',
         coords: [37.5516627217384, 126.9881627477384],
         zoom: 15,
@@ -519,7 +601,7 @@ const POI_DATA = [
     {
         id: 'bukchon-hanok-village',
         name: 'Bukchon Hanok Village',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'monument',
         coords: [37.58162032547799, 126.98499210182949],
         zoom: 14,
@@ -539,7 +621,7 @@ const POI_DATA = [
     {
         id: 'gangnam-hands',
         name: 'Gangnam',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'monument',
         coords: [37.51379657037621, 127.06079878620051],
         zoom: 15,
@@ -557,7 +639,7 @@ const POI_DATA = [
     {
         id: 'namdaemun-market',
         name: 'Namdaemun Market',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'shopping',
         coords: [37.559370554897924, 126.97757415386383],
         zoom: 15,
@@ -579,7 +661,8 @@ const POI_DATA = [
     {
         id: 'deoksugung-palace',
         name: 'Deoksugung Palace',
-        city: 'Seul',
+        subcategory: 'palace',
+        city: 'Seoul',
         category: 'monument',
         coords: [37.565948490098606, 126.97486247895333],
         zoom: 15,
@@ -604,7 +687,8 @@ const POI_DATA = [
     {
         id: 'memorial-kor-war',
         name: 'Memoriale della Guerra della Corea',
-        city: 'Seul',
+        subcategory: 'museum',
+        city: 'Seoul',
         category: 'monument',
         coords: [37.537296426678125, 126.97727821072802],
         zoom: 15,
@@ -626,7 +710,7 @@ const POI_DATA = [
     {
         id: 'cheonggyecheon',
         name: 'Cheonggyecheon',
-        city: 'Seul',
+        city: 'Seoul',
         category: 'nature',
         coords: [37.570616794486554, 126.97873465626606],
         zoom: 15,
@@ -658,6 +742,7 @@ const POI_DATA = [
     {
         id: 'xian',
         name: "Xi'an",
+        cityKey: 'xian',
         city: 'Cina — Shaanxi',
         category: 'city',
         coords: [34.3416, 108.9398],
@@ -680,15 +765,188 @@ const POI_DATA = [
         coords: [34.3848, 109.2734],
         zoom: 14,
         description:
-            "Mausoleo dell'imperatore Qin Shi Huang (III sec. a.C.): " +
-            "oltre 8.000 statue in terracotta a grandezza naturale, " +
-            "ciascuna con tratti distinti. Scoperto nel 1974 da " +
-            "contadini che scavavano un pozzo.",
+            "L'Esercito di Terracotta (Bīngmǎyǒng) è una delle scoperte " +
+            "archeologiche più straordinarie della storia, creata per " +
+            "scortare il primo imperatore Qin Shi Huang nell'aldilà. " +
+            "Il complesso custodisce oltre 8.000 statue a grandezza " +
+            "naturale tra soldati, cavalli e carri da guerra, ciascuna " +
+            "caratterizzata da tratti del viso e dettagli unici. " +
+            "Un capolavoro millenario dichiarato Patrimonio UNESCO.",
         tags: ['Monumento', 'UNESCO', 'Archeologia', 'Storia'],
         image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785593151/mon-XIAesercitoTer1_ayplnb.jpg',
-        bestTime: 'Mar-Mag / Set-Nov',
-        openingDays: 'Ogni giorno 8:30-17:30',
-        priceLevel: 3
+        openingDays: 'Ogni giorno 8:30 - 18:00',
+        visitDuration: '~2 - 2,5 ore + 40/45 min di tragitto',
+        ticketPrice: '120 ¥ (~15,20 €)',
+        reservation: 'Obbligatoria fino a 7 giorni prima',
+    },
+    {
+        id: 'city-wall',
+        name: 'Mura della città',
+        city: "Xi'an",
+        category: 'monument',
+        coords: [34.279223657352524, 108.94642432685062],
+        zoom: 14,
+        description: "Le Mura di Xi'an sono una delle fortificazioni " +
+            "medievali più imponenti e meglio conservate al mondo. " +
+            "Erette durante la dinastia Ming sul tracciato della " +
+            "capitale Tang, formano un rettangolo di circa 14 km " +
+            "che racchiude il centro storico. Ampie e pavimentate, " +
+            "offrono una vista panoramica e la possibilità unica di " +
+            "essere percorse interamente a piedi o in bicicletta.",
+        tags: ["Monumenti", "Mura", "Giro"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462313/mon-muraXIA1_qa0brj.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462317/mon-muraXIA2_zld45b.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/eMJmpavYNyAcFBCr7',
+        openingDays: 'Tutti i giorni, 08:00 - 20/22:00',
+        visitDuration: '1 - 1.5 ore, 3/4 ore giro completo',
+        ticketPrice: '54 ¥ (~6,80 €)',
+        customMeta: [
+            { label: 'Consigli',   value: 'Salire prima del tramonto per pedalare con la luce' +
+                    'per poi vedere lo spettacolo delle mura con le luci' },
+            { label: "Punto di entrata consigliato",   value:'Porta Sud (la più ' +
+                    'grandiosa)'},
+        ]
+    },
+    {
+        id: 'giant-wild-goose-pagoda',
+        subcategory: 'temple',
+        name: 'Pagoda della Grande Oca Selvatica',
+        city: "Xi'an",
+        category: 'monument',
+        coords: [34.21838081110034, 108.96415716435656],
+        zoom: 15,
+        description: "La Grande Pagoda dell'Oca Selvatica (Dà Yàn Tǎ) è " +
+            "un'iconica struttura buddista eretta nel 652 durante " +
+            "la dinastia Tang. Costruita per custodire i preziosi " +
+            "sutra e le reliquie portate dall'India dal monaco " +
+            "Xuanzang, si erge su 7 piani all'interno del Tempio " +
+            "Da Ci'en, circondata da piazze e fontane scenografiche.",
+        tags: ["Monumento", "Pagoda"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462319/mon-pagodaOca1_gknkfr.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462315/mon-pagodaOca2_onevfx.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/L5LjaGxNZz3UjeBCA',
+        openingDays: 'Tutti i giorni, 08:30 - 18:30',
+        visitDuration: '1 - 1.5 ore',
+        ticketPrice: '40 ¥ (~5,00 €), ma per il tempio.\n' +
+            'Per la pagoda, 25 ¥ (~3,15 €)'
+    },
+    {
+        id: 'bell-tower-xi',
+        name: "Bell Tower of Xi'an",
+        city: "Xi'an",
+        category: 'monument',
+        coords: [34.260018245077745, 108.94729423943429],
+        zoom: 15,
+        description: "La Torre della Campana (Zhōnglóu) è il cuore geografico " +
+            "e simbolico del centro storico di Xi'an. Costruita " +
+            "nel 1384 durante la dinastia Ming, è una maestosa " +
+            "struttura in legno e mattoni con tetti a più livelli " +
+            "e tegole verde scuro. Storicamente usata per " +
+            "scandire il tempo e dare l'allarme, domina l'incrocio " +
+            "dei quattro stradoni principali della città.",
+        tags: ["Monumento", "Pagoda"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462333/mon-bellTower1_gm2ttx.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462333/mon-bellTower2_w6m0nv.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/xcXq4vPTLpgPF1Ye7',
+        openingDays: 'Tutti i giorni, 08:30 - 21:30',
+        visitDuration: '30 - 45 minuti',
+        ticketPrice: '30 ¥ (~3,80 €), solo Torre della Campana\n' +
+            '50 ¥ (~6,30 €), biglietto combinato',
+    },
+    {
+        id: 'huaqing-palace',
+        name: 'Huaqing Palace',
+        subcategory: 'palace',
+        city: "Xi'an",
+        category: 'monument',
+        coords: [34.374460404121606, 109.2125228789891],
+        zoom: 15,
+        description: "Il Palazzo Huaqing (Huaqing Pool) è un antico complesso " +
+            "di palazzi imperiali e sorgenti termali situato ai piedi " +
+            "del monte Lishan. Famoso fin dalla dinastia Tang, è celebre " +
+            "per essere stato il luogo di villeggiatura e la romantica " +
+            "dimora dell'Imperatore Xuanzong e della sua amata concubina " +
+            "Yang Guifei. Tra padiglioni storici, vasche in marmo d'epoca " +
+            "e splendidi giardini, ripercorre secoli di storie e leggende.",
+        tags: ["Monumento", "Palazzo", "Sorgenti"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462627/mon-huaqingPalace1_evn9l9.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462336/mon-huaqingPalace2_wlbfdv.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/jNKkbPSCvsEgVrNaA',
+        openingDays: 'Tutti i giorni, 07:30 - 18:00',
+        visitDuration: '1.5 - 2 ore',
+        ticketPrice: '120 ¥ (~15,20 €)',
+        customMeta: [
+            { label: 'Consigli',   value: 'Si trova nello stesso distretto ' +
+                    'dell\'Esercito di Terracotta, conviene combinare'},
+        ],
+    },
+    {
+        id: 'shaanxi-history-museum',
+        name: 'Shaanxi History Museum',
+        city: "Xi'an",
+        category: 'monument',
+        subcategory: 'museum',
+        coords: [34.223628299711635, 108.95534667967763],
+        zoom: 15,
+        description: "Il Museo della Storia dello Shaanxi è uno dei più importanti " +
+            "e maestosi musei nazionali della Cina. Con una collezione " +
+            "di oltre 370.000 reperti che spaziano dalla preistoria alla " +
+            "dinastia Qing, custodisce bronzi antichi, affreschi imperiali " +
+            "Tang, ceramiche della Via della Seta e tesori d'oro e d'argento " +
+            "scoperti nei dintorni dell'antica capitale Chang'an.",
+        tags: ["Museo", "Storia"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462345/act-shhanxiMuseum1_lhok5a.avif',
+        mapsUrl: 'https://maps.app.goo.gl/iWWjNXikxWSUki4s7',
+        openingDays: 'Tutti i giorni, 08:30 - 18:00',
+        visitDuration: '2 ore',
+        freeEntry: true,
+        ticketPrice: 'Sala dei Tesori della Dinastia Tang, 30 ¥ (~3,80 €)',
+        reservation: 'Molto rigida, occorre prenotare con massimo anticipo, ' +
+            'fino a 3 giorni prima'
+    },
+    {
+        id: 'tang-paradise',
+        name: 'Tang Paradise',
+        city: "Xi'an",
+        category: 'nature',
+        coords: [34.21291389860814, 108.9745240910494],
+        zoom: 15,
+        description: "Tang Paradise è un vasto parco a tema culturale " +
+            "situato vicino alla Grande Pagoda dell'Oca Selvatica. " +
+            "Costruito nello stile architettonico della dinastia Tang, " +
+            "riproduce un antico giardino imperiale con imponenti " +
+            "padiglioni sul lago, ponti tradizionali, spettacoli di " +
+            "danza, musica d'epoca e giochi d'acqua illuminati.",
+        tags: ["Parco", "Dinastia Tang"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462326/mon-tangParadise1_akfzx6.webp',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462329/mon-tangParadise2_odeaht.webp'],
+        mapsUrl: 'https://maps.app.goo.gl/ygELcZicjSW4tvgQ8',
+        openingDays: 'Tutti i giorni, 09:00 - 22:00',
+        visitDuration: '1.5 - 2 ore',
+        ticketPrice: '120 ¥ (~15,20 €)',
+        customMeta: [
+            { label: 'Orario consigliato',   value: 'La sera per vedere ' +
+                    'le lanterne riflesse sul lago'}
+        ]
+    },
+    {
+        id: 'shuyuanmen',
+        name: 'Shuyuanmen',
+        city: "Xi'an",
+        category: 'monument',
+        coords: [34.25315824901608, 108.94912819682101],
+        zoom: 15,
+        description: "Shuyuanmen è una storica via culturale situata nei pressi " +
+            "della Porta Sud delle mura di Xi'an. Prende il nome " +
+            "dall'antica Accademia Guanzhong risalente alla dinastia " +
+            "Ming. Caratterizzata da un'architettura d'epoca con " +
+            "edifici in pietra e legno, è famosa per i suoi negozi " +
+            "di pennelli da calligrafia, inchiostri, carte artigianali, " +
+            "sigilli intagliati e dipinti tradizionali.",
+        tags: ["Zona pedonale"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462324/mon-shuyuanmen1_clqn0s.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/gUQw1TnaqTsRt1au5',
+        openingDays: 'Tutti i giorni, negozi 09:00 - 19:00',
     },
 
 
@@ -704,6 +962,7 @@ const POI_DATA = [
         id: 'chengdu',
         name: 'Chengdu',
         city: 'Cina — Sichuan',
+        cityKey: 'chengdu',
         category: 'city',
         coords: [30.5728, 104.0668],
         zoom: 11,
@@ -721,6 +980,7 @@ const POI_DATA = [
         id: 'dujiangyan',
         name: 'Dujiangyan',
         city: 'Sichuan - Chengdu',
+        cityKey: 'chengdu',
         category: 'city',
         coords: [30.990262891008882, 103.61664969263762],
         zoom: 11,
@@ -739,6 +999,7 @@ const POI_DATA = [
         id: 'panda-valley',
         name: 'Panda Valley',
         city: 'Dujiangyan - Chengdu',
+        cityKey: 'chengdu',
         category: 'nature',
         coords: [30.967303674382045, 103.59092972817113],
         zoom: 15,
@@ -770,6 +1031,7 @@ const POI_DATA = [
         id: 'south-bridge-dujiangyan',
         name: 'South Bridge (Nanqiao Bridge)',
         city: 'Dujiangyan - Chengdu',
+        cityKey: 'chengdu',
         category: 'monument',
         coords: [30.996601929734275, 103.61596531009786],
         zoom: 15,
@@ -787,7 +1049,7 @@ const POI_DATA = [
         id: 'research-base-panda',
         name: 'Research Base of Giant Panda breeding',
         city: 'Chengdu',
-        category: 'activity',
+        category: 'nature',
         coords: [30.733114140225204, 104.14578341426495],
         zoom: 15,
         description: "La Base di Ricerca di Chengdu per l'Allevamento dei Panda " +
@@ -812,6 +1074,7 @@ const POI_DATA = [
 
     {
         id: 'wenshu-monastery',
+        subcategory: 'temple',
         name: 'Wenshu Yuan Monastery',
         city: 'Chengdu',
         category: 'monument',
@@ -955,6 +1218,7 @@ const POI_DATA = [
         id: 'osaka',
         name: 'Osaka',
         city: 'Japan',
+        cityKey: 'osaka',
         category: 'city',
         coords: [34.6990252321527, 135.49804993198111],
         zoom: 10,
@@ -971,7 +1235,106 @@ const POI_DATA = [
         mapsUrl: 'https://maps.app.goo.gl/EC4PnWvmWX9jG5XUA',
     },
 
+    /* ------------------------------------------------------------------
+                       ---BANGKOK---
+------------------------------------------------------------------*/
+    {
+        id: 'bangkok',
+        name: 'Bangkok',
+        city: 'Thailandia',
+        cityKey: 'bangkok',
+        category: 'city',
+        coords: [13.78122356464266, 100.51319218519984],
+        zoom: 10,
+        description: "Bangkok è la vibrante capitale della Thailandia, " +
+            "famosa per i suoi sfolgoranti templi dorati, i vivaci " +
+            "mercati su strada e una vita notturna leggendaria. " +
+            "Attraversata dal fiume Chao Phraya, la città offre un " +
+            "affascinante contrasto tra l'antica spiritualità " +
+            "dei suoi santuari, come il Grande Palazzo Reale " +
+            "e il Wat Arun, e la modernità dei suoi grattacieli " +
+            "e centri commerciali ultramoderni.",
+        tags: ["Città", "Capitale", "Lady or ladyboy?"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462277/city-bangkok1_ikjwzr.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462276/city-bangkok2_fwwkuf.jpg'],
+        mapsUrl: 'https://maps.app.goo.gl/7oNXUjqskwqnavJL8',
+    },
 
+
+
+    /* ------------------------------------------------------------------
+                           ---ZHANGJIAJIE---
+------------------------------------------------------------------*/
+    {
+        id: 'zhangjiajie',
+        name: 'Zhangjiajie',
+        city: 'Hunan',
+        cityKey: 'zhangjiajie',
+        category: 'city',
+        coords: [29.114559522255153, 110.47738630682007],
+        zoom: 11,
+        description: "Zhangjiajie, una città nel Nord-ovest della provincia " +
+            "cinese dello Hunan, comprende Wulingyuan, una zona famosa per i " +
+            "paesaggi scenografici. In questa area protetta si innalzano migliaia " +
+            "di pilastri di quarzarenite dalla forma frastagliata, molti dei quali " +
+            "superano i 200 m di altezza. Qui si trovano anche grotte ricche di " +
+            "stalattiti e stalagmiti, oltre a foreste, fiumi, cascate, due grandi " +
+            "ponti naturali e animali e piante in via di estinzione.",
+        tags: ["Città", "Natura"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462274/city-zhangjiajie2_gnhlpk.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/GCu7vDWmi6TnaPmF8',
+    },
+
+
+    {
+        id: 'parco-zhangjiajie',
+        name: 'Parco nazionale forestale di Zhangjiajie',
+        city: 'Hunan',
+        cityKey: 'zhangjiajie',
+        category: 'nature',
+        coords: [29.31755833750445, 110.43485017927311],
+        zoom: 13,
+        description: "Parco Forestale Nazionale celebre per i suoi imponenti " +
+            "pilastri di pietra arenaria che hanno ispirato le montagne " +
+            "fluttuanti del film Avatar. Un paesaggio mozzafiato caratterizzato " +
+            "dall'ardito ascensore Bailong e dal famoso e vertiginoso " +
+            "Ponte di Vetro sul Grand Canyon. Uno dei luoghi naturali più " +
+            "spettacolari della Cina.",
+        tags: ["Natura", "Chiavatar", "Immenso"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-zhangjiajie1_ueklqa.png',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666263/nat-zhangjiajie2_v9x0ul.webp'],
+        mapsUrl: 'https://maps.app.goo.gl/j45KkgQgoneQkK4u5',
+        ticketPrice: '225-239 ¥ (~29-36 €) valido 4 giorni + bus interni inclusi',
+        openingDays: 'Ogni giorno 7:00-17:00',
+        visitDuration: '1 giorno in fast, 2 con più calma (consigliato)',
+        customMeta: [
+            { label: 'Ascensore Bailong',       value: '326m in 88s - 65 ¥ (~8,50 €)' },
+            { label: 'Funivia Tianzi Mountain', value: 'Ottima vista sui picchi forestali, 75¥ (~9,50 €)' },
+            { label: 'Funivia Yangjiajie',      value: 'Comoda per raggiungere la Natural Great Wall, 79 ¥ (~10 €)' },
+            { label: 'Occhio alle scimmie',     value: 'Scippano come a N...' }
+        ]
+    },
+    {
+        id: 'porta-del-cielo',
+        name: 'Porta del Cielo',
+        city: 'Monte Tianmen - Hunan',
+        cityKey: 'zhangjiajie',
+        category: 'nature',
+        coords: [29.068640150042604, 110.47542853076597],
+        zoom: 14,
+        description: "Spettacolare cavità naturale aperta nella roccia del Monte " +
+            "Tianmen, raggiungibile con una scalinata da 999 gradini o con " +
+            "la funivia urbana più lunga del mondo (7,5 km). Famosa per le " +
+            "sue passerelle di vetro a picco sul vuoto e la strada tortuosa " +
+            "delle 99 curve. Uno dei luoghi più sacri e scenografici della Cina.",
+        tags: ["Natura", "Piottata", "Mozzafiato"],
+        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-tianmenPorta2_w7h4pk.jpg',
+            'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-tianmenPorta1_iqm8fl.webp'],
+        mapsUrl: 'https://maps.app.goo.gl/GQeN8KezcWUeMyfE9',
+        ticketPrice: 'All-Inclusive 278 ¥ (~36 €), comprende bus interni, cheat scala mobile per i gradini e una seggiovia',
+        openingDays: 'Ogni giorno ~7:30-18:30',
+        visitDuration: '4-5 ore',
+    },
     /* ------------------------------------------------------------------
                             ---ALTRO---
  ------------------------------------------------------------------*/
@@ -1110,53 +1473,7 @@ const POI_DATA = [
         }
     },
 
-    {
-    id: 'parco-zhangjiajie',
-        name: 'Parco nazionale forestale di Zhangjiajie',
-    city: 'Hunan',
-    category: 'nature',
-    coords: [29.31755833750445, 110.43485017927311],
-    zoom: 13,
-    description: "Parco Forestale Nazionale celebre per i suoi imponenti " +
-"pilastri di pietra arenaria che hanno ispirato le montagne " +
-"fluttuanti del film Avatar. Un paesaggio mozzafiato caratterizzato " +
-"dall'ardito ascensore Bailong e dal famoso e vertiginoso " +
-"Ponte di Vetro sul Grand Canyon. Uno dei luoghi naturali più " +
-"spettacolari della Cina.",
-    tags: ["Natura", "Chiavatar", "Immenso"],
-    images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-zhangjiajie1_ueklqa.png',
-    'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666263/nat-zhangjiajie2_v9x0ul.webp'],
-    mapsUrl: 'https://maps.app.goo.gl/j45KkgQgoneQkK4u5',
-    ticketPrice: '225-239 ¥ (~29-36 €) valido 4 giorni + bus interni inclusi',
-    openingDays: 'Ogni giorno 7:00-17:00',
-    visitDuration: '1 giorno in fast, 2 con più calma (consigliato)',
-    customMeta: [
-        { label: 'Ascensore Bailong',       value: '326m in 88s - 65 ¥ (~8,50 €)' },
-        { label: 'Funivia Tianzi Mountain', value: 'Ottima vista sui picchi forestali, 75¥ (~9,50 €)' },
-        { label: 'Funivia Yangjiajie',      value: 'Comoda per raggiungere la Natural Great Wall, 79 ¥ (~10 €)' },
-        { label: 'Occhio alle scimmie',     value: 'Scippano come a N...' }
-    ]
-},
-{
-    id: 'porta-del-cielo',
-        name: 'Porta del Cielo',
-    city: 'Monte Tianmen - Hunan',
-    category: 'nature',
-    coords: [29.068640150042604, 110.47542853076597],
-    zoom: 14,
-    description: "Spettacolare cavità naturale aperta nella roccia del Monte " +
-    "Tianmen, raggiungibile con una scalinata da 999 gradini o con " +
-    "la funivia urbana più lunga del mondo (7,5 km). Famosa per le " +
-    "sue passerelle di vetro a picco sul vuoto e la strada tortuosa " +
-    "delle 99 curve. Uno dei luoghi più sacri e scenografici della Cina.",
-    tags: ["Natura", "Piottata", "Mozzafiato"],
-        images: ['https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-tianmenPorta2_w7h4pk.jpg',
-    'https://res.cloudinary.com/vsbp8pxx/image/upload/v1785666264/nat-tianmenPorta1_iqm8fl.webp'],
-    mapsUrl: 'https://maps.app.goo.gl/GQeN8KezcWUeMyfE9',
-    ticketPrice: 'All-Inclusive 278 ¥ (~36 €), comprende bus interni, cheat scala mobile per i gradini e una seggiovia',
-    openingDays: 'Ogni giorno ~7:30-18:30',
-    visitDuration: '4-5 ore',
-},
+
 
 
     /* ------------------------------------------------------------------
@@ -1223,7 +1540,7 @@ const POI_DATA = [
     {
         id: 'icn-airport',
         name: 'Aeroporto Internazionale Incheon',
-        city: 'Seul — ICN',
+        city: 'Seoul — ICN',
         category: 'airport',
         coords: [37.4602, 126.4407],
         zoom: 12,
@@ -1242,7 +1559,7 @@ const POI_DATA = [
     {
         id: 'gmp-airport',
         name: 'Aeroporto di Gimpo',
-        city: 'Seul — GMP',
+        city: 'Seoul — GMP',
         category: 'airport',
         coords: [37.5583, 126.7906],
         zoom: 13,
@@ -1394,43 +1711,134 @@ const POI_DATA = [
 
 
 /* ------------------------------------------------------------------
-   2) TASSONOMIA CATEGORIE
+   2) TASSONOMIA: CITTÀ (primary bar) + TIPI (sub-bar + distance modal)
    ------------------------------------------------------------------
-   Struttura gerarchica: elementi top-level appaiono nella primary
-   bar. Quelli con `sub` sono espandibili (aprono la sub-bar).
-   'esperienze' e 'services' NON sono categorie di POI (nessun POI
-   ha `category: 'esperienze'`), sono contenitori visivi. Le key
-   foglia ('food', 'hotel', ecc.) sono quelle usate nei POI.
+   Riorganizzazione del filtro attorno alle CITTÀ del viaggio invece
+   che ai tipi di POI. Motivazione: durante il viaggio la domanda
+   naturale è "cosa c'è a X" più che "che genere di posto è questo".
+
+   Struttura risultante di CATEGORIES (barra primaria):
+       Tutti · Pechino · Xi'an · Chengdu · Zhangjiajie · Shanghai
+             · Seoul  · Osaka · Altro
+
+   Ogni città ha una sub-bar identica (Tutto, Monumenti, Cibo, ecc.):
+   click su una città filtra i POI di quella città; click su un tipo
+   nella sub-bar filtra ulteriormente per genere.
+
+   Le key delle sub-voci hanno formato "cityKey:typeKey" (es.
+   "pechino:food") — separatore ':' per parsing univoco. Il valore
+   speciale "cityKey:all" o "cityKey" (senza :) mostra tutti i POI
+   della città indipendentemente dal tipo.
+
+   La categoria "altro" raccoglie i POI di città NON nella barra
+   principale (es. Chongqing, Shenzhen, Hong Kong, Bangkok, ecc.).
 ------------------------------------------------------------------ */
-const CATEGORIES = [
-    { key: 'all',      label: 'Tutti' },
-    { key: 'city',     label: 'Città' },
-    { key: 'monument', label: 'Monumenti' },
-    { key: 'nature',   label: 'Natura' },
-    { key: 'esperienze', label: 'Esperienze', sub: [
-        { key: 'food',     label: 'Cibo' },
-        { key: 'shopping', label: 'Shopping' },
-        { key: 'activity', label: 'Attività' }
-    ]},
-    { key: 'services', label: 'Servizi', sub: [
-        { key: 'hotel',   label: 'Hotel' },
-        { key: 'station', label: 'Stazioni' },
-        { key: 'airport', label: 'Aeroporti' }
-    ]}
+
+/* Città sulla barra primaria. `cityKey` è lo slug che matcha il
+   campo `city` dei POI (dopo normalizzazione via getPoiCityKey).
+   `center` è opzionale: se assente, il click fa fit-bounds sui
+   POI della città invece di volare a coordinate fisse. */
+const CITIES = [
+    { key: 'pechino',     label: 'Pechino',     cityKey: 'pechino'     },
+    { key: 'xian',        label: "Xi'an",       cityKey: 'xian'        },
+    { key: 'chengdu',     label: 'Chengdu',     cityKey: 'chengdu'     },
+    { key: 'zhangjiajie', label: 'Zhangjiajie', cityKey: 'zhangjiajie' },
+    { key: 'shanghai',    label: 'Shanghai',    cityKey: 'shanghai'    },
+    { key: 'seoul',       label: 'Seoul',       cityKey: 'seoul'       },
+    { key: 'osaka',       label: 'Osaka',       cityKey: 'osaka'       },
+    { key: 'bangkok',     label: 'Bangkok',     cityKey: 'bangkok'     }
 ];
 
-/* Colore di sfondo del marker per ogni categoria.
+/* Tipi di POI. Usati:
+   - Per popolare la sub-bar di ogni città (prefissati con "cityKey:")
+   - Dal dropdown "Categoria" del modal distanze (che continua a
+     ragionare per tipo, non per città).
+   `category` sui POI usa esattamente queste key. */
+const POI_TYPES = [
+    { key: 'city',      label: 'Città' },
+    { key: 'quartieri', label: 'Quartieri' },
+    { key: 'monument',  label: 'Monumenti' },
+    { key: 'nature',    label: 'Natura' },
+    { key: 'food',      label: 'Cibo' },
+    { key: 'shopping',  label: 'Shopping' },
+    { key: 'hotel',     label: 'Hotel' },
+    { key: 'station',   label: 'Stazioni' },
+    { key: 'airport',   label: 'Aeroporti' }
+];
+
+/* Genera la sub-bar di una città: "Tutto" (mostra tutti i POI della
+   città) + una entry per ciascun POI_TYPES. Le key sono compound
+   "cityKey:typeKey" per essere univoche fra tutte le città. */
+function buildCitySubBar(cityKey) {
+    return [
+        { key: `${cityKey}:all`, label: 'Tutto' },
+        ...POI_TYPES.map(t => ({ key: `${cityKey}:${t.key}`, label: t.label }))
+    ];
+}
+
+const CATEGORIES = [
+    { key: 'all', label: 'Tutti' },
+    ...CITIES.map(city => ({
+        key:     city.key,
+        label:   city.label,
+        cityKey: city.cityKey,
+        sub:     buildCitySubBar(city.cityKey)
+    })),
+    {
+        key:     'altro',
+        label:   'Altro',
+        cityKey: '__other__',
+        sub:     buildCitySubBar('__other__')
+    }
+];
+
+/* Estrae la city-key normalizzata da un POI. Fallback intelligente:
+   se il POI ha `cityKey` esplicito, usa quello (override manuale);
+   altrimenti deriva dal `city` (stringa human-readable) togliendo
+   l'eventuale suffisso "— XXX" (aeroporti) e slugificando.
+   Esempi:  "Pechino"        → "pechino"
+            "Pechino — PKX"  → "pechino"
+            "Xi'an"          → "xian"
+            "Hong Kong"      → "hong-kong"
+            undefined        → null (POI senza città) */
+function getPoiCityKey(poi) {
+    if (!poi) return null;
+    if (poi.cityKey) return poi.cityKey;
+    if (!poi.city)   return null;
+    // Split solo su em-dash (—), che è il separatore usato per i
+    // suffissi tipo "Pechino — PKX". Un hyphen normale NON è
+    // separatore, per non spezzare nomi come "Hong Kong" (che
+    // slugificato diventa "hong-kong" e non deve essere splittato).
+    const base = poi.city.split('—')[0].trim();
+    return base
+        .toLowerCase()
+        .replace(/['`‘’]/g, '')   // apostrofi diritti + curly
+        .normalize('NFD')                   // decompone accentate
+        .replace(/[̀-ͯ]/g, '')    // rimuove diacritici (combining marks)
+        .replace(/\s+/g, '-');              // spazi → trattini
+}
+
+/* Colore di sfondo del marker.
+   Le chiavi corrispondono a poi.category oppure a poi.subcategory
+   (subcategory prevale in buildIcon per differenziare i marker della
+   stessa categoria — vedi sub-tipi di monument sotto).
    Cambia qui il valore hex per rifare il colore di una categoria. */
 const CATEGORY_MARKER_COLOR = {
-    city:     '#4a5aa8',   /* indaco urbano  */
-    monument: '#c8332a',   /* rosso cinabro  */
-    nature:   '#3d8f4d',   /* verde bosco    */
-    food:     '#d68a2e',   /* arancione caldo*/
-    shopping: '#b846a0',   /* magenta        */
-    activity: '#d4a635',   /* giallo oro     */
-    hotel:    '#2f9990',   /* teal           */
-    station:  '#6b6a63',   /* grigio scuro   */
-    airport:  '#3a8fc9'    /* celeste cielo  */
+    city:      '#4a5aa8',   /* indaco urbano       */
+    quartieri: '#d4a635',   /* giallo oro          */
+    monument:  '#c8332a',   /* rosso cinabro (base)*/
+    /* Sub-tipi di monument (poi.subcategory), tutti filtrati come
+       "Monumenti" nella barra ma con marker distinti sulla mappa. */
+    temple:    '#b8862b',   /* bronzo templi lacquerati */
+    palace:    '#7a4b96',   /* viola imperiale          */
+    museum:    '#4a6d8c',   /* blu ardesia istituzionale */
+
+    nature:    '#3d8f4d',   /* verde bosco    */
+    food:      '#d68a2e',   /* arancione caldo*/
+    shopping:  '#b846a0',   /* magenta        */
+    hotel:     '#2f9990',   /* teal           */
+    station:   '#6b6a63',   /* grigio scuro   */
+    airport:   '#3a8fc9'    /* celeste cielo  */
 };
 
 
@@ -1466,9 +1874,36 @@ const CATEGORY_MARKER_ICON = {
         '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>' +
         '<path d="M3 6h18"/>' +
         '<path d="M16 10a4 4 0 0 1-8 0"/>',
-    activity:
-        '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02' +
-        ' 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/>',
+    /* quartieri (era 'activity' / stella): mappa/mattonelle,
+       evoca la suddivisione della città in aree. */
+    quartieri:
+        '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619' +
+        'v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106' +
+        'a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894' +
+        'l4.553-2.277a2 2 0 0 1 1.788 0z"/>' +
+        '<path d="M15 5.764v15"/>' +
+        '<path d="M9 3.236v15"/>',
+    /* Sub-tipi di monument: icone SVG distinte. */
+    temple:                                     /* Lucide "church" */
+        '<path d="M10 9h4"/>' +
+        '<path d="M12 7v5"/>' +
+        '<path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/>' +
+        '<path d="M18 22V5.618a1 1 0 0 0-.553-.894l-4.553-2.277' +
+        'a2 2 0 0 0-1.788 0L6.553 4.724A1 1 0 0 0 6 5.618V22"/>' +
+        '<path d="m18 7 3.447 1.724a1 1 0 0 1 .553.894V20a2 2 0 0 1-2 2' +
+        'H4a2 2 0 0 1-2-2V9.618a1 1 0 0 1 .553-.894L6 7"/>',
+    palace:                                     /* Lucide "castle" */
+        '<path d="M22 20v-9H2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2Z"/>' +
+        '<path d="M18 11V4H6v7"/>' +
+        '<path d="M15 22v-4a3 3 0 0 0-3-3v0a3 3 0 0 0-3 3v4"/>' +
+        '<path d="M22 11V9"/><path d="M2 11V9"/>' +
+        '<path d="M6 4V2"/><path d="M18 4V2"/>' +
+        '<path d="M10 4V2"/><path d="M14 4V2"/>',
+    museum:                                     /* Lucide "book-open" */
+        '<path d="M12 7v14"/>' +
+        '<path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4' +
+        ' 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3' +
+        ' 3 3 0 0 0-3-3z"/>',
     hotel:
         '<path d="M2 4v16"/>' +
         '<path d="M2 8h18a2 2 0 0 1 2 2v10"/>' +
@@ -1549,8 +1984,17 @@ const state = {
    di default: permette styling via CSS e transizioni.
 ------------------------------------------------------------------ */
 function buildIcon(poi) {
-    const iconPath = CATEGORY_MARKER_ICON[poi.category] || '';
-    const bgColor  = CATEGORY_MARKER_COLOR[poi.category] || '#c8332a';
+    /* Preferisci subcategory (es. 'temple', 'palace', 'museum' per
+       differenziare i monumenti) se presente; altrimenti fallback
+       sulla category. Icona e colore sono cercati con la stessa
+       chiave (definite in CATEGORY_MARKER_ICON/COLOR). Se una
+       subcategory è definita ma manca la sua entry nelle mappe,
+       ricade sulla category. */
+    const markerKey = (poi.subcategory && CATEGORY_MARKER_ICON[poi.subcategory])
+                      ? poi.subcategory
+                      : poi.category;
+    const iconPath = CATEGORY_MARKER_ICON[markerKey] || '';
+    const bgColor  = CATEGORY_MARKER_COLOR[markerKey] || '#c8332a';
     const svg =
         `<svg class="marker-icon" viewBox="0 0 24 24" fill="none"` +
         ` stroke="currentColor" stroke-width="2.4"` +
@@ -2311,7 +2755,16 @@ function applyCategoryFilter(opts = {}) {
 
     if (visible.length >= 2) {
         const bounds = L.latLngBounds(visible.map(p => p.coords));
-        map.flyToBounds(bounds, { padding: [60, 60], duration: 0.9 });
+        // maxZoom 12 evita over-zoom quando due POI di una città sono
+        // molto vicini (es. due POI centrali di Xi'an). Senza cap si
+        // finirebbe zoomati al livello strada, perdendo il contesto.
+        // La costante è deliberatamente permissiva: quartieri visibili
+        // ma non isolati vicoli.
+        map.flyToBounds(bounds, {
+            padding: [60, 60],
+            duration: 0.9,
+            maxZoom: 12
+        });
     } else if (visible.length === 1) {
         map.flyTo(visible[0].coords, visible[0].zoom, { duration: 0.9 });
     }
@@ -2319,18 +2772,46 @@ function applyCategoryFilter(opts = {}) {
 
 /**
  * Restituisce i POI da mostrare secondo activeCategory.
- * Se la key è di un parent (es. 'esperienze'), restituisce l'unione
- * dei POI di tutti i suoi sub. Altrimenti filtra sulla singola key.
+ *
+ * activeCategory ha uno di questi formati:
+ *   'all'                → tutti i POI (nessun filtro)
+ *   'pechino'            → tutti i POI di Pechino (click su tab città)
+ *   'pechino:all'        → idem (click su "Tutto" nella sub-bar Pechino)
+ *   'pechino:food'       → solo POI di Pechino con category='food'
+ *   'altro'              → POI di città non nella barra principale
+ *   '__other__:food'     → POI di città non-principali con category='food'
+ *
+ * L'algoritmo:
+ *   1) parse "cityKey:typeKey" o cityKey solo
+ *   2) restringe il pool per città
+ *   3) restringe ulteriormente per tipo se specificato
  */
 function getVisiblePois() {
     const key = state.activeCategory;
     if (key === 'all') return POI_DATA;
-    const cat = findCategoryByKey(key);
-    if (cat && cat.sub) {
-        const subKeys = cat.sub.map(s => s.key);
-        return POI_DATA.filter(p => subKeys.includes(p.category));
+
+    // Parse key compound (o singola). Normalizza "altro" → "__other__".
+    let [cityKey, typeKey] = key.split(':');
+    if (cityKey === 'altro') cityKey = '__other__';
+
+    // Pool per città
+    let pool;
+    const mainCityKeys = new Set(CITIES.map(c => c.cityKey));
+    if (cityKey === '__other__') {
+        // "Altro" = POI la cui città non è nella barra principale.
+        // POI senza città (es. overlay Grande Muraglia) vengono
+        // inclusi in "Altro" per non lasciarli senza casa.
+        pool = POI_DATA.filter(p => {
+            const ck = getPoiCityKey(p);
+            return !ck || !mainCityKeys.has(ck);
+        });
+    } else {
+        pool = POI_DATA.filter(p => getPoiCityKey(p) === cityKey);
     }
-    return POI_DATA.filter(p => p.category === key);
+
+    // Filtro tipo (se specificato e diverso da "all")
+    if (!typeKey || typeKey === 'all') return pool;
+    return pool.filter(p => p.category === typeKey);
 }
 
 /* ------------------------------------------------------------------
@@ -2542,19 +3023,15 @@ function closeDistanceModal() {
     dom.distModal.hidden = true;
 }
 
-/* Popola il dropdown categorie con tutte le key foglia di CATEGORIES
-   (esclude i parent "esperienze"/"services" che sono contenitori). */
+/* Popola il dropdown categorie del modal distanza con i TIPI di POI
+   (Città, Monumenti, Cibo, ecc.). Il modal ragiona per genere di
+   POI, non per città — la barra principale è per città, ma qui ha
+   senso poter filtrare "tutti gli aeroporti" o "tutti gli hotel"
+   indipendentemente dalla città. */
 function populateDistCategories() {
     const opts = ['<option value="all">Tutte le categorie</option>'];
-    CATEGORIES.forEach(c => {
-        if (c.key === 'all') return;
-        if (c.sub) {
-            c.sub.forEach(s => {
-                opts.push(`<option value="${s.key}">${escapeHtml(s.label)}</option>`);
-            });
-        } else {
-            opts.push(`<option value="${c.key}">${escapeHtml(c.label)}</option>`);
-        }
+    POI_TYPES.forEach(t => {
+        opts.push(`<option value="${t.key}">${escapeHtml(t.label)}</option>`);
     });
     dom.distCat.innerHTML = opts.join('');
     dom.distCat.value = distState.catKey;
