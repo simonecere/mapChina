@@ -622,7 +622,7 @@ const POI_DATA = [
         id: 'gangnam-hands',
         name: 'Gangnam',
         city: 'Seoul',
-        category: 'monument',
+        category: 'quartieri',
         coords: [37.51379657037621, 127.06079878620051],
         zoom: 15,
         description: "Gangnam è il quartiere più moderno, glamour e finanziario " +
@@ -729,6 +729,52 @@ const POI_DATA = [
             { label: 'Meglio visitare', value: 'Al tramonto' }
         ]
     },
+    {
+        id: 'changdeokgung',
+        name: 'Changdeokgung',
+        city: 'Seoul',
+        category: 'palace',
+        coords: [37.58014560460392, 126.9906824177458],
+        zoom: 15,
+        description: "Changdeokgung ('Palazzo della Prospera Virtù') è il " +
+            "palazzo reale meglio conservato della dinastia Joseon " +
+            "e patrimonio UNESCO. A differenza di altri palazzi, la sua " +
+            "architettura si integra perfettamente nel paesaggio " +
+            "naturale circostante. È celebre per il suo Giardino " +
+            "Segreto (Huwon), un'oasi incantata di padiglioni, " +
+            "stagni e alberi secolari usata dai re per il riposo.",
+        tags: ["Palazzo", "Giardini"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1787234366/mon-changdeokgung1_myyr6j.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/8rYvynDe8kXBKDhMA',
+        openingDays: 'Mar-Dom 9:00-17/18:00',
+        visitDuration: '~1-1.5 ore',
+        ticketPrice: '3.000 ₩ (~2,10 €) per il palazzo\n5.000 ₩ (~3,50 €)' +
+            ' per il Giardino Segreto',
+        reservation: 'Obbligatoria per il giardino, dal sito ufficiale',
+    },
+    {
+        id: 'insadong',
+        name: 'Insadong',
+        city: 'Seoul',
+        category: 'quartieri',
+        coords: [37.57296356612539, 126.98638582499935],
+        zoom: 14,
+        description: "Insadong è uno dei quartieri culturali più affascinanti " +
+            "di Seul, situato nel cuore della città. Un tempo residenza " +
+            "di funzionari governativi e studiosi, la sua via pedonale " +
+            "principale e i vicoli adiacenti sono rinomati per le gallerie " +
+            "d'arte, i negozi di antiquariato, le storiche case da " +
+            "tè tradizionali e il famoso complesso commerciale Ssamzigil.",
+        tags: ["Quartiere", "Chill", "Cultura"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1787234429/sho-insadong1_s6pqhg.jpg',
+        mapsUrl: 'https://maps.app.goo.gl/efLN5onrbkv3gWnf8',
+        openingDays: 'Negozi 10:00 - 20:30',
+        customMeta: [
+            { label: 'Consigli', value:'Una delle pochissime zone a Seoul dove anche' +
+                    'i brand internazionali hanno le insegne scritte con l\'alfabeto' +
+                    'coreano' },
+        ]
+    },
 
 
     /*=======================   CIBO+ SEUL =============================*/
@@ -832,7 +878,7 @@ const POI_DATA = [
     },
     {
         id: 'bell-tower-xi',
-        name: "Bell Tower of Xi'an",
+        name: "Torre della Campana",
         city: "Xi'an",
         category: 'monument',
         coords: [34.260018245077745, 108.94729423943429],
@@ -947,6 +993,11 @@ const POI_DATA = [
         image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1786462324/mon-shuyuanmen1_clqn0s.jpg',
         mapsUrl: 'https://maps.app.goo.gl/gUQw1TnaqTsRt1au5',
         openingDays: 'Tutti i giorni, negozi 09:00 - 19:00',
+        customMeta: [
+            { label: 'Consigli',  value:'Uno dei posti migliori per acquistare' +
+                'souvenir tradizionali legati all\'arte della calligrafia o stampe antiche' +
+                'su carta' },
+        ]
     },
 
 
@@ -1335,6 +1386,27 @@ const POI_DATA = [
         openingDays: 'Ogni giorno ~7:30-18:30',
         visitDuration: '4-5 ore',
     },
+    {
+        id: '72-strange-towers',
+        name: '72 Strange Towers',
+        city: 'Zhangjiajie',
+        category: 'monument',
+        coords: [29.14441357220852, 110.45662733406927],
+        zoom: 15,
+        description: "Le 72 Strange Towers (72 Qilou) sono una spettacolare " +
+            "struttura architettonica alta 109.9 metri situata a " +
+            "Zhangjiajie. Ispirata alle palafitte tradizionali del popolo " +
+            "Tujia (Stilt Houses), è la costruzione in stile stilt " +
+            "house più alta al mondo. Di sera si trasforma in una " +
+            "città incantata ricca di luci a LED, spettacoli folkloristici, " +
+            "bancarelle di street food e locali storici.",
+        tags: ["Architettura", "Serale"],
+        image: 'https://res.cloudinary.com/vsbp8pxx/image/upload/v1787234366/mon-72zhang1_hilqr9.png',
+        mapsUrl: 'https://maps.app.goo.gl/GvPf6VxGdnxPQNMU8',
+        openingDays: 'Consigliata la sera 19:00 - 22:00',
+    },
+
+
     /* ------------------------------------------------------------------
                             ---ALTRO---
  ------------------------------------------------------------------*/
