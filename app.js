@@ -2027,14 +2027,26 @@ const map = L.map('map', {
     worldCopyJump: true
 });
 
+/* Tile provider: OpenStreetMap standard.
+   Precedentemente usavamo CartoDB Voyager (basemaps.cartocdn.com),
+   ma a fine 2024 CARTO ha iniziato a richiedere API keys registrate
+   per il loro basemap "gratuito", restituendo errori "API keys not
+   found" dal CDN. OSM standard resta completamente free, senza
+   registrazione, limiti soft documentati (OSM Tile Usage Policy).
+   Per uso personale di un trip planner è ampiamente entro i limiti.
+
+   Se in futuro vuoi uno stile più "pulito" alla CartoDB, alternative
+   senza API key tuttora valide:
+     - OpenFreeMap        (vector tiles, richiede plugin Leaflet.VectorGrid)
+     - Esri World_Topo    (richiede attribution, grafica più tradizionale)
+     - Thunderforest      (gratuito con API key free registrabile) */
 L.tileLayer(
-    'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
         attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> ' +
-            'contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 20
+            '&copy; <a href="https://www.openstreetmap.org/copyright">' +
+            'OpenStreetMap</a> contributors',
+        maxZoom: 19
     }
 ).addTo(map);
 
